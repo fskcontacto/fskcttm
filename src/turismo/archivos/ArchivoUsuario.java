@@ -20,23 +20,22 @@ public class ArchivoUsuario {
 	
 	public List<Usuario> leer() throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
-		Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US);
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			String nombre;
+			String tipo;
+			double presupuesto;
+			double tiempoDisp;
+			
+			while(lector.hasNextLine()) {
+				nombre = lector.next();
+				tipo = lector.next();
+				presupuesto = lector.nextInt();
+				tiempoDisp = lector.nextInt();
+				usuarios.add(new Usuario(nombre, tipo, presupuesto, tiempoDisp));
+			}
 
-		List<Usuario> usuarios = new ArrayList<Usuario>();
-		String nombre;
-		String tipo;
-		double presupuesto;
-		double tiempoDisp;
-		
-		while(lector.hasNextLine()) {
-			nombre = lector.next();
-			tipo = lector.next();
-			presupuesto = lector.nextInt();
-			tiempoDisp = lector.nextInt();
-			usuarios.add(new Usuario(nombre, tipo, presupuesto, tiempoDisp));
+			return usuarios;
 		}
-
-		lector.close();
-		return usuarios;
 	}
 }

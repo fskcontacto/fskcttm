@@ -1,17 +1,16 @@
 package turismo.sistema;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
-import turismo.archivos.ArchivoAtraccion;
-import turismo.archivos.ArchivoUsuario;
 
 public class SistemaTurismo {
 	private List<Usuario> usuarios;
 	private List<Atraccion> atracciones;
-
-	public SistemaTurismo(List<Usuario> usuarios, List<Atraccion> atracciones) {
+	private List<Paquete> paquetes;
+	
+	public SistemaTurismo(List<Usuario> usuarios, List<Atraccion> atracciones, List<Paquete> paquetes) {
 		this.usuarios = usuarios;
 		this.atracciones = atracciones;
+		this.paquetes = paquetes;
 	}
 }

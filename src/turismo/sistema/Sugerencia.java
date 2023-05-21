@@ -9,7 +9,6 @@ public abstract class Sugerencia {
 	protected int cupoDisponible;
 
 	public Sugerencia(String nombre, String tipo, double costo, double duracion, int cupo) {
-		super();
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.costo = costo;
@@ -17,5 +16,8 @@ public abstract class Sugerencia {
 		this.cupo = cupo;
 		this.cupoDisponible = cupo;
 	}
-
+	
+	protected Sugerencia(String tipo) {
+		this.tipo = tipo;
+	}
 }
