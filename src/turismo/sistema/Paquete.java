@@ -7,11 +7,10 @@ public abstract class Paquete extends Sugerencia {
 
 	protected List<Atraccion> atracciones;
 	protected double costoOriginal;
-	public static final int ABSOLUTO = 0;
+	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum???
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
-	
-	
+
 	public Paquete(String tipo, List<Atraccion> atracciones) {
 		super(tipo);
 		this.atracciones = atracciones;
@@ -19,13 +18,13 @@ public abstract class Paquete extends Sugerencia {
 		this.cupoDisponible = this.cupo;
 		this.costo = costoOriginal;
 	}
-	
+
 	private void inicializarValores() {
 		String nombre = "";
 		double costoOriginal = 0;
 		double duracion = 0;
 		int menorCupo = Integer.MAX_VALUE;
-		
+
 		for (Atraccion atraccion : this.atracciones) {
 			nombre += atraccion.nombre + ", ";
 			duracion += atraccion.duracion;
@@ -33,20 +32,21 @@ public abstract class Paquete extends Sugerencia {
 			if (atraccion.cupo < menorCupo)
 				menorCupo = atraccion.cupo;
 		}
-		
+
 		this.nombre = nombre.substring(0, nombre.length() - 2);
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
-		this.cupo = menorCupo;		
+		this.cupo = menorCupo;
 	}
-	
+
 	protected abstract double calcularCosto();
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: " + String.format(Locale.US, "%.2f", costoOriginal);
+		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
+				+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
-	
+
 //	private String calcularNombre() {
 //		String nombre = "";
 //		int tope = this.atracciones.size() - 1;

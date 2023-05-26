@@ -17,4 +17,8 @@ public class PaquetePorcentual extends Paquete {
 		return this.costoOriginal * (1 - this.porcentaje);
 	}
 
+	public double getPorcentaje() {
+		return this.porcentaje;
+	}
+	
 }

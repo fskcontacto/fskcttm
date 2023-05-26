@@ -13,4 +13,15 @@ public class SistemaTurismo {
 		this.atracciones = atracciones;
 		this.paquetes = paquetes;
 	}
+	
+	public void sugerirUsuario(Usuario u,Sugerencia sug,Itinerario it) {
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 }
