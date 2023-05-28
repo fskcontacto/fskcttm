@@ -1,20 +1,13 @@
 package turismo.archivos;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Scanner;
 
 import turismo.sistema.Atraccion;
 import turismo.sistema.Paquete;
-import turismo.sistema.PaqueteAbsoluto;
-import turismo.sistema.PaqueteAxB;
-import turismo.sistema.PaquetePorcentual;
 import turismo.sistema.SistemaTurismo;
-import turismo.sistema.TipoPaqueteEnum;
 import turismo.sistema.Usuario;
 
 public class ArchivoSistemaTurismo {

@@ -41,6 +41,7 @@ public abstract class Sugerencia {
 		return this.duracion;
 	}
 	
+	
 	//logica de ordenamiento para enviar la info a la lista y sugerirla en SistemaTurismo:
 //	 public static void ordenarAtracciones(List<Atraccion> atracciones) {
 //	     
