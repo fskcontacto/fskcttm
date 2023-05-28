@@ -33,7 +33,8 @@ public class App {
 	
 	public static void main(String[] args) {
 		ArchivoSistemaTurismo archivo = new ArchivoSistemaTurismo("itinerancias", "usuarios", "atracciones", "paquetes");
-		SistemaTurismo sistema = archivo.leer();
+		SistemaTurismo sistema = archivo.leer(); //tengo todas las listas
+		
 	}
 
 }

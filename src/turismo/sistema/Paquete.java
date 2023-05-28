@@ -46,6 +46,11 @@ public abstract class Paquete extends Sugerencia {
 		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
 				+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
+	
+	public List<Atraccion> getAtraccionesPaq(){
+		return this.atracciones;
+	}
+	
 
 //	private String calcularNombre() {
 //		String nombre = "";
