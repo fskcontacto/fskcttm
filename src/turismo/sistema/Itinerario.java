@@ -1,21 +1,18 @@
 package turismo.sistema;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Itinerario {
-	
 	private double costo;
 	private double duracion;
-	private List<Atraccion> atrItinerario;
-	private static final String RES_SI = "S";
-	private static final String RES_NO = "N";
+	private boolean respuestaUsuario;
+    private List<Sugerencia> sugAceptadas;
 
 	public Itinerario() {
 		this.costo = 0;
 		this.duracion = 0;
-		atrItinerario = new ArrayList<Atraccion>();
+		// atrItinerario = new ArrayList<Atraccion>();
 	}
 
 	public double getCostoItinerario() {
@@ -26,16 +23,21 @@ public class Itinerario {
 		return this.duracion;
 	}
 
-	public List<Atraccion> getItinerario() {
-		return atrItinerario;
-	}
+//	public List<Atraccion> getItinerario() {
+//		return atrItinerario;
+//	}
 
+	public boolean getRespuestaUsuario() {
+		return this.respuestaUsuario;
+	}
 
 	public void mostrarAtrGratIter(PaqueteAxB paquete) {
 		paquete.mostrarAtraccionesGratuitas();
 	}
+	
+	/*
 
-	public void pantallaItinerPromo(Sugerencia sug) {
+	public void pantallaItinerPromo(Sugerencia sug) { //repensar un poco el tema de que sea una pantalla iteradora
 
 		System.out.println("Promocion");
 		System.out.println("-Atracciones incluidas: [" + sug.getNombreSug() + "]");
@@ -44,7 +46,7 @@ public class Itinerario {
 
 		if (sug.tipo.equals(Sugerencia.PAQ_PORC)) {
 
-			if (sug instanceof PaquetePorcentual) {
+			if (sug instanceof PaquetePorcentual) { //se rompe polimorfismo - corregir
 				PaquetePorcentual paquete = (PaquetePorcentual) sug;
 				double precioDescuento = paquete.calcularCosto();
 				System.out.println("-Precio con descuento: " + precioDescuento);
@@ -62,7 +64,7 @@ public class Itinerario {
 
 	}
 
-	public void pantallaItinerAtraccion(Sugerencia sug,Usuario u) {
+	public void pantallaItinerAtraccion(Sugerencia sug) {
 
 		System.out.println("Atracción");
 		System.out.println("Nombre: [" + sug.getNombreSug() + "]");
@@ -75,18 +77,18 @@ public class Itinerario {
 		String respuesta;
 
 		do {
-			System.out.println("¿Acepta la sugerencia? (S/N): ");
+			System.out.println("¿Acepta la sugerencia? (s/n): ");
 			respuesta = scanner.nextLine();
 
 			if (respuesta.equals(RES_SI)) {
-				//
-				//lógica para descontar a cada usuario:
-						
+				this.respuestaUsuario = true;
+			} else if (respuesta.equals(RES_NO)) {
+				this.respuestaUsuario = false;
 			}
 
 		} while (!respuesta.equals(RES_SI) && !respuesta.equals(RES_NO));
 
 		scanner.close();
 	}
-
+*/
 }

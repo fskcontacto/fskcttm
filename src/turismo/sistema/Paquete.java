@@ -7,7 +7,7 @@ public abstract class Paquete extends Sugerencia {
 
 	protected List<Atraccion> atracciones;
 	protected double costoOriginal;
-	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum???
+	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum??? -> 
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
@@ -46,11 +46,32 @@ public abstract class Paquete extends Sugerencia {
 		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
 				+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
+
 	
-	public List<Atraccion> getAtraccionesPaq(){
-		return this.atracciones;
+	
+	
+	
+	public double getMontoOrigPaquete() {
+		return this.costoOriginal;
 	}
 	
+	public List<Atraccion> getAtraccionesPaq() {
+		return this.atracciones;
+	}
+
+	public void buscarPrefUsuario(Usuario u, List<Atraccion> atr) {
+
+		if (atracciones.isEmpty()) {
+			throw new IllegalArgumentException("El paquete no cuenta con Atracciones para mostrar"); // clase test
+		}
+
+		for (Atraccion a : atr) {
+
+			if (u.preferenciaAtracc(a.nombre)) {
+				atracciones.add(a);
+			}
+		}
+	}
 
 //	private String calcularNombre() {
 //		String nombre = "";
