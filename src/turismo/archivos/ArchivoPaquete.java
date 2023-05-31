@@ -3,6 +3,7 @@ package turismo.archivos;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ArchivoPaquete {
 		this.nombre = nombre;
 	}
 
-	public List<Paquete> leer(Map<String,Atraccion> atracciones) throws FileNotFoundException {
+	public List<Paquete> leer(Map<String, Atraccion> atracciones) throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
 		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			List<Paquete> paquetes = new ArrayList<Paquete>();
@@ -30,19 +31,19 @@ public class ArchivoPaquete {
 			int tipoPaquete;
 			String nombresAtrac;
 			String tipo;
-			List<Atraccion> atracPaquete = new ArrayList<>();
+			Map<String, Atraccion> atracPaquete = new HashMap<>();
 
 			while (lector.hasNextLine()) {
 				tipoPaquete = lector.nextInt();
 				tipo = lector.next();
 				nombresAtrac = lector.next();
-				
+
 				switch (tipoPaquete) {
 				case Paquete.ABSOLUTO: {
 					double costoAbsoluto = lector.nextDouble();
 					String[] nombres = nombresAtrac.split(";");
 					for (String nombre : nombres) {
-						atracPaquete.add(atracciones.get(nombre));
+						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
 					paquetes.add(new PaqueteAbsoluto(tipo, costoAbsoluto, atracPaquete));
 					break;
@@ -51,7 +52,7 @@ public class ArchivoPaquete {
 					double porcentaje = lector.nextDouble();
 					String[] nombres = nombresAtrac.split(";");
 					for (String nombre : nombres) {
-						atracPaquete.add(atracciones.get(nombre));
+						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
 					paquetes.add(new PaquetePorcentual(tipo, porcentaje, atracPaquete));
 					break;
@@ -59,16 +60,16 @@ public class ArchivoPaquete {
 				case Paquete.AXB: {
 					String[] nombres = nombresAtrac.split(";");
 					for (String nombre : nombres) {
-						atracPaquete.add(atracciones.get(nombre));
+						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
-					
+
 					nombres = lector.next().split(";");
-					List<Atraccion> atracGratuitas = new ArrayList<>();
-					
+					Map<String, Atraccion> atracGratuitas = new HashMap<>();
+
 					for (String nombre : nombres) {
-						atracGratuitas.add(atracciones.get(nombre));
+						atracGratuitas.put(nombre, atracciones.get(nombre));
 					}
-					atracPaquete.addAll(atracGratuitas);
+					atracPaquete.putAll(atracGratuitas);
 					paquetes.add(new PaqueteAxB(tipo, atracPaquete, atracGratuitas));
 					break;
 				}

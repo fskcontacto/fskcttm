@@ -3,7 +3,7 @@ package turismo.sistema;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Sugerencia implements Comparable<Sugerencia>{
+public abstract class Sugerencia implements Comparable<Sugerencia> {
 	protected String nombre;
 	protected String tipo;
 	protected double costo;
@@ -20,38 +20,38 @@ public abstract class Sugerencia implements Comparable<Sugerencia>{
 		this.tipo = tipo;
 	}
 
-	public String getNombreSug() {
+	public String getNombre() {
 		return this.nombre;
 	}
 
-	public String getTipoSug() {
+	public String getTipo() {
 		return this.tipo;
 	}
 
-	public double getCostoSug() { //generar métodos abstractos
+	public double getCosto() { // generar métodos abstractos
 		return this.costo;
 	}
 
-	public double getDuracionSug() {
+	public double getDuracion() {
 		return this.duracion;
 	}
-	
-	public abstract void reducirCupo();
-	
+
+	//public abstract void reducirCupo();
 
 	public abstract int getCupoDisponible();
-	
-//	logica de ordenamiento para enviar la info a la lista y sugerirla en SistemaTurismo:
-//	1° paquetes mas caros y mas largos
-	 public static void ordenarSugerencias(List<Sugerencia> sugerencias) {
-		 Collections.sort(sugerencias);
-	 }
-	 
-	public int compareTo(Sugerencia o) {
-		if(this.costo != o.costo)
-			return Double.compare(this.costo, o.costo);
-		
-		return Double.compare(this.duracion, o.duracion);
+	// public abstract int getCupoTotal();
+	public abstract boolean hayCupoDisponible();
+
+	public static void ordenarSugerencias(List<Sugerencia> sugerencias) {
+		Collections.sort(sugerencias);
 	}
 
+	public int compareTo(Sugerencia o) {
+		if (this.costo != o.costo)
+			return Double.compare(this.costo, o.costo);
+
+		return Double.compare(this.duracion, o.duracion);
+	}
+	
+	protected abstract void imprimir();
 }

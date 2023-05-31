@@ -1,18 +1,17 @@
 package turismo.sistema;
 
-import java.util.List;
+import java.util.Map;
 
 public class PaquetePorcentual extends Paquete {
-	
+
 	private double porcentaje;
-	
-	public PaquetePorcentual(String tipo, double porcentaje, List<Atraccion> atracciones) {
+
+	public PaquetePorcentual(String tipo, double porcentaje, Map<String, Atraccion> atracciones) {
 		super(tipo, atracciones);
 		this.porcentaje = porcentaje;
 		this.costo = calcularCosto();
 	}
-	
-	@Override
+
 	protected double calcularCosto() {
 		return this.costoOriginal * (1 - this.porcentaje);
 	}
@@ -20,5 +19,9 @@ public class PaquetePorcentual extends Paquete {
 	public double getPorcentaje() {
 		return this.porcentaje;
 	}
-	
+
+	protected void imprimir() {
+		System.out.println(" ");
+	}
+
 }

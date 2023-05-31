@@ -1,17 +1,18 @@
 package turismo.sistema;
 
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class Paquete extends Sugerencia {
 
-	protected List<Atraccion> atracciones;
+	protected Map<String, Atraccion> atracciones;
 	protected double costoOriginal;
-	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum??? -> 
+	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum??? ->
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
-	public Paquete(String tipo, List<Atraccion> atracciones) {
+	public Paquete(String tipo, Map<String, Atraccion> atracciones) {
 		super(tipo);
 		this.atracciones = atracciones;
 		inicializarValores();
@@ -24,7 +25,7 @@ public abstract class Paquete extends Sugerencia {
 		double duracion = 0;
 		int menorCupo = Integer.MAX_VALUE;
 
-		for (Atraccion atraccion : this.atracciones) {
+		for (Atraccion atraccion : this.atracciones.values()) {
 			nombre += atraccion.nombre + ", ";
 			duracion += atraccion.duracion;
 			costoOriginal += atraccion.costo;
@@ -37,20 +38,22 @@ public abstract class Paquete extends Sugerencia {
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
 	}
-	
-	public void reducirCupo() {
-		for(Atraccion atraccion: atracciones)
+
+	public Set<String> reducirCupo() {
+		
+		for (Atraccion atraccion : this.atracciones.values())
 			atraccion.reducirCupo();
+		return this.atracciones.keySet();
 	}
-	
+
 	public int getCupoDisponible() {
 		int cupoDisponible = Integer.MAX_VALUE;
-		
-		for(Atraccion atraccion: atracciones) {
-			if(atraccion.getCupoDisponible() < cupoDisponible)
+
+		for (Atraccion atraccion : this.atracciones.values()) {
+			if (atraccion.getCupoDisponible() < cupoDisponible)
 				cupoDisponible = atraccion.getCupoDisponible();
 		}
-		
+
 		return cupoDisponible;
 	}
 
@@ -61,28 +64,19 @@ public abstract class Paquete extends Sugerencia {
 		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
 				+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
-	
+
 	public double getMontoOrigPaquete() {
 		return this.costoOriginal;
 	}
+
+
 	
-	public List<Atraccion> getAtraccionesPaq() {
-		return this.atracciones;
+	public boolean hayCupoDisponible() { //el padre lo implementó, los hijos ya saben hacerlo
+		return getCupoDisponible() > 0;
 	}
+	
+	protected abstract void imprimir();
 
-	public void buscarPrefUsuario(Usuario u, List<Atraccion> atr) {
-
-		if (atracciones.isEmpty()) {
-			throw new IllegalArgumentException("El paquete no cuenta con Atracciones para mostrar"); // clase test
-		}
-
-		for (Atraccion a : atr) {
-
-			if (u.preferenciaAtracc(a.nombre)) {
-				atracciones.add(a);
-			}
-		}
-	}
 
 //	private String calcularNombre() {
 //		String nombre = "";

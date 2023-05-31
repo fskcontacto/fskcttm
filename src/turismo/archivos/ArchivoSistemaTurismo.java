@@ -11,12 +11,12 @@ import turismo.sistema.SistemaTurismo;
 import turismo.sistema.Usuario;
 
 public class ArchivoSistemaTurismo {
-	
+
 	private String nombre;
 	private String archUsuario;
 	private String archAtrac;
 	private String archPaquetes;
-	
+
 	public ArchivoSistemaTurismo(String nombre, String archUsuario, String archAtrac, String archPaquetes) {
 		super();
 		this.nombre = nombre;
@@ -24,7 +24,7 @@ public class ArchivoSistemaTurismo {
 		this.archAtrac = archAtrac;
 		this.archPaquetes = archPaquetes;
 	}
-	
+
 	public SistemaTurismo leer() {
 		ArchivoUsuario archivoUsuario = new ArchivoUsuario(this.archUsuario);
 		ArchivoAtraccion archivoAtraccion = new ArchivoAtraccion(this.archAtrac);
@@ -35,7 +35,7 @@ public class ArchivoSistemaTurismo {
 		SistemaTurismo sistema = null;
 		try {
 			usuarios = archivoUsuario.leer();
-			Map<String,Atraccion> atracMapa = archivoAtraccion.leer();
+			Map<String, Atraccion> atracMapa = archivoAtraccion.leer();
 			paquetes = archivoPaquete.leer(atracMapa);
 			atracciones = new ArrayList<Atraccion>(atracMapa.values());
 			sistema = new SistemaTurismo(usuarios, atracciones, paquetes);

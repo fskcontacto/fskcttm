@@ -1,22 +1,21 @@
 package turismo.sistema;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Usuario {
 	private String nombre;
 	private String tipo;
-	private double presupuesto;
+	private double presupuestoTotal;
+	private double presupuestoDisp;
+	private double tiempoTotal;
 	private double tiempoDisp;
-	private List<Atraccion> sugDiaria;
 	private Itinerario itinerario;
 
-	public Usuario(String nombre, String tipo, double presupuesto, double tiempoDisp) {
+	public Usuario(String nombre, String tipo, double presupuestoTotal, double tiempoTotal) {
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.presupuesto = presupuesto;
-		this.tiempoDisp = tiempoDisp;
-		sugDiaria = new ArrayList<Atraccion>();
+		this.presupuestoTotal = presupuestoTotal;
+		this.presupuestoDisp = presupuestoTotal;
+		this.tiempoTotal = tiempoTotal;
+		this.tiempoDisp = tiempoTotal;
 		itinerario = new Itinerario();
 	}
 
@@ -28,8 +27,8 @@ public class Usuario {
 		return tipo;
 	}
 
-	public double getPresupuesto() {
-		return presupuesto;
+	public double getPresupuestoTotal() {
+		return this.presupuestoTotal;
 	}
 
 	public double getTiempoDisp() {
@@ -38,43 +37,34 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuesto + " Tiempo disponible: "
-				+ tiempoDisp + " Horas";
+		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoTotal + " Tiempo disponible: "
+				+ tiempoTotal + " Horas";
 	}
 
 	public boolean puedeCostearAtraccion(double costo) {
-		return this.presupuesto >= costo;
+		return this.presupuestoDisp >= costo;
 	}
-	
+
 	public boolean tieneTiempoDispo(double duracion) {
 		return this.tiempoDisp >= duracion;
 	}
-	
+
 	public boolean preferenciaAtracc(String tipoAtracc) {
 		return tipoAtracc.equals(this.tipo);
 	}
-	
-	public void agregarSugDiaria(Atraccion atraccion) { //esto para el SistemaTurismo
-		sugDiaria.add(atraccion);
-	}
-	
-	public List<Atraccion> obtenerSugDiaria() {
-		return sugDiaria;
-	}
-	
+
 	// definir si vamos a recibir como sugerencia o como atraccion
+
 	public void agregarSugerencia(Sugerencia sugerencia) {
-		if(!this.puedeCostearAtraccion(sugerencia.getCostoSug()))
+		if (!this.puedeCostearAtraccion(sugerencia.getCosto()))
 			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
-		
-		if(this.tieneTiempoDispo(sugerencia.getDuracionSug())) 
-			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); //TiempoInsuficienteException();
-		
-		this.presupuesto -= sugerencia.getCostoSug();
-		this.tiempoDisp -= sugerencia.getDuracionSug();
+
+		if (this.tieneTiempoDispo(sugerencia.getDuracion()))
+			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); // TiempoInsuficienteException();
+
+		this.presupuestoDisp -= sugerencia.getCosto();
+		this.tiempoDisp -= sugerencia.getDuracion();
 		this.itinerario.agregarSugerencia(sugerencia);
 	}
-	
-	
-	
+
 }
