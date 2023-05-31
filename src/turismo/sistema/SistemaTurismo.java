@@ -17,35 +17,7 @@ public class SistemaTurismo {
 	
 	public void sugerirUsuario(Usuario u,Sugerencia sug) {
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/////////
-		
-		List<Paquete> ppu = new ArrayList<>();
-		double costoPaquete = paquetes.getMontoOrigPaquete(); //estoy mareado, tiene que ser el monto de la sugerencia o del paquete? -> rta, el precio es por c/entidad hija
-		Paquete p = new Paquete(ppu,costoPaquete);
-
-		//List<Paquete> ppu = buscarPrefEnPaquete(u,paquetes);
-		//primero ofertar paquetes
-		//pantallaItinerPromo(sug);
-		
-		//if(respuestaUsuario)
-		
-		
-		// Lógica de agregar atracciones
-		
-		
-		
-		//despues ofertar atracciones
-		
+	
 		
 	}
 	

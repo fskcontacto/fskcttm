@@ -90,5 +90,10 @@ public class Itinerario {
 
 		scanner.close();
 	}
+<<<<<<< HEAD
 */
+
+	public void agregarSugerencia(Sugerencia sugerencia) {
+		// TODO: definir como lo vamos a implementar
+	}
 }

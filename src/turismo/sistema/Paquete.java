@@ -15,7 +15,6 @@ public abstract class Paquete extends Sugerencia {
 		super(tipo);
 		this.atracciones = atracciones;
 		inicializarValores();
-		this.cupoDisponible = this.cupo;
 		this.costo = costoOriginal;
 	}
 
@@ -29,14 +28,30 @@ public abstract class Paquete extends Sugerencia {
 			nombre += atraccion.nombre + ", ";
 			duracion += atraccion.duracion;
 			costoOriginal += atraccion.costo;
-			if (atraccion.cupo < menorCupo)
-				menorCupo = atraccion.cupo;
+			int cupoTotal = atraccion.getCupoTotal();
+			if (cupoTotal < menorCupo)
+				menorCupo = cupoTotal;
 		}
 
 		this.nombre = nombre.substring(0, nombre.length() - 2);
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
-		this.cupo = menorCupo;
+	}
+	
+	public void reducirCupo() {
+		for(Atraccion atraccion: atracciones)
+			atraccion.reducirCupo();
+	}
+	
+	public int getCupoDisponible() {
+		int cupoDisponible = Integer.MAX_VALUE;
+		
+		for(Atraccion atraccion: atracciones) {
+			if(atraccion.getCupoDisponible() < cupoDisponible)
+				cupoDisponible = atraccion.getCupoDisponible();
+		}
+		
+		return cupoDisponible;
 	}
 
 	protected abstract double calcularCosto();
@@ -46,10 +61,6 @@ public abstract class Paquete extends Sugerencia {
 		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
 				+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
-
-	
-	
-	
 	
 	public double getMontoOrigPaquete() {
 		return this.costoOriginal;

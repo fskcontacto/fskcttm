@@ -9,6 +9,7 @@ public class Usuario {
 	private double presupuesto;
 	private double tiempoDisp;
 	private List<Atraccion> sugDiaria;
+	private Itinerario itinerario;
 
 	public Usuario(String nombre, String tipo, double presupuesto, double tiempoDisp) {
 		this.nombre = nombre;
@@ -16,6 +17,7 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 		this.tiempoDisp = tiempoDisp;
 		sugDiaria = new ArrayList<Atraccion>();
+		itinerario = new Itinerario();
 	}
 
 	public String getNombre() {
@@ -58,6 +60,19 @@ public class Usuario {
 	
 	public List<Atraccion> obtenerSugDiaria() {
 		return sugDiaria;
+	}
+	
+	// definir si vamos a recibir como sugerencia o como atraccion
+	public void agregarSugerencia(Sugerencia sugerencia) {
+		if(!this.puedeCostearAtraccion(sugerencia.getCostoSug()))
+			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
+		
+		if(this.tieneTiempoDispo(sugerencia.getDuracionSug())) 
+			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); //TiempoInsuficienteException();
+		
+		this.presupuesto -= sugerencia.getCostoSug();
+		this.tiempoDisp -= sugerencia.getDuracionSug();
+		this.itinerario.agregarSugerencia(sugerencia);
 	}
 	
 	
