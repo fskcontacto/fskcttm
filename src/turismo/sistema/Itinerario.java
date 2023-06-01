@@ -36,4 +36,13 @@ public class Itinerario {
 		paquete.mostrarAtraccionesGratuitas();
 	}
 
+	public void imprimir() {
+		System.out.println("Sugerencias aceptadas:");
+		for(Sugerencia sugerencia : sugAceptadas) {
+			System.out.println("\t" + sugerencia.getNombre());
+		}
+		System.out.println("");
+		System.out.println("Duracion total: " + this.duracion);
+		System.out.println("Costo total: " + this.costo + " monedas");
+	}
 }

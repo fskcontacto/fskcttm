@@ -28,41 +28,82 @@ public class SistemaTurismo {
 			Collections.sort(paquetes);
 			Collections.sort(atracciones);
 			List<Paquete> paqNoTipo = new ArrayList<>();
+			List<Atraccion> atrNoTipo = new ArrayList<>();
 
 			for (Paquete p : paquetes) {
-
-				if (p.getTipo().equals(u.getTipo()) && p.hayCupoDisponible() &&
-					u.tieneTiempoDispo(p.getDuracion()) && u.puedeCostearAtraccion(p.getCosto())
-					
-						
-						) {
-
+				if (p.getTipo().equals(u.getTipo()) && p.hayCupoDisponible()
+						&& u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion())) {
 					p.imprimir();
-
 					do {
-
-						respUsuario = teclado.nextLine();
-						System.out.println("Acepta sugerencia? Ingrese S o N");
-
+						System.out.println("Acepta sugerencia? Ingrese S o N:");
+						respUsuario = teclado.nextLine().toUpperCase();
 					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-
 					if (respUsuario.equals("S")) {
 						p.reducirCupo();
 						u.agregarSugerencia(p); // el paquete es una sug por eso no arroja error
-
+						atrTomadas.addAll(p.getAtracciones());
 					}
-
-				} else {
+				} else if (!p.getTipo().equals(u.getTipo())) {
 					paqNoTipo.add(p); // Una vez agotadas las ofertas que coincidan con sus intereses, se ofertarán
 										// aquellas que no coincidan, bajo el mismo criterio.
 				}
-
 			}
 
 			for (Atraccion a : atracciones) {
-
+				if (a.getTipo().equals(u.getTipo()) && a.hayCupoDisponible()
+						&& u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion())
+						&& !atrTomadas.contains(a.getNombre())) {
+					a.imprimir();
+					do {
+						System.out.println("Acepta sugerencia? Ingrese S o N:");
+						respUsuario = teclado.nextLine().toUpperCase();
+					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+					if (respUsuario.equals("S")) {
+						a.reducirCupo();
+						u.agregarSugerencia(a);
+						atrTomadas.add(a.getNombre());
+					}
+				} else if (!a.getTipo().equals(u.getTipo())) {
+					atrNoTipo.add(a);
+				}
 			}
 
+			for (Paquete p : paqNoTipo) {
+				if (p.hayCupoDisponible() && u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion())) {
+					p.imprimir();
+					do {
+						System.out.println("Acepta sugerencia? Ingrese S o N:");
+						respUsuario = teclado.nextLine().toUpperCase();
+					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+					if (respUsuario.equals("S")) {
+						p.reducirCupo();
+						u.agregarSugerencia(p);
+						atrTomadas.addAll(p.getAtracciones());
+					}
+				}
+			}
+
+			for (Atraccion a : atrNoTipo) {
+				if (a.hayCupoDisponible() && u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion())
+						&& atrTomadas.contains(a.getNombre())) {
+					a.imprimir();
+					do {
+						System.out.println("Acepta sugerencia? Ingrese S o N:");
+						respUsuario = teclado.nextLine().toUpperCase();
+					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+					if (respUsuario.equals("S")) {
+						a.reducirCupo();
+						u.agregarSugerencia(a);
+						atrTomadas.add(a.getNombre());
+					}
+				}
+			}
+
+			System.out.println("\n¡ Han finalizado sus sugerencias del día !");
+
+			System.out.println("¡Hola, " + u.getNombre() + "! Su itinerario es el siguiente: ");
+			u.mostrarItinerario();
+			System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
 		}
 
 		/*

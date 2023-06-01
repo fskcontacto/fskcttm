@@ -40,14 +40,20 @@ public class Usuario {
 		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoTotal + " Tiempo disponible: "
 				+ tiempoTotal + " Horas";
 	}
+	
+	public boolean puedeAdquirirSugerencia(double costo, double duracion) {
+		return this.puedeCostearSugerencia(costo) && this.tieneTiempoDispo(duracion);
+	}
 
-	public boolean puedeCostearAtraccion(double costo) {
+	////// se pueden cambiar a private /////////////////
+	public boolean puedeCostearSugerencia(double costo) {
 		return this.presupuestoDisp >= costo;
 	}
 
 	public boolean tieneTiempoDispo(double duracion) {
 		return this.tiempoDisp >= duracion;
 	}
+	////////////////////////////////////////////////////
 
 	public boolean preferenciaAtracc(String tipoAtracc) {
 		return tipoAtracc.equals(this.tipo);
@@ -56,7 +62,7 @@ public class Usuario {
 	// definir si vamos a recibir como sugerencia o como atraccion
 
 	public void agregarSugerencia(Sugerencia sugerencia) {
-		if (!this.puedeCostearAtraccion(sugerencia.getCosto()))
+		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
 			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
 
 		if (this.tieneTiempoDispo(sugerencia.getDuracion()))
@@ -67,4 +73,7 @@ public class Usuario {
 		this.itinerario.agregarSugerencia(sugerencia);
 	}
 
+	public void mostrarItinerario() {
+		this.itinerario.imprimir();
+	}
 }

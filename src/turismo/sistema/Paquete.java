@@ -38,12 +38,14 @@ public abstract class Paquete extends Sugerencia {
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
 	}
-
-	public Set<String> reducirCupo() {
-		
+	
+	public Set<String> getAtracciones() {
+		return this.atracciones.keySet();
+	}
+	
+	public void reducirCupo() {
 		for (Atraccion atraccion : this.atracciones.values())
 			atraccion.reducirCupo();
-		return this.atracciones.keySet();
 	}
 
 	public int getCupoDisponible() {
