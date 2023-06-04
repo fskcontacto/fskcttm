@@ -45,9 +45,9 @@ public class ArchivoSistemaTurismo {
 //			for (Atraccion atraccion : atracciones) {
 //				System.out.println(atraccion);
 //			}
-			for (Paquete paquete : paquetes) {
-				System.out.println(paquete);
-			}
+//			for (Paquete paquete : paquetes) {
+//				System.out.println(paquete);
+//			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

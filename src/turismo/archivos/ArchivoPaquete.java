@@ -25,7 +25,7 @@ public class ArchivoPaquete {
 
 	public List<Paquete> leer(Map<String, Atraccion> atracciones) throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\r\n").useLocale(Locale.ENGLISH)) {
 			List<Paquete> paquetes = new ArrayList<Paquete>();
 
 			int tipoPaquete;
@@ -35,12 +35,17 @@ public class ArchivoPaquete {
 
 			while (lector.hasNextLine()) {
 				tipoPaquete = lector.nextInt();
+				//tipoPaquete = Integer.valueOf(lector.next());
+				
 				tipo = lector.next();
+				
 				nombresAtrac = lector.next();
+				
 
 				switch (tipoPaquete) {
 				case Paquete.ABSOLUTO: {
 					double costoAbsoluto = lector.nextDouble();
+					//double costoAbsoluto = Double.parseDouble(lector.next());
 					String[] nombres = nombresAtrac.split(";");
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
@@ -50,7 +55,9 @@ public class ArchivoPaquete {
 				}
 				case Paquete.PORCENTUAL: {
 					double porcentaje = lector.nextDouble();
+					//double porcentaje =Double.parseDouble(lector.next());
 					String[] nombres = nombresAtrac.split(";");
+					
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
@@ -58,10 +65,14 @@ public class ArchivoPaquete {
 					break;
 				}
 				case Paquete.AXB: {
-					String[] nombres = nombresAtrac.split(";");
+					String[] nombres = nombresAtrac.split(",");
+					
+					
 					for (String nombre : nombres) {
+						
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
+					
 
 					nombres = lector.next().split(";");
 					Map<String, Atraccion> atracGratuitas = new HashMap<>();

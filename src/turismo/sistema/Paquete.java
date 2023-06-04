@@ -1,13 +1,18 @@
 package turismo.sistema;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+
 
 public abstract class Paquete extends Sugerencia {
 
 	protected Map<String, Atraccion> atracciones;
 	protected double costoOriginal;
+	protected List<Atraccion> atracciones_incluidas;
 	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum??? ->
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
@@ -15,6 +20,7 @@ public abstract class Paquete extends Sugerencia {
 	public Paquete(String tipo, Map<String, Atraccion> atracciones) {
 		super(tipo);
 		this.atracciones = atracciones;
+		this.atracciones_incluidas = new ArrayList<Atraccion>();
 		inicializarValores();
 		this.costo = costoOriginal;
 	}
@@ -32,28 +38,39 @@ public abstract class Paquete extends Sugerencia {
 			int cupoTotal = atraccion.getCupoTotal();
 			if (cupoTotal < menorCupo)
 				menorCupo = cupoTotal;
+			this.atracciones_incluidas.add(atraccion);
 		}
 
 		this.nombre = nombre.substring(0, nombre.length() - 2);
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
+		
+		
 	}
 	
+	//devuelve vacio
 	public Set<String> getAtracciones() {
 		return this.atracciones.keySet();
+		
+	}
+	
+	public List<Atraccion> getAtracciones2() {
+		return this.atracciones_incluidas;
 	}
 	
 	public void reducirCupo() {
 		for (Atraccion atraccion : this.atracciones.values())
+		{
 			atraccion.reducirCupo();
+		}
+			
 	}
 
 	public int getCupoDisponible() {
-		int cupoDisponible = Integer.MAX_VALUE;
+		int cupoDisponible=0;
 
-		for (Atraccion atraccion : this.atracciones.values()) {
-			if (atraccion.getCupoDisponible() < cupoDisponible)
-				cupoDisponible = atraccion.getCupoDisponible();
+		for (Atraccion atraccion : this.atracciones_incluidas) {
+				cupoDisponible += atraccion.getCupoDisponible();
 		}
 
 		return cupoDisponible;
@@ -63,8 +80,10 @@ public abstract class Paquete extends Sugerencia {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
-				+ String.format(Locale.US, "%.2f", costoOriginal);
+		return "*PAQUETE*"
+				+"\n Nombre: " + nombre
+				+"\n Costo: " + String.format(Locale.US, "%.2f", costo) + 
+				"\n Costo original: "+ String.format(Locale.US, "%.2f", costoOriginal);
 	}
 
 	public double getMontoOrigPaquete() {

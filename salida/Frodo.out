@@ -1,0 +1,19 @@
+*PAQUETE*
+ Nombre: Mordor, Bosque Negro
+ Costo: 22.40
+ Costo original: 28.00
+*ATRACCION* Nombre: Moria
+ Tipo: Aventura
+ Costo: 10.0
+ Duración: 2.0 horas 
+ Cupo: 0 -- Cupo disponible: 5
+*PAQUETE*
+ Nombre: Lothlórien, La Comarca
+ Costo: 36.00
+ Costo original: 38.00
+*PAQUETE*
+ Nombre: Minas Tirith, Erebor, Abismo de Helm
+ Costo: 10.00
+ Costo original: 22.00
+Costo total:78.4
+Duracion total:24.0

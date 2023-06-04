@@ -26,8 +26,11 @@ public class Atraccion extends Sugerencia {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " Tipo: " + tipo + " Costo: " + costo + " Duración: " + duracion + " Horas "
-				+ "Cupo: " + cupoTotal + " Cupo disponible: " + cupoDisponible;
+		return "*ATRACCION* Nombre: " + nombre + 
+				"\n Tipo: " + tipo + 
+				"\n Costo: " + costo + 
+				"\n Duración: " + duracion + " horas "
+				+"\n Cupo: " + cupoTotal + " -- Cupo disponible: " + cupoDisponible;
 	}
 	
 	

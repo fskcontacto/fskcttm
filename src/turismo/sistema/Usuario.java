@@ -1,5 +1,8 @@
 package turismo.sistema;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 public class Usuario {
 	private String nombre;
 	private String tipo;
@@ -34,7 +37,16 @@ public class Usuario {
 	public double getTiempoDisp() {
 		return tiempoDisp;
 	}
+	
+	public String mensajeBienvenida()
+	{
+		return "Bienvendido/a " +nombre+
+				"\nPresupuesto: "+presupuestoTotal+
+				"\nTiempo disponible: "+tiempoTotal +" horas.\n";
+				
+	}
 
+	
 	@Override
 	public String toString() {
 		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoTotal + " Tiempo disponible: "
@@ -61,19 +73,54 @@ public class Usuario {
 
 	// definir si vamos a recibir como sugerencia o como atraccion
 
+//	public void agregarSugerencia(Sugerencia sugerencia) {
+//		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
+//			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
+//
+//		if (this.tieneTiempoDispo(sugerencia.getDuracion()))
+//			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); // TiempoInsuficienteException();
+//
+//		this.presupuestoDisp -= sugerencia.getCosto();
+//		this.tiempoDisp -= sugerencia.getDuracion();
+//		this.itinerario.agregarSugerencia(sugerencia);
+//	}
+
+	public void mostrarItinerario() {
+		this.itinerario.imprimir();
+	}
+
+//	public void comprarPaquete(Paquete p) {
+//		this.presupuestoDisp -= p.getCosto();
+//		this.tiempoDisp -= p.getDuracion();
+//		this.itinerario.agregarPaquete(p);
+//	}
+//		
+//	public void comprarAtraccion(Atraccion a) {
+//			this.presupuestoDisp -= a.getCosto();
+//			this.tiempoDisp -= a.getDuracion();
+//			this.itinerario.agregarAtraccion(a);
+//		
+//		
+//	}
+
+	public boolean estaEnItinerario(Atraccion a) {
+		return itinerario.getAtraccionesCompradas().contains(a);
+	}
+
+	public void escribirItinerario() {
+		itinerario.escribirItinerarioArchivo(this.nombre);
+		
+	}
+
 	public void agregarSugerencia(Sugerencia sugerencia) {
 		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
 			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
-
-		if (this.tieneTiempoDispo(sugerencia.getDuracion()))
+		if (!this.tieneTiempoDispo(sugerencia.getDuracion()))
 			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); // TiempoInsuficienteException();
 
 		this.presupuestoDisp -= sugerencia.getCosto();
 		this.tiempoDisp -= sugerencia.getDuracion();
 		this.itinerario.agregarSugerencia(sugerencia);
 	}
-
-	public void mostrarItinerario() {
-		this.itinerario.imprimir();
-	}
+	
 }
