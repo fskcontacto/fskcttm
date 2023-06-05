@@ -1,8 +1,5 @@
 package turismo.sistema;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
-
 public class Usuario {
 	private String nombre;
 	private String tipo;
@@ -38,6 +35,10 @@ public class Usuario {
 		return tiempoDisp;
 	}
 	
+	public double getPresupuestoDisp() {
+		return presupuestoDisp;
+	}
+
 	public String mensajeBienvenida()
 	{
 		return "Bienvendido/a " +nombre+
