@@ -1,9 +1,15 @@
 package turismo.sistema;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -21,18 +27,25 @@ public class SistemaTurismo {
 	public void sugerirUsuario() {
 		Scanner teclado = new Scanner(System.in);
 
+		paquetes.sort(Comparator.reverseOrder());
+		atracciones.sort(Comparator.reverseOrder());
+
 		for (Usuario u : usuarios) {
+			this.mensajeBienvenida(u);
 
 			Set<String> atrTomadas = new HashSet<>();
 			String respUsuario;
-			Collections.sort(paquetes);
-			Collections.sort(atracciones);
 			List<Paquete> paqNoTipo = new ArrayList<>();
 			List<Atraccion> atrNoTipo = new ArrayList<>();
 
+			boolean esPreferencia;
+			boolean puedeAdquirir;
+			boolean hayCupo;
 			for (Paquete p : paquetes) {
-				if (p.getTipo().equals(u.getTipo()) && p.hayCupoDisponible()
-						&& u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion())) {
+				esPreferencia = p.getTipo().equals(u.getTipo());
+				puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
+				hayCupo = p.hayCupoDisponible();
+				if (esPreferencia && hayCupo && puedeAdquirir) {
 					p.imprimir();
 					do {
 						System.out.println("Acepta sugerencia? Ingrese S o N:");
@@ -40,19 +53,19 @@ public class SistemaTurismo {
 					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
 					if (respUsuario.equals("S")) {
 						p.reducirCupo();
-						u.agregarSugerencia(p); // el paquete es una sug por eso no arroja error
+						u.agregarSugerencia(p);
 						atrTomadas.addAll(p.getAtracciones());
 					}
-				} else if (!p.getTipo().equals(u.getTipo())) {
-					paqNoTipo.add(p); // Una vez agotadas las ofertas que coincidan con sus intereses, se ofertarán
-										// aquellas que no coincidan, bajo el mismo criterio.
+				} else if (!esPreferencia) {
+					paqNoTipo.add(p);
 				}
 			}
 
 			for (Atraccion a : atracciones) {
-				if (a.getTipo().equals(u.getTipo()) && a.hayCupoDisponible()
-						&& u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion())
-						&& !atrTomadas.contains(a.getNombre())) {
+				esPreferencia = a.getTipo().equals(u.getTipo());
+				puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
+				hayCupo = a.hayCupoDisponible();
+				if (esPreferencia && hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
 					a.imprimir();
 					do {
 						System.out.println("Acepta sugerencia? Ingrese S o N:");
@@ -63,13 +76,15 @@ public class SistemaTurismo {
 						u.agregarSugerencia(a);
 						atrTomadas.add(a.getNombre());
 					}
-				} else if (!a.getTipo().equals(u.getTipo())) {
+				} else if (!esPreferencia) {
 					atrNoTipo.add(a);
 				}
 			}
 
 			for (Paquete p : paqNoTipo) {
-				if (p.hayCupoDisponible() && u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion())) {
+				puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
+				hayCupo = p.hayCupoDisponible();
+				if (hayCupo && puedeAdquirir) {
 					p.imprimir();
 					do {
 						System.out.println("Acepta sugerencia? Ingrese S o N:");
@@ -84,8 +99,9 @@ public class SistemaTurismo {
 			}
 
 			for (Atraccion a : atrNoTipo) {
-				if (a.hayCupoDisponible() && u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion())
-						&& atrTomadas.contains(a.getNombre())) {
+				puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
+				hayCupo = a.hayCupoDisponible();
+				if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
 					a.imprimir();
 					do {
 						System.out.println("Acepta sugerencia? Ingrese S o N:");
@@ -104,27 +120,57 @@ public class SistemaTurismo {
 			System.out.println("¡Hola, " + u.getNombre() + "! Su itinerario es el siguiente: ");
 			u.mostrarItinerario();
 			System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
+
+			paqNoTipo.clear();
+			atrNoTipo.clear();
 		}
 
-		/*
-		 * System.out.println("Promocion");
-		 * System.out.println("-Atracciones incluidas: [" + sug.getNombreSug() + "]");
-		 * System.out.println("-Duración: " + sug.getDuracionSug());
-		 * System.out.println("-Precio original: " + sug.getCostoSug());
-		 */
-
+		this.mensajeFinal();
 	}
 
-	/*
-	 * public List<Sugerencia> buscarPrefSugerencia(){
-	 * 
-	 * List<Sugerencia> pa = new ArrayList<>();
-	 * 
-	 * for(Atraccion a: atracciones) {
-	 * 
-	 * if(u.preferenciaAtracc(a.nombre)) { pa.add(a); } }
-	 * 
-	 * return pa; }
-	 */
+	public void generarArchivoSalida() {
+		FileWriter file = null;
+		PrintWriter printerWriter = null;
 
+		try {
+			// LocalDate hoy = LocalDate.now();
+			file = new FileWriter(LocalDate.now() + ".out");
+			printerWriter = new PrintWriter(file);
+
+			printerWriter.println("++++++++++++++++++++++");
+			printerWriter.println("+++ VENTAS DEL DIA +++");
+			printerWriter.println("++++++++++++++++++++++");
+
+			for (Usuario u : usuarios) {
+				printerWriter.println(u.imprimirItinerarioEnArchivo());
+				printerWriter.println("----------------------------------------");
+			}
+			/////////////////////////////////
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (file != null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public void mensajeBienvenida(Usuario usuario) {
+		System.out.println("*******************************************************");
+		System.out.println("Bienvendido/a " + usuario.getNombre());
+		System.out.println("Presupuesto: " + String.format(Locale.US, "%.2f", usuario.getPresupuestoTotal()));
+		System.out
+				.println("Tiempo disponible: " + String.format(Locale.US, "%.2f", usuario.getTiempoDisp()) + " horas");
+		System.out.println("*******************************************************");
+	}
+
+	public void mensajeFinal() {
+		System.out.println("*******************************************");
+		System.out.println("** FIN DEL PROCESAMIENTO DE LOS USUARIOS **");
+		System.out.println("*******************************************");
+	}
 }

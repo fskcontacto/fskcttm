@@ -32,7 +32,11 @@ public class Atraccion extends Sugerencia {
 	
 	
 	protected void imprimir() {
-		System.out.println(" ");
+		System.out.println("*ATRACCION*" +
+								"\n\tNombre: " + this.nombre + 
+								"\n\t Tipo: " + this.tipo + 
+								"\n\t Costo: " + this.costo + 
+								"\n\t Duración: " + this.duracion + " horas");
 	}
 	
 	public boolean hayCupoDisponible() {

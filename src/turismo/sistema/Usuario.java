@@ -65,7 +65,7 @@ public class Usuario {
 		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
 			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
 
-		if (this.tieneTiempoDispo(sugerencia.getDuracion()))
+		if (!this.tieneTiempoDispo(sugerencia.getDuracion()))
 			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); // TiempoInsuficienteException();
 
 		this.presupuestoDisp -= sugerencia.getCosto();
@@ -75,5 +75,11 @@ public class Usuario {
 
 	public void mostrarItinerario() {
 		this.itinerario.imprimir();
+	}
+	
+	public String imprimirItinerarioEnArchivo() {
+		return 	"Nombre: " + this.nombre +
+				"\nTipo preferencia: " + this.tipo + "\n" +
+				this.itinerario.imprimirEnArchivo();
 	}
 }

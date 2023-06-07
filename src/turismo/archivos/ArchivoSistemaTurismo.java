@@ -12,14 +12,14 @@ import turismo.sistema.Usuario;
 
 public class ArchivoSistemaTurismo {
 
-	private String nombre;
+	//private String nombre; // ESTO VA? 
 	private String archUsuario;
 	private String archAtrac;
 	private String archPaquetes;
 
 	public ArchivoSistemaTurismo(String nombre, String archUsuario, String archAtrac, String archPaquetes) {
 		super();
-		this.nombre = nombre;
+		//this.nombre = nombre;
 		this.archUsuario = archUsuario;
 		this.archAtrac = archAtrac;
 		this.archPaquetes = archPaquetes;
@@ -45,9 +45,9 @@ public class ArchivoSistemaTurismo {
 //			for (Atraccion atraccion : atracciones) {
 //				System.out.println(atraccion);
 //			}
-			for (Paquete paquete : paquetes) {
-				System.out.println(paquete);
-			}
+//			for (Paquete paquete : paquetes) {
+//				System.out.println(paquete);
+//			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			System.out.println(e.getMessage());

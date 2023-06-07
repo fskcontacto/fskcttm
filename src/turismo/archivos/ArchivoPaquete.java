@@ -31,9 +31,9 @@ public class ArchivoPaquete {
 			int tipoPaquete;
 			String nombresAtrac;
 			String tipo;
-			Map<String, Atraccion> atracPaquete = new HashMap<>();
 
 			while (lector.hasNextLine()) {
+				Map<String, Atraccion> atracPaquete = new HashMap<>();
 				tipoPaquete = lector.nextInt();
 				tipo = lector.next();
 				nombresAtrac = lector.next();
@@ -76,7 +76,6 @@ public class ArchivoPaquete {
 				default:
 					continue;
 				}
-				atracPaquete.clear();
 			}
 			return paquetes;
 		}

@@ -59,6 +59,17 @@ public abstract class Paquete extends Sugerencia {
 		return cupoDisponible;
 	}
 
+	public int getCupoTotal() {
+		int cupoTotal = Integer.MAX_VALUE;
+
+		for (Atraccion atraccion : this.atracciones.values()) {
+			if (atraccion.getCupoTotal() < cupoTotal)
+				cupoTotal = atraccion.getCupoTotal();
+		}
+
+		return cupoTotal;
+	}
+	
 	protected abstract double calcularCosto();
 
 	@Override

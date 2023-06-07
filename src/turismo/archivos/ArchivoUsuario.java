@@ -30,8 +30,8 @@ public class ArchivoUsuario {
 			while(lector.hasNextLine()) {
 				nombre = lector.next();
 				tipo = lector.next();
-				presupuesto = lector.nextInt();
-				tiempoDisp = lector.nextInt();
+				presupuesto = lector.nextDouble();
+				tiempoDisp = lector.nextDouble();
 				usuarios.add(new Usuario(nombre, tipo, presupuesto, tiempoDisp));
 			}
 

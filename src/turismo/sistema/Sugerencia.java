@@ -39,7 +39,7 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	//public abstract void reducirCupo();
 
 	public abstract int getCupoDisponible();
-	// public abstract int getCupoTotal();
+	public abstract int getCupoTotal();
 	public abstract boolean hayCupoDisponible();
 
 	public static void ordenarSugerencias(List<Sugerencia> sugerencias) {

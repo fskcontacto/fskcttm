@@ -1,6 +1,7 @@
 package turismo.sistema;
 
 import java.util.Map;
+import java.util.Set;
 
 public class PaqueteAxB extends Paquete {
 
@@ -32,9 +33,18 @@ public class PaqueteAxB extends Paquete {
         }
     }
     
+    public Set<String> getAtraccionesGratuitas() {
+    	return atracGratuitas.keySet();
+    }
 
-	protected void imprimir() {
-		System.out.println(" ");
+    protected void imprimir() {
+		System.out.println("*PAQUETE*" + 
+							"\n\tNombre atracciones totales: " + this.getAtracciones() +
+							"\n\tNombre atracciones gratuitas: " + this.getAtraccionesGratuitas() +
+							"\n\tTipo: " + this.getTipo() +
+							"\n\tDuracion: " + this.getDuracion() +
+							"\n\tCosto original: " + this.costoOriginal +
+							"\n\tCosto final: " + this.getCosto() );
 	}
 	
 
