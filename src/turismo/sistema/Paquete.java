@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import turismo.excepciones.AtraccionExcepcion;
+
 public abstract class Paquete extends Sugerencia {
 
 	protected Map<String, Atraccion> atracciones;
@@ -43,7 +45,7 @@ public abstract class Paquete extends Sugerencia {
 		return this.atracciones.keySet();
 	}
 
-	public void reducirCupo() {
+	public void reducirCupo() throws AtraccionExcepcion {
 		for (Atraccion atraccion : this.atracciones.values())
 			atraccion.reducirCupo();
 	}

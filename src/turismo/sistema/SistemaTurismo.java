@@ -12,6 +12,8 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
 
+import turismo.excepciones.AtraccionExcepcion;
+
 public class SistemaTurismo {
 	private List<Usuario> usuarios;
 	private List<Atraccion> atracciones;
@@ -50,7 +52,11 @@ public class SistemaTurismo {
 							respUsuario = teclado.nextLine().toUpperCase();
 						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
 						if (respUsuario.equals("S")) {
-							p.reducirCupo();
+							try {
+								p.reducirCupo();
+							} catch (AtraccionExcepcion e) {
+								System.out.println(e.getMessage());
+							}
 							u.agregarSugerencia(p);
 							atrTomadas.addAll(p.getAtracciones());
 							System.out.println("¡Aceptada!");
@@ -71,7 +77,11 @@ public class SistemaTurismo {
 							respUsuario = teclado.nextLine().toUpperCase();
 						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
 						if (respUsuario.equals("S")) {
-							a.reducirCupo();
+							try {
+								a.reducirCupo();
+							} catch (AtraccionExcepcion e) {
+								System.out.println(e.getMessage());
+							}
 							u.agregarSugerencia(a);
 							atrTomadas.add(a.getNombre());
 							System.out.println("¡Aceptada!");
@@ -91,7 +101,11 @@ public class SistemaTurismo {
 							respUsuario = teclado.nextLine().toUpperCase();
 						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
 						if (respUsuario.equals("S")) {
-							p.reducirCupo();
+							try {
+								p.reducirCupo();
+							} catch (AtraccionExcepcion e) {
+								System.out.println(e.getMessage());
+							}
 							u.agregarSugerencia(p);
 							atrTomadas.addAll(p.getAtracciones());
 							System.out.println("¡Aceptada!");
@@ -109,7 +123,11 @@ public class SistemaTurismo {
 							respUsuario = teclado.nextLine().toUpperCase();
 						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
 						if (respUsuario.equals("S")) {
-							a.reducirCupo();
+							try {
+								a.reducirCupo();
+							} catch (AtraccionExcepcion e) {
+								System.out.println(e.getMessage());
+							}
 							u.agregarSugerencia(a);
 							atrTomadas.add(a.getNombre());
 							System.out.println("¡Aceptada!");

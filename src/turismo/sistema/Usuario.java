@@ -42,11 +42,11 @@ public class Usuario {
 	}
 
 	////// se pueden cambiar a private /////////////////
-	public boolean puedeCostearSugerencia(double costo) {
+	private boolean puedeCostearSugerencia(double costo) {
 		return this.presupuestoDisp >= costo;
 	}
 
-	public boolean tieneTiempoDispo(double duracion) {
+	private boolean tieneTiempoDispo(double duracion) {
 		return this.tiempoDisp >= duracion;
 	}
 	////////////////////////////////////////////////////
@@ -54,8 +54,6 @@ public class Usuario {
 	public boolean preferenciaAtracc(String tipoAtracc) {
 		return tipoAtracc.equals(this.tipo);
 	}
-
-	// definir si vamos a recibir como sugerencia o como atraccion
 
 	public void agregarSugerencia(Sugerencia sugerencia) {
 		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))

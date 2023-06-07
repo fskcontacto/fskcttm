@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
+import turismo.excepciones.AtraccionExcepcion;
 import turismo.sistema.Atraccion;
 
 public class ArchivoAtraccion {
@@ -35,7 +36,11 @@ public class ArchivoAtraccion {
 				duracion = lector.nextDouble();
 				cupo = lector.nextInt();
 				tipo = lector.next();
-				atracciones.put(nombre, new Atraccion(nombre, tipo, costo, duracion, cupo));
+				try {
+					atracciones.put(nombre, new Atraccion(nombre, tipo, costo, duracion, cupo));
+				} catch (AtraccionExcepcion e) {
+					System.out.println(e.getMessage());
+				}
 			}
 			
 			return atracciones;

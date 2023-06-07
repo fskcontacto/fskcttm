@@ -1,17 +1,23 @@
 package turismo.sistema;
 
+import turismo.excepciones.AtraccionExcepcion;
+
 public class Atraccion extends Sugerencia {
 	private int cupoTotal;
 	private int cupoDisponible;
 
-	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo) {
+	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo) throws AtraccionExcepcion {
 		super(nombre, tipo, costo, duracion, cupo);
+		if(cupoTotal < 0 || cupoDisponible < 0) {
+			throw new AtraccionExcepcion("No puede generar atracciones sin cupo"); 
+		}
+		
 		cupoDisponible = cupo;
 	}
 
-	public void reducirCupo() {
+	public void reducirCupo() throws AtraccionExcepcion {
 		if (cupoDisponible < 1)
-			throw new RuntimeException("Cupo Insuficiente"); // Crear exception propia (CupoInsuficienteException)
+			throw new AtraccionExcepcion("Cupo Insuficiente"); // Crear exception propia (CupoInsuficienteException)
 
 		cupoDisponible--;
 	}
