@@ -17,9 +17,7 @@ public class ArchivoSistemaTurismo {
 	private String archAtrac;
 	private String archPaquetes;
 
-	public ArchivoSistemaTurismo(String nombre, String archUsuario, String archAtrac, String archPaquetes) {
-		super();
-		//this.nombre = nombre;
+	public ArchivoSistemaTurismo(String archUsuario, String archAtrac, String archPaquetes) {
 		this.archUsuario = archUsuario;
 		this.archAtrac = archAtrac;
 		this.archPaquetes = archPaquetes;

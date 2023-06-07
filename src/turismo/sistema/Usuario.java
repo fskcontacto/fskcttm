@@ -3,18 +3,14 @@ package turismo.sistema;
 public class Usuario {
 	private String nombre;
 	private String tipo;
-	private double presupuestoTotal;
 	private double presupuestoDisp;
-	private double tiempoTotal;
 	private double tiempoDisp;
 	private Itinerario itinerario;
 
 	public Usuario(String nombre, String tipo, double presupuestoTotal, double tiempoTotal) {
 		this.nombre = nombre;
 		this.tipo = tipo;
-		this.presupuestoTotal = presupuestoTotal;
 		this.presupuestoDisp = presupuestoTotal;
-		this.tiempoTotal = tiempoTotal;
 		this.tiempoDisp = tiempoTotal;
 		itinerario = new Itinerario();
 	}
@@ -27,8 +23,8 @@ public class Usuario {
 		return tipo;
 	}
 
-	public double getPresupuestoTotal() {
-		return this.presupuestoTotal;
+	public double getPresupuestoDisp() {
+		return this.presupuestoDisp;
 	}
 
 	public double getTiempoDisp() {
@@ -37,8 +33,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoTotal + " Tiempo disponible: "
-				+ tiempoTotal + " Horas";
+		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoDisp + " Tiempo disponible: "
+				+ tiempoDisp + " Horas";
 	}
 	
 	public boolean puedeAdquirirSugerencia(double costo, double duracion) {

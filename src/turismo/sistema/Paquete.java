@@ -38,11 +38,11 @@ public abstract class Paquete extends Sugerencia {
 		this.duracion = duracion;
 		this.costoOriginal = costoOriginal;
 	}
-	
+
 	public Set<String> getAtracciones() {
 		return this.atracciones.keySet();
 	}
-	
+
 	public void reducirCupo() {
 		for (Atraccion atraccion : this.atracciones.values())
 			atraccion.reducirCupo();
@@ -69,7 +69,7 @@ public abstract class Paquete extends Sugerencia {
 
 		return cupoTotal;
 	}
-	
+
 	protected abstract double calcularCosto();
 
 	@Override
@@ -82,57 +82,10 @@ public abstract class Paquete extends Sugerencia {
 		return this.costoOriginal;
 	}
 
-
-	
-	public boolean hayCupoDisponible() { //el padre lo implementó, los hijos ya saben hacerlo
+	public boolean hayCupoDisponible() { // el padre lo implementó, los hijos ya saben hacerlo
 		return getCupoDisponible() > 0;
 	}
-	
+
 	protected abstract void imprimir();
 
-
-//	private String calcularNombre() {
-//		String nombre = "";
-//		int tope = this.atracciones.size() - 1;
-//		int i = 0;
-//
-//		for (i = 0; i < tope; i++) {
-//			nombre += this.atracciones.get(i).nombre + ", ";
-//		}
-//
-//		nombre += this.atracciones.get(i).nombre;
-//
-//		return nombre;
-//	}
-//	
-//	private double calcularDuracion() {
-//		double duracion = 0;
-//		
-//		for (Atraccion atraccion : this.atracciones) {
-//			duracion += atraccion.duracion;
-//		}
-//
-//		return duracion;
-//	}
-//
-//	private int calcularCupo() {
-//		int menorCupo = Integer.MAX_VALUE;
-//
-//		for (Atraccion atraccion : this.atracciones) {
-//			if (atraccion.cupo < menorCupo)
-//				menorCupo = atraccion.cupo;
-//		}
-//
-//		return menorCupo;
-//	}
-//
-//	private double calcularCostoOriginal() {
-//		double costoOriginal = 0;
-//
-//		for (Atraccion atraccion : this.atracciones) {
-//			costoOriginal += atraccion.costo;
-//		}
-//
-//		return costoOriginal;
-//	}
 }

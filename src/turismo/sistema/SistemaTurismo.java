@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -25,104 +24,105 @@ public class SistemaTurismo {
 	}
 
 	public void sugerirUsuario() {
-		Scanner teclado = new Scanner(System.in);
+		try (Scanner teclado = new Scanner(System.in)) {
+			paquetes.sort(Comparator.reverseOrder());
+			atracciones.sort(Comparator.reverseOrder());
 
-		paquetes.sort(Comparator.reverseOrder());
-		atracciones.sort(Comparator.reverseOrder());
+			for (Usuario u : usuarios) {
+				this.mensajeBienvenida(u);
 
-		for (Usuario u : usuarios) {
-			this.mensajeBienvenida(u);
+				Set<String> atrTomadas = new HashSet<>();
+				String respUsuario;
+				List<Paquete> paqNoTipo = new ArrayList<>();
+				List<Atraccion> atrNoTipo = new ArrayList<>();
 
-			Set<String> atrTomadas = new HashSet<>();
-			String respUsuario;
-			List<Paquete> paqNoTipo = new ArrayList<>();
-			List<Atraccion> atrNoTipo = new ArrayList<>();
-
-			boolean esPreferencia;
-			boolean puedeAdquirir;
-			boolean hayCupo;
-			for (Paquete p : paquetes) {
-				esPreferencia = p.getTipo().equals(u.getTipo());
-				puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
-				hayCupo = p.hayCupoDisponible();
-				if (esPreferencia && hayCupo && puedeAdquirir) {
-					p.imprimir();
-					do {
-						System.out.println("Acepta sugerencia? Ingrese S o N:");
-						respUsuario = teclado.nextLine().toUpperCase();
-					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-					if (respUsuario.equals("S")) {
-						p.reducirCupo();
-						u.agregarSugerencia(p);
-						atrTomadas.addAll(p.getAtracciones());
-					}
-				} else if (!esPreferencia) {
-					paqNoTipo.add(p);
-				}
-			}
-
-			for (Atraccion a : atracciones) {
-				esPreferencia = a.getTipo().equals(u.getTipo());
-				puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
-				hayCupo = a.hayCupoDisponible();
-				if (esPreferencia && hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-					a.imprimir();
-					do {
-						System.out.println("Acepta sugerencia? Ingrese S o N:");
-						respUsuario = teclado.nextLine().toUpperCase();
-					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-					if (respUsuario.equals("S")) {
-						a.reducirCupo();
-						u.agregarSugerencia(a);
-						atrTomadas.add(a.getNombre());
-					}
-				} else if (!esPreferencia) {
-					atrNoTipo.add(a);
-				}
-			}
-
-			for (Paquete p : paqNoTipo) {
-				puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
-				hayCupo = p.hayCupoDisponible();
-				if (hayCupo && puedeAdquirir) {
-					p.imprimir();
-					do {
-						System.out.println("Acepta sugerencia? Ingrese S o N:");
-						respUsuario = teclado.nextLine().toUpperCase();
-					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-					if (respUsuario.equals("S")) {
-						p.reducirCupo();
-						u.agregarSugerencia(p);
-						atrTomadas.addAll(p.getAtracciones());
+				boolean esPreferencia;
+				boolean puedeAdquirir;
+				boolean hayCupo;
+				for (Paquete p : paquetes) {
+					esPreferencia = p.getTipo().equals(u.getTipo());
+					puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
+					hayCupo = p.hayCupoDisponible();
+					if (esPreferencia && hayCupo && puedeAdquirir) {
+						p.imprimir();
+						do {
+							System.out.println("Acepta sugerencia? Ingrese S o N:");
+							respUsuario = teclado.nextLine().toUpperCase();
+						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+						if (respUsuario.equals("S")) {
+							p.reducirCupo();
+							u.agregarSugerencia(p);
+							atrTomadas.addAll(p.getAtracciones());
+							System.out.println("¡Aceptada!");
+						}
+					} else if (!esPreferencia) {
+						paqNoTipo.add(p);
 					}
 				}
-			}
 
-			for (Atraccion a : atrNoTipo) {
-				puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
-				hayCupo = a.hayCupoDisponible();
-				if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-					a.imprimir();
-					do {
-						System.out.println("Acepta sugerencia? Ingrese S o N:");
-						respUsuario = teclado.nextLine().toUpperCase();
-					} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-					if (respUsuario.equals("S")) {
-						a.reducirCupo();
-						u.agregarSugerencia(a);
-						atrTomadas.add(a.getNombre());
+				for (Atraccion a : atracciones) {
+					esPreferencia = a.getTipo().equals(u.getTipo());
+					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
+					hayCupo = a.hayCupoDisponible();
+					if (esPreferencia && hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
+						a.imprimir();
+						do {
+							System.out.println("Acepta sugerencia? Ingrese S o N:");
+							respUsuario = teclado.nextLine().toUpperCase();
+						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+						if (respUsuario.equals("S")) {
+							a.reducirCupo();
+							u.agregarSugerencia(a);
+							atrTomadas.add(a.getNombre());
+							System.out.println("¡Aceptada!");
+						}
+					} else if (!esPreferencia) {
+						atrNoTipo.add(a);
 					}
 				}
+
+				for (Paquete p : paqNoTipo) {
+					puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
+					hayCupo = p.hayCupoDisponible();
+					if (hayCupo && puedeAdquirir) {
+						p.imprimir();
+						do {
+							System.out.println("Acepta sugerencia? Ingrese S o N:");
+							respUsuario = teclado.nextLine().toUpperCase();
+						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+						if (respUsuario.equals("S")) {
+							p.reducirCupo();
+							u.agregarSugerencia(p);
+							atrTomadas.addAll(p.getAtracciones());
+							System.out.println("¡Aceptada!");
+						}
+					}
+				}
+
+				for (Atraccion a : atrNoTipo) {
+					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
+					hayCupo = a.hayCupoDisponible();
+					if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
+						a.imprimir();
+						do {
+							System.out.println("Acepta sugerencia? Ingrese S o N:");
+							respUsuario = teclado.nextLine().toUpperCase();
+						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+						if (respUsuario.equals("S")) {
+							a.reducirCupo();
+							u.agregarSugerencia(a);
+							atrTomadas.add(a.getNombre());
+							System.out.println("¡Aceptada!");
+						}
+					}
+				}
+
+				System.out.println("\n¡ Han finalizado sus sugerencias del día !");
+
+				System.out.println("¡Hola, " + u.getNombre() + "! Su itinerario es el siguiente: ");
+				u.mostrarItinerario();
+				System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
 			}
-
-			System.out.println("\n¡ Han finalizado sus sugerencias del día !");
-
-			System.out.println("¡Hola, " + u.getNombre() + "! Su itinerario es el siguiente: ");
-			u.mostrarItinerario();
-			System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
-
-			paqNoTipo.clear();
-			atrNoTipo.clear();
 		}
 
 		this.mensajeFinal();
@@ -159,16 +159,16 @@ public class SistemaTurismo {
 		}
 	}
 
-	public void mensajeBienvenida(Usuario usuario) {
+	private void mensajeBienvenida(Usuario usuario) {
 		System.out.println("*******************************************************");
 		System.out.println("Bienvendido/a " + usuario.getNombre());
-		System.out.println("Presupuesto: " + String.format(Locale.US, "%.2f", usuario.getPresupuestoTotal()));
+		System.out.println("Presupuesto: " + String.format(Locale.US, "%.2f", usuario.getPresupuestoDisp()));
 		System.out
 				.println("Tiempo disponible: " + String.format(Locale.US, "%.2f", usuario.getTiempoDisp()) + " horas");
 		System.out.println("*******************************************************");
 	}
 
-	public void mensajeFinal() {
+	private void mensajeFinal() {
 		System.out.println("*******************************************");
 		System.out.println("** FIN DEL PROCESAMIENTO DE LOS USUARIOS **");
 		System.out.println("*******************************************");
