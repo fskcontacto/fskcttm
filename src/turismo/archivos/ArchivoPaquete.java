@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
+import turismo.excepciones.PaqueteExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
 import turismo.sistema.Atraccion;
 import turismo.sistema.Paquete;
 import turismo.sistema.PaqueteAbsoluto;
@@ -45,7 +47,11 @@ public class ArchivoPaquete {
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
-					paquetes.add(new PaqueteAbsoluto(tipo, costoAbsoluto, atracPaquete));
+					try {
+						paquetes.add(new PaqueteAbsoluto(tipo, costoAbsoluto, atracPaquete));
+					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				}
 				case Paquete.PORCENTUAL: {
@@ -54,7 +60,11 @@ public class ArchivoPaquete {
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
-					paquetes.add(new PaquetePorcentual(tipo, porcentaje, atracPaquete));
+					try {
+						paquetes.add(new PaquetePorcentual(tipo, porcentaje, atracPaquete));
+					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				}
 				case Paquete.AXB: {
@@ -70,7 +80,11 @@ public class ArchivoPaquete {
 						atracGratuitas.put(nombre, atracciones.get(nombre));
 					}
 					atracPaquete.putAll(atracGratuitas);
-					paquetes.add(new PaqueteAxB(tipo, atracPaquete, atracGratuitas));
+					try {
+						paquetes.add(new PaqueteAxB(tipo, atracPaquete, atracGratuitas));
+					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				}
 				default:

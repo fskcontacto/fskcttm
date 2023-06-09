@@ -1,7 +1,7 @@
 package turismo.sistema;
 
-import java.util.Collections;
-import java.util.List;
+import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
 
 public abstract class Sugerencia implements Comparable<Sugerencia> {
 	protected String nombre;
@@ -9,15 +9,43 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	protected double costo;
 	protected double duracion;
 
-	public Sugerencia(String nombre, String tipo, double costo, double duracion, int cupo) {
-		this.nombre = nombre;
-		this.tipo = tipo;
-		this.costo = costo;
-		this.duracion = duracion;
+	public Sugerencia(String nombre, String tipo, double costo, double duracion) throws SugerenciaExcepcion {
+		this.nombre = verificarNombre(nombre);
+		this.tipo = verificarTipo(tipo);
+		this.costo = verificarCosto(costo);
+		this.duracion = verificarDuracion(duracion);
 	}
 
-	protected Sugerencia(String tipo) {
-		this.tipo = tipo;
+	protected Sugerencia(String tipo) throws SugerenciaExcepcion {
+		this.tipo = verificarTipo(tipo);
+	}
+	
+	private double verificarCosto(double costo) throws SugerenciaExcepcion {
+		if(costo < 0)
+			throw new SugerenciaExcepcion("No puede generar sugerencias con costo menor que 0.");
+		
+		return costo;
+	}
+	
+	private double verificarDuracion(double duracion) throws SugerenciaExcepcion {
+		if(duracion < 0)
+			throw new SugerenciaExcepcion("No puede generar sugerencias con duracion no positiva.");
+		
+		return duracion;
+	}
+	
+	private String verificarTipo(String tipo) throws SugerenciaExcepcion {
+		if(!tipo.equalsIgnoreCase("Paisaje") && !tipo.equalsIgnoreCase("Degustacion") && !tipo.equalsIgnoreCase("Aventura"))
+			throw new SugerenciaExcepcion("Tipo de sugerencia invalida.");
+		
+		return tipo;
+	}
+	
+	private String verificarNombre(String nombre) throws SugerenciaExcepcion {
+		if(!nombre.equals(""))
+			throw new SugerenciaExcepcion("No se ingreso nombre.");
+		
+		return nombre;
 	}
 
 	public String getNombre() {
@@ -28,7 +56,7 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 		return this.tipo;
 	}
 
-	public double getCosto() { // generar métodos abstractos
+	public double getCosto() { 
 		return this.costo;
 	}
 
@@ -36,15 +64,14 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 		return this.duracion;
 	}
 
-	//public abstract void reducirCupo();
-
+	public abstract void reducirCupo() throws AtraccionExcepcion;
 	public abstract int getCupoDisponible();
 	public abstract int getCupoTotal();
 	public abstract boolean hayCupoDisponible();
 
-	public static void ordenarSugerencias(List<Sugerencia> sugerencias) {
-		Collections.sort(sugerencias);
-	}
+//	public static void ordenar(List<Sugerencia> sugerencias) {
+//		Collections.sort(sugerencias);
+//	}
 
 	public int compareTo(Sugerencia o) {
 		if (this.costo != o.costo)

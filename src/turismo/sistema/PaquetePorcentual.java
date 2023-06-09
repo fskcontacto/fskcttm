@@ -2,14 +2,24 @@ package turismo.sistema;
 
 import java.util.Map;
 
+import turismo.excepciones.PaqueteExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
+
 public class PaquetePorcentual extends Paquete {
 
 	private double porcentaje;
 
-	public PaquetePorcentual(String tipo, double porcentaje, Map<String, Atraccion> atracciones) {
+	public PaquetePorcentual(String tipo, double porcentaje, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo, atracciones);
-		this.porcentaje = porcentaje;
+		this.porcentaje = verificarPorcentaje(porcentaje);
 		this.costo = calcularCosto();
+	}
+	
+	private double verificarPorcentaje(double porcentaje) throws PaqueteExcepcion {
+		if(Double.compare(porcentaje, 0) < 0 || Double.compare(porcentaje, 1) > 0)
+			throw new PaqueteExcepcion("El porcentaje a descontar debe estar entre 0(0%) y 1(100%)");
+		
+		return porcentaje;
 	}
 
 	protected double calcularCosto() {

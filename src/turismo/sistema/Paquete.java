@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
 
 public abstract class Paquete extends Sugerencia {
 
@@ -14,7 +15,7 @@ public abstract class Paquete extends Sugerencia {
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
-	public Paquete(String tipo, Map<String, Atraccion> atracciones) {
+	public Paquete(String tipo, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion {
 		super(tipo);
 		this.atracciones = atracciones;
 		inicializarValores();
@@ -84,7 +85,7 @@ public abstract class Paquete extends Sugerencia {
 		return this.costoOriginal;
 	}
 
-	public boolean hayCupoDisponible() { // el padre lo implementó, los hijos ya saben hacerlo
+	public boolean hayCupoDisponible() {
 		return getCupoDisponible() > 0;
 	}
 

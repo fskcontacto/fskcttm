@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
 import turismo.sistema.Atraccion;
 
 public class ArchivoAtraccion {
@@ -39,6 +40,8 @@ public class ArchivoAtraccion {
 				try {
 					atracciones.put(nombre, new Atraccion(nombre, tipo, costo, duracion, cupo));
 				} catch (AtraccionExcepcion e) {
+					System.out.println(e.getMessage());
+				} catch (SugerenciaExcepcion e) {
 					System.out.println(e.getMessage());
 				}
 			}

@@ -1,24 +1,32 @@
 package turismo.sistema;
 
 import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.SugerenciaExcepcion;
 
 public class Atraccion extends Sugerencia {
 	private int cupoTotal;
 	private int cupoDisponible;
 
-	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo) throws AtraccionExcepcion {
-		super(nombre, tipo, costo, duracion, cupo);
-		if(cupoTotal < 0 || cupoDisponible < 0) {
-			throw new AtraccionExcepcion("No puede generar atracciones sin cupo"); 
-		}
+	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo) throws AtraccionExcepcion, SugerenciaExcepcion {
+		super(nombre, tipo, costo, duracion);
 		
-		cupoDisponible = cupo;
+		cupoTotal = verificarCupo(cupo, "No se puede crear atracciones sin cupo");
+		cupoDisponible = cupoTotal;
+	}
+
+	private int verificarCupo(int cupo, String msgExcepcion) throws AtraccionExcepcion {
+		if(cupo < 1)
+			throw new AtraccionExcepcion(msgExcepcion);
+		
+		return cupo;
 	}
 
 	public void reducirCupo() throws AtraccionExcepcion {
-		if (cupoDisponible < 1)
-			throw new AtraccionExcepcion("Cupo Insuficiente"); // Crear exception propia (CupoInsuficienteException)
-
+// 		LO COMENTO PARA NO REPETIR CODIGO Y LO ENCAPSULE EN EL METODO PRIVADO verificarCupo()
+//		SI LES PARECE BIEN LO DEJAMOS ASI.
+//		if (cupoDisponible < 1)
+//			throw new AtraccionExcepcion("Cupo Insuficiente");
+		verificarCupo(cupoDisponible - 1, "No hay cupo disponible.");
 		cupoDisponible--;
 	}
 
