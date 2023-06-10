@@ -22,10 +22,6 @@ public class Atraccion extends Sugerencia {
 	}
 
 	public void reducirCupo() throws AtraccionExcepcion {
-// 		LO COMENTO PARA NO REPETIR CODIGO Y LO ENCAPSULE EN EL METODO PRIVADO verificarCupo()
-//		SI LES PARECE BIEN LO DEJAMOS ASI.
-//		if (cupoDisponible < 1)
-//			throw new AtraccionExcepcion("Cupo Insuficiente");
 		verificarCupo(cupoDisponible - 1, "No hay cupo disponible.");
 		cupoDisponible--;
 	}
