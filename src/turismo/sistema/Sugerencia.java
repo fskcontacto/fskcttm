@@ -42,7 +42,7 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	}
 	
 	private String verificarNombre(String nombre) throws SugerenciaExcepcion {
-		if(!nombre.equals(""))
+		if(nombre.equals(""))
 			throw new SugerenciaExcepcion("No se ingreso nombre.");
 		
 		return nombre;

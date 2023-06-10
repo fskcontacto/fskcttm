@@ -11,7 +11,7 @@ public abstract class Paquete extends Sugerencia {
 
 	protected Map<String, Atraccion> atracciones;
 	protected double costoOriginal;
-	public static final int ABSOLUTO = 0; // preguntar -> se hace una clase enum??? ->
+	public static final int ABSOLUTO = 0;
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
