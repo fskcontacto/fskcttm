@@ -147,12 +147,9 @@ public class SistemaTurismo {
 	}
 
 	public void generarArchivoSalida() {
-		FileWriter file = null;
 		PrintWriter printerWriter = null;
 
-		try {
-			// LocalDate hoy = LocalDate.now();
-			file = new FileWriter(LocalDate.now() + ".out");
+		try (FileWriter file = new FileWriter(LocalDate.now() + ".out")){
 			printerWriter = new PrintWriter(file);
 
 			printerWriter.println("++++++++++++++++++++++");
@@ -166,14 +163,6 @@ public class SistemaTurismo {
 			/////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (file != null) {
-				try {
-					file.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
