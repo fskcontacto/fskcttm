@@ -24,13 +24,13 @@ public class PaqueteAxB extends Paquete {
 	}
 
 	protected double calcularCosto() {
-		double costoGratuito = 0;
-
+		double costo = this.costoOriginal;
+		
 		for (Atraccion atraccion : this.atracGratuitas.values()) {
-			costoGratuito += atraccion.costo;
+			this.costoOriginal += atraccion.costo;
 		}
-
-		return this.costoOriginal - costoGratuito;
+		
+		return costo;
 	}
 
 	
