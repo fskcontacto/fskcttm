@@ -24,7 +24,7 @@ public class ArchivoSistemaTurismo {
 		this.archPaquetes = archPaquetes;
 	}
 
-	public SistemaTurismo leer() throws UsuarioExcepcion {
+	public SistemaTurismo leer() {
 		ArchivoUsuario archivoUsuario = new ArchivoUsuario(this.archUsuario);
 		ArchivoAtraccion archivoAtraccion = new ArchivoAtraccion(this.archAtrac);
 		ArchivoPaquete archivoPaquete = new ArchivoPaquete(this.archPaquetes);
