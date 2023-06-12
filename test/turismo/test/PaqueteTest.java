@@ -23,6 +23,7 @@ public class PaqueteTest {
 	private Atraccion atraccion, atraccion2, atraccion3, atraccion4, atraccion5;
 	private Map<String, Atraccion> atracciones;
 	private Map<String, Atraccion> atraccionesGratuitas;
+	private Map<String, Atraccion> atraccionesAXB; // Al crear el paqueteAXB junta las atracciones pagas y las gratuitas al momento de leer el archivo
 	private Paquete paqueteAbs;
 	private Paquete paqueteAXB;
 	private Paquete paquetePorc;
@@ -39,7 +40,7 @@ public class PaqueteTest {
 	private double costoAtrGratuita2 = 60;
 	private double costoTotal = costoAtr1 + costoAtr2 + costoAtr3;
 	private double costoOriginalAXB = costoTotal + costoAtrGratuita1 + costoAtrGratuita2;
-	private double porcentajeDescontado = 0.99;
+	private double porcentajeDescontado = 0.1;
 	private double precioAbsoluto = costoTotal - 10;
 	private double totalConDescuento = costoTotal - costoTotal * porcentajeDescontado;
 
@@ -47,6 +48,7 @@ public class PaqueteTest {
 	public void setup() {
 		atracciones = new HashMap<String, Atraccion>();
 		atraccionesGratuitas = new HashMap<String, Atraccion>();
+		atraccionesAXB = new HashMap<String, Atraccion>();
 		paquetes = new ArrayList<Paquete>();
 		try {
 			atraccion = new Atraccion("Moria", "Paisaje", costoAtr1, 2, cupoAtr1);
@@ -66,11 +68,13 @@ public class PaqueteTest {
 
 		atraccionesGratuitas.put("4", atraccion4);
 		atraccionesGratuitas.put("5", atraccion5);
-
+		
+		atraccionesAXB.putAll(atracciones);
+		atraccionesAXB.putAll(atraccionesGratuitas);
 		try {
 			paqueteAbs = new PaqueteAbsoluto("Paisaje", precioAbsoluto, atracciones);
-			paqueteAXB = new PaqueteAxB("Aventura", atracciones, atraccionesGratuitas);
-			paquetePorc = new PaquetePorcentual("Degustacion", porcentajeDescontado, atracciones); // Hacer clases de test para el resto de las clases
+			paqueteAXB = new PaqueteAxB("Aventura", atraccionesAXB, atraccionesGratuitas);
+			paquetePorc = new PaquetePorcentual("Degustación", porcentajeDescontado, atracciones); // Hacer clases de test para el resto de las clases
 		} catch (PaqueteExcepcion e) {
 			e.printStackTrace();
 		} catch (SugerenciaExcepcion e) {
@@ -113,9 +117,9 @@ public class PaqueteTest {
 		boolean originalAXB = paqueteAXB.getMontoOrigPaquete() == costoOriginalAXB;
 		boolean originalPorc = paquetePorc.getMontoOrigPaquete() == costoTotal;
 		
-		Assert.assertEquals(originalAbs, true);
-		Assert.assertEquals(originalAXB, true);
-		Assert.assertEquals(originalPorc, true);
+		Assert.assertEquals(true, originalAbs);
+		Assert.assertEquals(true, originalAXB);
+		Assert.assertEquals(true, originalPorc);
 	}
 	
 
