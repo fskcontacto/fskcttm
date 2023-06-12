@@ -1,5 +1,6 @@
 package turismo.sistema;
 
+import java.util.Locale;
 import java.util.Map;
 
 import turismo.excepciones.PaqueteExcepcion;
@@ -36,7 +37,7 @@ public class PaquetePorcentual extends Paquete {
 							"\n\tTipo: " + this.getTipo() +
 							"\n\tDuracion: " + this.getDuracion() + 
 							"\n\tCosto original: " + this.costoOriginal +
-							"\n\tCosto con descuento: " + this.getCosto() );
+							"\n\tCosto con descuento: " + String.format(Locale.US, "%.2f", this.getCosto()));
 	}
 
 }
