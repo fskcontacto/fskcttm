@@ -71,6 +71,10 @@ public class Usuario {
 		this.itinerario.imprimir();
 	}
 	
+	public boolean itinerarioVacio() {
+		return this.itinerario.getItinerario().isEmpty();
+	}
+	
 	public String imprimirItinerarioEnArchivo() {
 		return 	"Nombre: " + this.nombre +
 				"\nTipo preferencia: " + this.tipo + "\n" +

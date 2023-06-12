@@ -137,10 +137,14 @@ public class SistemaTurismo {
 
 				System.out.println("\n¡ Han finalizado sus sugerencias del día !");
 
-				System.out.println("¡Hola, " + u.getNombre() + "! Su itinerario es el siguiente: ");
-				u.mostrarItinerario();
-				System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
+				if (!u.itinerarioVacio()) {
+					System.out.println("¡" + u.getNombre() + ", su itinerario es el siguiente: ");
+					u.mostrarItinerario();
+					System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
+				}
+
 			}
+
 		}
 
 		this.mensajeFinal();
@@ -149,17 +153,28 @@ public class SistemaTurismo {
 	public void generarArchivoSalida() {
 		PrintWriter printerWriter = null;
 
-		try (FileWriter file = new FileWriter(LocalDate.now() + ".out")){
+		try (FileWriter file = new FileWriter(LocalDate.now() + ".out")) {
 			printerWriter = new PrintWriter(file);
+			int contVentas = 0;
 
 			printerWriter.println("++++++++++++++++++++++");
 			printerWriter.println("+++ VENTAS DEL DIA +++");
 			printerWriter.println("++++++++++++++++++++++");
 
 			for (Usuario u : usuarios) {
-				printerWriter.println(u.imprimirItinerarioEnArchivo());
-				printerWriter.println("----------------------------------------");
+				
+				if(!u.itinerarioVacio()) {
+					printerWriter.println(u.imprimirItinerarioEnArchivo());
+					printerWriter.println("----------------------------------------");
+					++contVentas;
+				}
 			}
+			
+			if(contVentas == 0) {
+				printerWriter.println("NO SE REGISTRARON VENTAS EN EL DÍA");
+			}
+			
+			
 			/////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
