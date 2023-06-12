@@ -28,8 +28,8 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	}
 	
 	private double verificarDuracion(double duracion) throws SugerenciaExcepcion {
-		if(duracion < 0)
-			throw new SugerenciaExcepcion("No puede generar sugerencias con duracion no positiva.");
+		if(duracion <= 0)
+			throw new SugerenciaExcepcion("No puede generar sugerencias con duracion menor o igual a 0");
 		
 		return duracion;
 	}

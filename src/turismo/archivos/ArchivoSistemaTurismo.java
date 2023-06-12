@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import turismo.excepciones.UsuarioExcepcion;
 import turismo.sistema.Atraccion;
 import turismo.sistema.Paquete;
 import turismo.sistema.SistemaTurismo;
@@ -23,7 +24,7 @@ public class ArchivoSistemaTurismo {
 		this.archPaquetes = archPaquetes;
 	}
 
-	public SistemaTurismo leer() {
+	public SistemaTurismo leer() throws UsuarioExcepcion {
 		ArchivoUsuario archivoUsuario = new ArchivoUsuario(this.archUsuario);
 		ArchivoAtraccion archivoAtraccion = new ArchivoAtraccion(this.archAtrac);
 		ArchivoPaquete archivoPaquete = new ArchivoPaquete(this.archPaquetes);

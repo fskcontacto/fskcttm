@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import turismo.excepciones.UsuarioExcepcion;
 import turismo.sistema.Usuario;
 
 public class ArchivoUsuario {
@@ -32,7 +33,11 @@ public class ArchivoUsuario {
 				tipo = lector.next();
 				presupuesto = lector.nextDouble();
 				tiempoDisp = lector.nextDouble();
-				usuarios.add(new Usuario(nombre, tipo, presupuesto, tiempoDisp));
+				try {
+					usuarios.add(new Usuario(nombre, tipo, presupuesto, tiempoDisp));
+				} catch (UsuarioExcepcion e) {
+					e.printStackTrace();
+				}
 			}
 
 			return usuarios;
