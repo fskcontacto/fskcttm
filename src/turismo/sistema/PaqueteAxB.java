@@ -12,12 +12,12 @@ public class PaqueteAxB extends Paquete {
 
 	public PaqueteAxB(String tipo, Map<String,Atraccion> atracciones, Map<String,Atraccion> atracGratuitas) throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo, atracciones);
-		this.atracGratuitas = verificarAtracciones(atracGratuitas);
+		this.atracGratuitas = verificarAtraccionesGratuitas(atracGratuitas);
 		this.costo = calcularCosto();
 	}
 	
-	private Map<String,Atraccion> verificarAtracciones(Map<String,Atraccion> atracciones) throws PaqueteExcepcion {
-		if(atracciones.isEmpty())
+	private Map<String,Atraccion> verificarAtraccionesGratuitas(Map<String,Atraccion> atraccionesGratuitas) throws PaqueteExcepcion {
+		if(atraccionesGratuitas.isEmpty())
 			throw new PaqueteExcepcion("Debe haber al menos una atraccion gratuita en Paquetes AxB");
 		
 		return atracciones;

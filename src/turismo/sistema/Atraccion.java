@@ -15,7 +15,7 @@ public class Atraccion extends Sugerencia {
 	}
 
 	private int verificarCupo(int cupo, String msgExcepcion) throws AtraccionExcepcion {
-		if(cupo < 0) //SAQUÉ EL < 1 YA QUE SINO NO TENÍA SENTIDO PROBAR LA REDUCCIÓN MIENTRAS HAYA CUPOS DISPONIBLES
+		if(cupo <= 0) //SAQUÉ EL < 1 YA QUE SINO NO TENÍA SENTIDO PROBAR LA REDUCCIÓN MIENTRAS HAYA CUPOS DISPONIBLES
 			throw new AtraccionExcepcion(msgExcepcion);
 		
 		return cupo;

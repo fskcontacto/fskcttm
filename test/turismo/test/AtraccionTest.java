@@ -23,105 +23,93 @@ public class AtraccionTest {
 		}
 	}
 
-	@Test(expected = AtraccionExcepcion.class) //tal vez es con una RunTimeException.class o modificando algo de las clases perso
+	@Test(expected = AtraccionExcepcion.class)
 	public void queAtraccionNoTengaCupoInvalido() throws AtraccionExcepcion, SugerenciaExcepcion {
 
-		try {
-
-			Atraccion atraccion = new Atraccion("Atraccion1", "Paisaje", 10.0, 0, 0);
-			// Assert.fail("Debería haber lanzado una excepción de AtraccionExcepcion");
-		} catch (AtraccionExcepcion e) {
-			Assert.assertTrue(e.getMessage().contains("No se puede crear atracciones sin cupo"));
-		} catch (SugerenciaExcepcion s) {
-			Assert.fail("Se produjo una excepción inesperada: " + s.getMessage());
-		}
-	} // NO FUNCA, REVISAR
+		new Atraccion("Atraccion1", "Paisaje", 10.0, 3, 0);
+	}
 
 	@Test
-	public void queVerifiqueCupoDispCorrepto() {
+	public void queVerifiqueCupoDispCorrecto() {
 		Assert.assertEquals(6, atraccion.getCupoDisponible());
-
 	}
 
 	@Test
-	public void queVerifiqueCupoTotalCorrepto() {
-
+	public void queVerifiqueCupoTotalCorrecto() {
 		Assert.assertEquals(6, atraccion.getCupoTotal());
-
 	}
 
-//	@Test CREO QUE ESTE ES UN EJEMPLO INNECESARIO - REVISAR
-//	public void queCupoTotalYDispSeanIgualesInicio()  {
-//
-//		try {
-//			Atraccion atraccion = new Atraccion("Moria", "Paisaje", 10, 2, 6);
-//			Assert.assertEquals(atraccion.getCupoDisponible(), atraccion.getCupoTotal());
-//			atraccion = null;
-//		} catch (AtraccionExcepcion e) {
-//			e.printStackTrace();
-//		} catch (SugerenciaExcepcion e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-// reducirCupo
+	@Test
+	public void queCupoTotalYDispSeanIgualesInicio() {
+		Assert.assertEquals(atraccion.getCupoDisponible(), atraccion.getCupoTotal());
+	}
 
 	@Test
 	public void queReduzcaMasDeUnCupo() {
-
 		try {
 			atraccion.reducirCupo();
 			atraccion.reducirCupo();
 			atraccion.reducirCupo();
 			Assert.assertEquals(3, atraccion.getCupoDisponible());
 		} catch (AtraccionExcepcion e) {
-
 			e.printStackTrace();
 		}
 	}
 
 	@Test
 	public void queReduzcaMaxCupos() {
-
 		try {
-
 			for (int i = 0; i < atraccion.getCupoTotal(); ++i) {
 				atraccion.reducirCupo();
 			}
-
 			Assert.assertEquals(0, atraccion.getCupoDisponible());
-			atraccion = null;
 		} catch (AtraccionExcepcion e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test(expected = AtraccionExcepcion.class)
-	public void queNoReduzcaMaxCuposPermitidos() {
-
-		try {
-
-			for (int i = 0; i < atraccion.getCupoTotal(); ++i) {
-				atraccion.reducirCupo();
-			}
-
+	public void queNoReduzcaMasCupoDelPermitido() throws AtraccionExcepcion {
+		for (int i = 0; i < atraccion.getCupoTotal(); ++i) {
 			atraccion.reducirCupo();
-		} catch (AtraccionExcepcion e) {
-			Assert.assertTrue(e.getMessage().contains("No hay cupo disponible."));
 		}
-
+		atraccion.reducirCupo();
 	}
 
 	@Test
-	public void queNoReduzcaMinCuposPermitidos() {
-
-		try {
-			atraccion.reducirCupo();
-			Assert.assertEquals(5, atraccion.getCupoDisponible());
-
-		} catch (AtraccionExcepcion e) {
-			e.printStackTrace();
-
-		}
+	public void queNoReduzcaMinCuposPermitidos() throws AtraccionExcepcion {
+		atraccion.reducirCupo();
+		Assert.assertEquals(5, atraccion.getCupoDisponible());
 	}
+	
+	@Test(expected = SugerenciaExcepcion.class)
+	public void queNoPermitaTipoInvalidos() throws AtraccionExcepcion, SugerenciaExcepcion {
+		new Atraccion("Moria", "Comida", 10, 3, 4);
+	}
+	
+	@Test(expected = SugerenciaExcepcion.class)
+	public void queNoPermitaNombreVacio() throws AtraccionExcepcion, SugerenciaExcepcion {
+		new Atraccion("", "Degustación", 10, 3, 1);
+	}
+	
+	@Test(expected = SugerenciaExcepcion.class)
+	public void queNoPermitaCostoNegativo() throws AtraccionExcepcion, SugerenciaExcepcion {
+		new Atraccion("Fortuna", "Paisaje", -10, 3, 11);
+	}
+	
+	@Test(expected = SugerenciaExcepcion.class)
+	public void queNoPermitaDuracionNoPositiva() throws AtraccionExcepcion, SugerenciaExcepcion {
+		new Atraccion("Fortuna", "Paisaje", 3, 0, 11);
+	}
+	
 }
+
+/*
+ * 
+ * proponer testear Usuario e ¿Itinerario? -> se testea el comportamiento de la clase, no tiene nada que ver con los files.
+ * proponer separar las cosas que testean cosas generales en un SugerenciaTest
+ * "final" en variables que no se pueden modificar ej -> todas las de Sugerencia
+ * chequear si falta alguna otra verificacion
+ * chequear si no hay try-catch innecesarios
+ * 
+*/

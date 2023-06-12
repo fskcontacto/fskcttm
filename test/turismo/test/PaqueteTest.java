@@ -23,7 +23,9 @@ public class PaqueteTest {
 	private Atraccion atraccion, atraccion2, atraccion3, atraccion4, atraccion5;
 	private Map<String, Atraccion> atracciones;
 	private Map<String, Atraccion> atraccionesGratuitas;
-	private Map<String, Atraccion> atraccionesAXB; // Al crear el paqueteAXB junta las atracciones pagas y las gratuitas al momento de leer el archivo
+	private Map<String, Atraccion> atraccionesAXB; // Al crear el paqueteAXB junta las atracciones pagas y las gratuitas
+													// al momento de leer el archivo
+	private Map<String, Atraccion> sinAtracciones;
 	private Paquete paqueteAbs;
 	private Paquete paqueteAXB;
 	private Paquete paquetePorc;
@@ -49,6 +51,7 @@ public class PaqueteTest {
 		atracciones = new HashMap<String, Atraccion>();
 		atraccionesGratuitas = new HashMap<String, Atraccion>();
 		atraccionesAXB = new HashMap<String, Atraccion>();
+		sinAtracciones = new HashMap<String, Atraccion>();
 		paquetes = new ArrayList<Paquete>();
 		try {
 			atraccion = new Atraccion("Moria", "Paisaje", costoAtr1, 2, cupoAtr1);
@@ -68,19 +71,19 @@ public class PaqueteTest {
 
 		atraccionesGratuitas.put("4", atraccion4);
 		atraccionesGratuitas.put("5", atraccion5);
-		
+
 		atraccionesAXB.putAll(atracciones);
 		atraccionesAXB.putAll(atraccionesGratuitas);
 		try {
 			paqueteAbs = new PaqueteAbsoluto("Paisaje", precioAbsoluto, atracciones);
 			paqueteAXB = new PaqueteAxB("Aventura", atraccionesAXB, atraccionesGratuitas);
-			paquetePorc = new PaquetePorcentual("Degustación", porcentajeDescontado, atracciones); // Hacer clases de test para el resto de las clases
+			paquetePorc = new PaquetePorcentual("Degustación", porcentajeDescontado, atracciones);
 		} catch (PaqueteExcepcion e) {
 			e.printStackTrace();
 		} catch (SugerenciaExcepcion e) {
 			e.printStackTrace();
 		}
-		
+
 		paquetes.add(paqueteAXB);
 		paquetes.add(paqueteAbs);
 		paquetes.add(paquetePorc);
@@ -110,79 +113,83 @@ public class PaqueteTest {
 		Assert.assertEquals(totalValido, true);
 	}
 
-	
 	@Test
 	public void queObtengocostoOriginal() {
 		boolean originalAbs = paqueteAbs.getMontoOrigPaquete() == costoTotal;
 		boolean originalAXB = paqueteAXB.getMontoOrigPaquete() == costoOriginalAXB;
 		boolean originalPorc = paquetePorc.getMontoOrigPaquete() == costoTotal;
-		
+
 		Assert.assertEquals(true, originalAbs);
 		Assert.assertEquals(true, originalAXB);
 		Assert.assertEquals(true, originalPorc);
 	}
-	
 
 	@Test
 	public void menorCupo() {
 		Assert.assertEquals(cupoMin, paqueteAbs.getCupoDisponible());
 		Assert.assertEquals(cupoMin, paqueteAXB.getCupoDisponible());
 		Assert.assertEquals(cupoMin, paquetePorc.getCupoDisponible());
-		
-	}
-	
-	@Test(expected = AtraccionExcepcion.class)
-	public void queNoReduzcaMaxCuposPermitidos() {
 
-		for (Paquete paquete: paquetes) {
-			
-			try {
-				
-				for (int i = 0; i < paquete.getCupoTotal(); ++i) {
-					paquete.reducirCupo();
-				}
-				
+	}
+
+	@Test(expected = AtraccionExcepcion.class)
+	public void queNoReduzcaMaxCuposPermitidos() throws AtraccionExcepcion {
+
+		for (Paquete paquete : paquetes) {
+			for (int i = 0; i < paquete.getCupoTotal(); ++i) {
 				paquete.reducirCupo();
-			} catch (AtraccionExcepcion e) {
-				Assert.assertTrue(e.getMessage().contains("No hay cupo disponible."));
 			}
+			paquete.reducirCupo();
 		}
 	}
 
 	@Test
 	public void queReduzcaCuposDeAtracciones() {
-		for (Paquete paquete: paquetes ) {
+		for (Paquete paquete : paquetes) {
 			try {
 				paquete.reducirCupo();
 			} catch (AtraccionExcepcion e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		Assert.assertEquals(cupoAtr1 - paquetes.size(), atraccion.getCupoDisponible());
 		Assert.assertEquals(cupoAtr2 - paquetes.size(), atraccion2.getCupoDisponible());
 		Assert.assertEquals(cupoAtr3 - paquetes.size(), atraccion3.getCupoDisponible());
 	}
-	
+
 	@Test
 	public void queReduzcaMaxCupos() {
 
-		for (Paquete paquete: paquetes) {
-			
+		for (Paquete paquete : paquetes) {
+
 			try {
-				
+
 				int cupoDisponible = paquete.getCupoDisponible();
 				for (int i = 0; i < cupoDisponible; ++i) {
 					paquete.reducirCupo();
 				}
-				
+
 				Assert.assertEquals(0, paquete.getCupoDisponible());
-				
+
 			} catch (AtraccionExcepcion e) {
 				e.printStackTrace();
 			}
 		}
 	}
+
+//	@Test
+//	public void queGenereBienNombreDePaquete() {
+//		Assert.asser
+//	}
+	
+	@Test(expected = PaqueteExcepcion.class)
+	public void queNoCreePaqueteAXBSinAtraccionesGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
+		new PaqueteAxB("Degustación", atracciones, sinAtracciones);
+	}
+
+	@Test(expected = PaqueteExcepcion.class)
+	public void quePaqueteAbsolutoNoTengaCostoFinalMayorAlOriginal() throws SugerenciaExcepcion, PaqueteExcepcion {
+		new PaqueteAbsoluto("Degustación", costoTotal + 10, atracciones);
+	}
 }
-
-
