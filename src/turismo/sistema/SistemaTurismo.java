@@ -173,7 +173,6 @@ public class SistemaTurismo {
 			if (contVentas == 0) {
 				printerWriter.println("NO SE REGISTRARON VENTAS EN EL DÍA");
 			}
-
 		/////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();

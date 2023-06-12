@@ -77,5 +77,6 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 		return Double.compare(this.duracion, o.duracion);
 	}
 	
+	
 	protected abstract void imprimir();
 }
