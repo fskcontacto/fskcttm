@@ -26,6 +26,13 @@ public class SistemaTurismo {
 	}
 
 	public void sugerirUsuario() {
+		
+		if(atracciones.isEmpty() && paquetes.isEmpty()) {
+			System.out.println("¡ No tenemos actividades que ofrecer, vuelva pronto !");
+			this.mensajeFinal();
+			return;
+		}
+		
 		try (Scanner teclado = new Scanner(System.in)) {
 			paquetes.sort(Comparator.reverseOrder());
 			atracciones.sort(Comparator.reverseOrder());
@@ -191,6 +198,7 @@ public class SistemaTurismo {
 	private void mensajeFinal() {
 		System.out.println("*******************************************");
 		System.out.println("** FIN DEL PROCESAMIENTO DE LOS USUARIOS **");
+		System.out.println("** GRACIAS POR ELEGIRNOS - SISTEMA TURISMO EN LA TIERRA MEDIA **");
 		System.out.println("*******************************************");
 	}
 }
