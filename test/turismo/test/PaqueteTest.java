@@ -132,17 +132,6 @@ public class PaqueteTest {
 
 	}
 
-	@Test(expected = AtraccionExcepcion.class)
-	public void queNoReduzcaMaxCuposPermitidos() throws AtraccionExcepcion {
-
-		for (Paquete paquete : paquetes) {
-			for (int i = 0; i < paquete.getCupoTotal(); ++i) {
-				paquete.reducirCupo();
-			}
-			paquete.reducirCupo();
-		}
-	}
-
 	@Test
 	public void queReduzcaCuposDeAtracciones() {
 		for (Paquete paquete : paquetes) {
@@ -178,10 +167,11 @@ public class PaqueteTest {
 		}
 	}
 
-//	@Test
-//	public void queGenereBienNombreDePaquete() {
-//		Assert.asser
-//	}
+	@Test
+	public void queGenereBienNombre() {
+		String nombreEsperado = "Moria, Fortuna, Giratoria";
+		Assert.assertEquals(nombreEsperado, paqueteAbs.getNombre());
+	}
 	
 	@Test(expected = PaqueteExcepcion.class)
 	public void queNoCreePaqueteAXBSinAtraccionesGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {

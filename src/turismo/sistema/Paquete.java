@@ -9,7 +9,7 @@ import turismo.excepciones.SugerenciaExcepcion;
 
 public abstract class Paquete extends Sugerencia {
 
-	protected Map<String, Atraccion> atracciones;
+	protected final Map<String, Atraccion> atracciones;
 	protected double costoOriginal;
 	public static final int ABSOLUTO = 0;
 	public static final int PORCENTUAL = 1;

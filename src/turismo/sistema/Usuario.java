@@ -3,8 +3,8 @@ package turismo.sistema;
 import turismo.excepciones.UsuarioExcepcion;
 
 public class Usuario {
-	private String nombre;
-	private String tipo;
+	private final String nombre;
+	private final String tipo;
 	private double presupuestoDisp;
 	private double tiempoDisp;
 	private Itinerario itinerario;

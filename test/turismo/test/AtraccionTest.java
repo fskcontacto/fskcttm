@@ -83,13 +83,3 @@ public class AtraccionTest {
 	}
 
 }
-
-/*
- * 
- * proponer testear Usuario e ¿Itinerario? -> se testea el comportamiento de la
- * clase, no tiene nada que ver con los files. proponer separar las cosas que
- * testean cosas generales en un SugerenciaTest "final" en variables que no se
- * pueden modificar ej -> todas las de Sugerencia chequear si falta alguna otra
- * verificacion chequear si no hay try-catch innecesarios
- * 
- */
