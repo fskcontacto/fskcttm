@@ -20,13 +20,13 @@ public class PaqueteAxB extends Paquete {
 		if(atraccionesGratuitas.isEmpty())
 			throw new PaqueteExcepcion("Debe haber al menos una atraccion gratuita en Paquetes AxB");
 		
-		return atracciones;
+		return atraccionesGratuitas;
 	}
 
 	protected double calcularCosto() {
 		double costoGratuito = 0;
 		for (Atraccion atraccion : this.atracGratuitas.values()) {
-			costoGratuito += atraccion.costo;
+			costoGratuito += atraccion.getCosto();
 		}
 		return this.costoOriginal - costoGratuito;
 	}
