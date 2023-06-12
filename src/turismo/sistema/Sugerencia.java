@@ -35,7 +35,7 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	}
 	
 	private String verificarTipo(String tipo) throws SugerenciaExcepcion {
-		if(!tipo.equalsIgnoreCase("Paisaje") && !tipo.equalsIgnoreCase("Degustacion") && !tipo.equalsIgnoreCase("Aventura"))
+		if(!tipo.equalsIgnoreCase("Paisaje") && !tipo.equalsIgnoreCase("Degustación") && !tipo.equalsIgnoreCase("Aventura"))
 			throw new SugerenciaExcepcion("Tipo de sugerencia invalida.");
 		
 		return tipo;
