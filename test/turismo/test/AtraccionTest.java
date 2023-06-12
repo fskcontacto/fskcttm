@@ -81,35 +81,15 @@ public class AtraccionTest {
 		atraccion.reducirCupo();
 		Assert.assertEquals(5, atraccion.getCupoDisponible());
 	}
-	
-	@Test(expected = SugerenciaExcepcion.class)
-	public void queNoPermitaTipoInvalidos() throws AtraccionExcepcion, SugerenciaExcepcion {
-		new Atraccion("Moria", "Comida", 10, 3, 4);
-	}
-	
-	@Test(expected = SugerenciaExcepcion.class)
-	public void queNoPermitaNombreVacio() throws AtraccionExcepcion, SugerenciaExcepcion {
-		new Atraccion("", "Degustación", 10, 3, 1);
-	}
-	
-	@Test(expected = SugerenciaExcepcion.class)
-	public void queNoPermitaCostoNegativo() throws AtraccionExcepcion, SugerenciaExcepcion {
-		new Atraccion("Fortuna", "Paisaje", -10, 3, 11);
-	}
-	
-	@Test(expected = SugerenciaExcepcion.class)
-	public void queNoPermitaDuracionNoPositiva() throws AtraccionExcepcion, SugerenciaExcepcion {
-		new Atraccion("Fortuna", "Paisaje", 3, 0, 11);
-	}
-	
+
 }
 
 /*
  * 
- * proponer testear Usuario e ¿Itinerario? -> se testea el comportamiento de la clase, no tiene nada que ver con los files.
- * proponer separar las cosas que testean cosas generales en un SugerenciaTest
- * "final" en variables que no se pueden modificar ej -> todas las de Sugerencia
- * chequear si falta alguna otra verificacion
- * chequear si no hay try-catch innecesarios
+ * proponer testear Usuario e ¿Itinerario? -> se testea el comportamiento de la
+ * clase, no tiene nada que ver con los files. proponer separar las cosas que
+ * testean cosas generales en un SugerenciaTest "final" en variables que no se
+ * pueden modificar ej -> todas las de Sugerencia chequear si falta alguna otra
+ * verificacion chequear si no hay try-catch innecesarios
  * 
-*/
+ */

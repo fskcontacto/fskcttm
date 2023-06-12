@@ -30,21 +30,21 @@ public class PaqueteTest {
 	private Paquete paqueteAXB;
 	private Paquete paquetePorc;
 	private List<Paquete> paquetes;
-	private int cupoAtr1 = 6;
-	private int cupoAtr2 = 5;
-	private int cupoAtr3 = 4;
-	private int cupoAtrGratis = 6;
-	private int cupoMin = Math.min(cupoAtrGratis, Math.min(cupoAtr3, Math.min(cupoAtr1, cupoAtr2)));
-	private double costoAtr1 = 10;
-	private double costoAtr2 = 20;
-	private double costoAtr3 = 25;
-	private double costoAtrGratuita1 = 60;
-	private double costoAtrGratuita2 = 60;
-	private double costoTotal = costoAtr1 + costoAtr2 + costoAtr3;
-	private double costoOriginalAXB = costoTotal + costoAtrGratuita1 + costoAtrGratuita2;
-	private double porcentajeDescontado = 0.1;
-	private double precioAbsoluto = costoTotal - 10;
-	private double totalConDescuento = costoTotal - costoTotal * porcentajeDescontado;
+	private static final int cupoAtr1 = 6;
+	private static final int cupoAtr2 = 5;
+	private static final int cupoAtr3 = 4;
+	private static final int cupoAtrGratis = 6;
+	private static final int cupoMin = Math.min(cupoAtrGratis, Math.min(cupoAtr3, Math.min(cupoAtr1, cupoAtr2)));
+	private static final double costoAtr1 = 10;
+	private static final double costoAtr2 = 20;
+	private static final double costoAtr3 = 25;
+	private static final double costoAtrGratuita1 = 60;
+	private static final double costoAtrGratuita2 = 60;
+	private static final double costoTotal = costoAtr1 + costoAtr2 + costoAtr3;
+	private static final double costoOriginalAXB = costoTotal + costoAtrGratuita1 + costoAtrGratuita2;
+	private static final double porcentajeDescontado = 0.1;
+	private static final double precioAbsoluto = costoTotal - 10;
+	private static final double totalConDescuento = costoTotal - costoTotal * porcentajeDescontado;
 
 	@Before
 	public void setup() {
