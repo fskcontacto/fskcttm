@@ -36,25 +36,23 @@ public class Itinerario {
 	public void imprimir() {
 		System.out.println("Sugerencias aceptadas:");
 		System.out.println("");
-		for(Sugerencia sugerencia : sugAceptadas) {
+		for (Sugerencia sugerencia : sugAceptadas) {
 			System.out.println("\t" + sugerencia.getNombre());
 		}
 		System.out.println("");
 		System.out.println("Duracion total: " + String.format(Locale.US, "%.2f", this.duracion));
 		System.out.println("Costo total: " + String.format(Locale.US, "%.2f", this.costo) + " monedas");
 	}
-	
+
 	public String imprimirEnArchivo() {
-		String texto = 	"Sugerencias aceptadas: "
-						+ "\n[ ";
-		for(Sugerencia sugerencia : sugAceptadas) {
+		String texto = "Sugerencias aceptadas: " + "\n[ ";
+		for (Sugerencia sugerencia : sugAceptadas) {
 			texto += sugerencia.getNombre() + ", ";
 		}
 		texto = texto.substring(0, texto.length() - 2);
-		texto += " ]" 
-				+ "\nDuracion total: " + String.format(Locale.US, "%.2f", this.duracion) 
-				+ "\nCosto total: " + String.format(Locale.US, "%.2f", this.costo);
-		
+		texto += " ]" + "\nDuracion total: " + String.format(Locale.US, "%.2f", this.duracion) + "\nCosto total: "
+				+ String.format(Locale.US, "%.2f", this.costo);
+
 		return texto;
 	}
 }

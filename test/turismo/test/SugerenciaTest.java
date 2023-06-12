@@ -25,6 +25,6 @@ public class SugerenciaTest {
 	@Test(expected = SugerenciaExcepcion.class)
 	public void queNoPermitaDuracionNoPositiva() throws AtraccionExcepcion, SugerenciaExcepcion {
 		new Atraccion("Fortuna", "Paisaje", 3, 0, 11);
-	}	
+	}
 
 }

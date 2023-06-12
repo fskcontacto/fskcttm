@@ -7,17 +7,18 @@ public class Atraccion extends Sugerencia {
 	private int cupoTotal;
 	private int cupoDisponible;
 
-	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo) throws AtraccionExcepcion, SugerenciaExcepcion {
+	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo)
+			throws AtraccionExcepcion, SugerenciaExcepcion {
 		super(nombre, tipo, costo, duracion);
-		
+
 		cupoTotal = verificarCupo(cupo, "No se puede crear atracciones sin cupo");
 		cupoDisponible = cupoTotal;
 	}
 
 	private int verificarCupo(int cupo, String msgExcepcion) throws AtraccionExcepcion {
-		if(cupo <= 0) //SAQUÉ EL < 1 YA QUE SINO NO TENÍA SENTIDO PROBAR LA REDUCCIÓN MIENTRAS HAYA CUPOS DISPONIBLES
+		if (cupo < 0)
 			throw new AtraccionExcepcion(msgExcepcion);
-		
+
 		return cupo;
 	}
 
@@ -39,16 +40,12 @@ public class Atraccion extends Sugerencia {
 		return "Nombre: " + nombre + " Tipo: " + tipo + " Costo: " + costo + " Duración: " + duracion + " Horas "
 				+ "Cupo: " + cupoTotal + " Cupo disponible: " + cupoDisponible;
 	}
-	
-	
+
 	protected void imprimir() {
-		System.out.println("*ATRACCION*" +
-								"\n\tNombre: " + this.nombre + 
-								"\n\t Tipo: " + this.tipo + 
-								"\n\t Costo: " + this.costo + 
-								"\n\t Duración: " + this.duracion + " horas");
+		System.out.println("*ATRACCION*" + "\n\tNombre: " + this.nombre + "\n\t Tipo: " + this.tipo + "\n\t Costo: "
+				+ this.costo + "\n\t Duración: " + this.duracion + " horas");
 	}
-	
+
 	public boolean hayCupoDisponible() {
 		return this.cupoDisponible > 0;
 	}

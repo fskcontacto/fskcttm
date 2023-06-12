@@ -11,14 +11,14 @@ import turismo.excepciones.UsuarioExcepcion;
 import turismo.sistema.Usuario;
 
 public class ArchivoUsuario {
-	
+
 	private String nombre;
 
 	public ArchivoUsuario(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-	
+
 	public List<Usuario> leer() throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
 		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
@@ -27,8 +27,8 @@ public class ArchivoUsuario {
 			String tipo;
 			double presupuesto;
 			double tiempoDisp;
-			
-			while(lector.hasNextLine()) {
+
+			while (lector.hasNextLine()) {
 				nombre = lector.next();
 				tipo = lector.next();
 				presupuesto = lector.nextDouble();

@@ -39,7 +39,7 @@ public class Usuario {
 
 		return nombreUsuario;
 	}
-	
+
 	private double verificarPresupDisp(double presupDisp) throws UsuarioExcepcion {
 		if (presupDisp < 0)
 			throw new UsuarioExcepcion("El presupuesto disponible del usuario no puede ser menor a 0");

@@ -19,11 +19,11 @@ public class ArchivoAtraccion {
 		this.nombre = nombre;
 	}
 
-	public Map<String,Atraccion> leer() throws FileNotFoundException {
-		
+	public Map<String, Atraccion> leer() throws FileNotFoundException {
+
 		File archivo = new File(this.nombre + ".in");
 		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
-			Map<String,Atraccion> atracciones = new HashMap<>();
+			Map<String, Atraccion> atracciones = new HashMap<>();
 
 			String nombre;
 			String tipo;
@@ -45,9 +45,9 @@ public class ArchivoAtraccion {
 					System.out.println(e.getMessage());
 				}
 			}
-			
+
 			return atracciones;
 		}
 	}
-	
+
 }

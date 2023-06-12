@@ -1,8 +1,8 @@
 package turismo.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -23,8 +23,7 @@ public class PaqueteTest {
 	private Atraccion atraccion, atraccion2, atraccion3, atraccion4, atraccion5;
 	private Map<String, Atraccion> atracciones;
 	private Map<String, Atraccion> atraccionesGratuitas;
-	private Map<String, Atraccion> atraccionesAXB; // Al crear el paqueteAXB junta las atracciones pagas y las gratuitas
-													// al momento de leer el archivo
+	private Map<String, Atraccion> atraccionesAXB;
 	private Map<String, Atraccion> sinAtracciones;
 	private Paquete paqueteAbs;
 	private Paquete paqueteAXB;
@@ -172,7 +171,7 @@ public class PaqueteTest {
 		String nombreEsperado = "Moria, Fortuna, Giratoria";
 		Assert.assertEquals(nombreEsperado, paqueteAbs.getNombre());
 	}
-	
+
 	@Test(expected = PaqueteExcepcion.class)
 	public void queNoCreePaqueteAXBSinAtraccionesGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
 		new PaqueteAxB("Degustación", atracciones, sinAtracciones);

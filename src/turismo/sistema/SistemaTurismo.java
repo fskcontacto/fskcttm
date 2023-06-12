@@ -1,7 +1,6 @@
 package turismo.sistema;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,18 +25,20 @@ public class SistemaTurismo {
 	}
 
 	public void sugerirUsuario() {
-		
-		if(atracciones.isEmpty() && paquetes.isEmpty()) {
-			System.out.println("¡ No tenemos actividades que ofrecer, vuelva pronto !");
-			this.mensajeFinal();
-			return;
-		}
-		
+
 		try (Scanner teclado = new Scanner(System.in)) {
 			paquetes.sort(Comparator.reverseOrder());
 			atracciones.sort(Comparator.reverseOrder());
 
 			for (Usuario u : usuarios) {
+
+				if (!validaDisponActivTotal()) {
+					System.out.println("\n*******************************************\n");
+					System.out.println("\n¡ No tenemos actividades que ofrecer, vuelva pronto !\n");
+					System.out.println("\n*******************************************\n");
+					this.mensajeFinal();
+					return;
+				}
 				this.mensajeBienvenida(u);
 
 				Set<String> atrTomadas = new HashSet<>();
@@ -180,10 +181,27 @@ public class SistemaTurismo {
 			if (contVentas == 0) {
 				printerWriter.println("NO SE REGISTRARON VENTAS EN EL DÍA");
 			}
-		/////////////////////////////////
+			/////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean validaDisponActivTotal() {
+
+		for (Paquete p : paquetes) {
+
+			if (p.hayCupoDisponible())
+				return true;
+		}
+
+		for (Atraccion a : atracciones) {
+
+			if (a.hayCupoDisponible())
+				return true;
+		}
+
+		return false;
 	}
 
 	private void mensajeBienvenida(Usuario usuario) {
@@ -196,7 +214,7 @@ public class SistemaTurismo {
 	}
 
 	private void mensajeFinal() {
-		System.out.println("*******************************************");
+		System.out.println("\n*******************************************");
 		System.out.println("** FIN DEL PROCESAMIENTO DE LOS USUARIOS **");
 		System.out.println("** GRACIAS POR ELEGIRNOS - SISTEMA TURISMO EN LA TIERRA MEDIA **");
 		System.out.println("*******************************************");
