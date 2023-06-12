@@ -69,9 +69,6 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	public abstract int getCupoTotal();
 	public abstract boolean hayCupoDisponible();
 
-//	public static void ordenar(List<Sugerencia> sugerencias) {
-//		Collections.sort(sugerencias);
-//	}
 
 	public int compareTo(Sugerencia o) {
 		if (this.costo != o.costo)

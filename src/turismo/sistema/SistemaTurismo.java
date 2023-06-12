@@ -162,20 +162,19 @@ public class SistemaTurismo {
 			printerWriter.println("++++++++++++++++++++++");
 
 			for (Usuario u : usuarios) {
-				
-				if(!u.itinerarioVacio()) {
+
+				if (!u.itinerarioVacio()) {
 					printerWriter.println(u.imprimirItinerarioEnArchivo());
 					printerWriter.println("----------------------------------------");
 					++contVentas;
 				}
 			}
-			
-			if(contVentas == 0) {
+
+			if (contVentas == 0) {
 				printerWriter.println("NO SE REGISTRARON VENTAS EN EL DÍA");
 			}
-			
-			
-			/////////////////////////////////
+
+		/////////////////////////////////
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
