@@ -1,6 +1,5 @@
 package turismo.sistema;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -74,12 +73,6 @@ public abstract class Paquete extends Sugerencia {
 	}
 
 	protected abstract double calcularCosto();
-
-	@Override
-	public String toString() {
-		return "Nombre: " + nombre + " Costo: " + String.format(Locale.US, "%.2f", costo) + " Costo original: "
-				+ String.format(Locale.US, "%.2f", costoOriginal);
-	}
 
 	public double getMontoOrigPaquete() {
 		return this.costoOriginal;

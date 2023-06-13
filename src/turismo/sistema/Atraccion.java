@@ -35,12 +35,6 @@ public class Atraccion extends Sugerencia {
 		return cupoTotal;
 	}
 
-	@Override
-	public String toString() {
-		return "Nombre: " + nombre + " Tipo: " + tipo + " Costo: " + costo + " Duración: " + duracion + " Horas "
-				+ "Cupo: " + cupoTotal + " Cupo disponible: " + cupoDisponible;
-	}
-
 	protected void imprimir() {
 		System.out.println("*ATRACCION*" + "\n\tNombre: " + this.nombre + "\n\t Tipo: " + this.tipo + "\n\t Costo: "
 				+ this.costo + "\n\t Duración: " + this.duracion + " horas");

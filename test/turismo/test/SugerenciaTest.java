@@ -6,9 +6,8 @@ import turismo.excepciones.AtraccionExcepcion;
 import turismo.excepciones.SugerenciaExcepcion;
 import turismo.sistema.Atraccion;
 
-
 public class SugerenciaTest {
-	
+
 	@Test(expected = SugerenciaExcepcion.class)
 	public void queNoPermitaTipoInvalidos() throws AtraccionExcepcion, SugerenciaExcepcion {
 		new Atraccion("Moria", "Comida", 10, 3, 4);

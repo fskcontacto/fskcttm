@@ -85,41 +85,39 @@ public class AtraccionTest {
 		atraccion.reducirCupo();
 		Assert.assertEquals(5, atraccion.getCupoDisponible());
 	}
-	
+
 	@Test
 	public void seOrdenaPorPrecioYTiempo() throws AtraccionExcepcion, SugerenciaExcepcion {
-		List<Atraccion> atraccionGeneral= new ArrayList<Atraccion>();
-		List<Atraccion> atraccionOrdenado= new ArrayList<Atraccion>();
+		List<Atraccion> atraccionGeneral = new ArrayList<Atraccion>();
+		List<Atraccion> atraccionOrdenado = new ArrayList<Atraccion>();
 		Atraccion atraccion1;
 		Atraccion atraccion2;
 		Atraccion atraccion3;
 		Atraccion atraccion4;
 		Atraccion atraccion5;
-		
-		
-		 atraccion1 = new Atraccion("Moria", "Paisaje", 10, 5, 1);
-		 atraccion2 = new Atraccion("Fortuna", "Paisaje", 20, 3, 1);
-		 atraccion3 = new Atraccion("Giratoria", "Paisaje", 5, 3, 1);
-		 atraccion4 = new Atraccion("Mirador", "Paisaje", 5, 5, 1);
-		 atraccion5 = new Atraccion("Telesferico", "Paisaje", 30, 6, 1);
-	
+
+		atraccion1 = new Atraccion("Moria", "Paisaje", 10, 5, 1);
+		atraccion2 = new Atraccion("Fortuna", "Paisaje", 20, 3, 1);
+		atraccion3 = new Atraccion("Giratoria", "Paisaje", 5, 3, 1);
+		atraccion4 = new Atraccion("Mirador", "Paisaje", 5, 5, 1);
+		atraccion5 = new Atraccion("Telesferico", "Paisaje", 30, 6, 1);
+
 		atraccionGeneral.add(atraccion1);
 		atraccionGeneral.add(atraccion2);
 		atraccionGeneral.add(atraccion3);
 		atraccionGeneral.add(atraccion4);
 		atraccionGeneral.add(atraccion5);
-		
+
 		atraccionOrdenado.add(atraccion5);
 		atraccionOrdenado.add(atraccion2);
 		atraccionOrdenado.add(atraccion1);
 		atraccionOrdenado.add(atraccion4);
 		atraccionOrdenado.add(atraccion3);
-		
-		atraccionGeneral.sort(Comparator.reverseOrder());
-		
-		Assert.assertEquals(atraccionGeneral,atraccionOrdenado);
-	
 
-}
+		atraccionGeneral.sort(Comparator.reverseOrder());
+
+		Assert.assertEquals(atraccionGeneral, atraccionOrdenado);
+
+	}
 
 }

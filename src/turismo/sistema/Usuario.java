@@ -62,12 +62,6 @@ public class Usuario {
 		return pref;
 	}
 
-	@Override
-	public String toString() {
-		return "Nombre: " + nombre + " Tipo: " + tipo + " Presupuesto: " + presupuestoDisp + " Tiempo disponible: "
-				+ tiempoDisp + " Horas";
-	}
-
 	public boolean puedeAdquirirSugerencia(double costo, double duracion) {
 		return this.puedeCostearSugerencia(costo) && this.tieneTiempoDispo(duracion);
 	}

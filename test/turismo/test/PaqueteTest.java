@@ -182,17 +182,16 @@ public class PaqueteTest {
 	public void quePaqueteAbsolutoNoTengaCostoFinalMayorAlOriginal() throws SugerenciaExcepcion, PaqueteExcepcion {
 		new PaqueteAbsoluto("Degustación", costoTotal + 10, atracciones);
 	}
-	
+
 	@Test
-	public void seOrdenaPorPrecioYTiempo()
-	{
+	public void seOrdenaPorPrecioYTiempo() {
 		paquetes.sort(Comparator.reverseOrder());
-		List<Paquete> paquetesOrdenados=new ArrayList<Paquete>();
+		List<Paquete> paquetesOrdenados = new ArrayList<Paquete>();
 		paquetesOrdenados.add(paqueteAXB);
 		paquetesOrdenados.add(paquetePorc);
 		paquetesOrdenados.add(paqueteAbs);
-		
-		Assert.assertEquals(paquetes,paquetesOrdenados);
-		
+
+		Assert.assertEquals(paquetes, paquetesOrdenados);
+
 	}
 }
