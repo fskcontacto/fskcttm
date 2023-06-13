@@ -15,3 +15,6 @@ Ignacio Nogueira – DNI: 41.714.018
 Juan Loiotile - DNI: 42.101.782
 
 Alan Alesina – DNI: 40.913.809
+
+Link a grabación: https://drive.google.com/file/d/1D1bzJ78oiWx6ao8PSxuBvwOM_Fs7rSVW/view?usp=drive_link
+Link a Diagrama UML: https://drive.google.com/file/d/13plHvuN5pOmYWPIzUyHHnMMzmjxp8PuS/view?usp=drive_link
