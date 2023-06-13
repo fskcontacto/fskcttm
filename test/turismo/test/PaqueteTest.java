@@ -1,6 +1,7 @@
 package turismo.test;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,5 +181,18 @@ public class PaqueteTest {
 	@Test(expected = PaqueteExcepcion.class)
 	public void quePaqueteAbsolutoNoTengaCostoFinalMayorAlOriginal() throws SugerenciaExcepcion, PaqueteExcepcion {
 		new PaqueteAbsoluto("Degustación", costoTotal + 10, atracciones);
+	}
+	
+	@Test
+	public void seOrdenaPorPrecioYTiempo()
+	{
+		paquetes.sort(Comparator.reverseOrder());
+		List<Paquete> paquetesOrdenados=new ArrayList<Paquete>();
+		paquetesOrdenados.add(paqueteAXB);
+		paquetesOrdenados.add(paquetePorc);
+		paquetesOrdenados.add(paqueteAbs);
+		
+		Assert.assertEquals(paquetes,paquetesOrdenados);
+		
 	}
 }
