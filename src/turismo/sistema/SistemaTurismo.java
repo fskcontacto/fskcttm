@@ -30,15 +30,12 @@ public class SistemaTurismo {
 			paquetes.sort(Comparator.reverseOrder());
 			atracciones.sort(Comparator.reverseOrder());
 
+			int atraccSinCupo = 0;
+
 			for (Usuario u : usuarios) {
 
-				if (!validaDisponActivTotal()) {
-					System.out.println("\n*******************************************\n");
-					System.out.println("\n¡ No tenemos actividades que ofrecer, vuelva pronto !\n");
-					System.out.println("\n*******************************************\n");
-					this.mensajeFinal();
-					return;
-				}
+				atraccSinCupo = 0;
+
 				this.mensajeBienvenida(u);
 
 				Set<String> atrTomadas = new HashSet<>();
@@ -49,6 +46,7 @@ public class SistemaTurismo {
 				boolean esPreferencia;
 				boolean puedeAdquirir;
 				boolean hayCupo;
+
 				for (Paquete p : paquetes) {
 					esPreferencia = p.getTipo().equals(u.getTipo());
 					puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
@@ -78,25 +76,30 @@ public class SistemaTurismo {
 					esPreferencia = a.getTipo().equals(u.getTipo());
 					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
 					hayCupo = a.hayCupoDisponible();
-					if (esPreferencia && hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-						a.imprimir();
-						do {
-							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respUsuario = teclado.nextLine().toUpperCase();
-						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-						if (respUsuario.equals("S")) {
-							try {
-								a.reducirCupo();
-							} catch (AtraccionExcepcion e) {
-								System.out.println(e.getMessage());
+					if (hayCupo) {
+						if (esPreferencia && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
+							a.imprimir();
+							do {
+								System.out.println("Acepta sugerencia? Ingrese S o N:");
+								respUsuario = teclado.nextLine().toUpperCase();
+							} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+							if (respUsuario.equals("S")) {
+								try {
+									a.reducirCupo();
+								} catch (AtraccionExcepcion e) {
+									System.out.println(e.getMessage());
+								}
+								u.agregarSugerencia(a);
+								atrTomadas.add(a.getNombre());
+								System.out.println("¡Aceptada!");
 							}
-							u.agregarSugerencia(a);
-							atrTomadas.add(a.getNombre());
-							System.out.println("¡Aceptada!");
+						} else if (!esPreferencia) {
+							atrNoTipo.add(a);
 						}
-					} else if (!esPreferencia) {
-						atrNoTipo.add(a);
+					} else {
+						++atraccSinCupo;
 					}
+
 				}
 
 				for (Paquete p : paqNoTipo) {
@@ -124,23 +127,40 @@ public class SistemaTurismo {
 				for (Atraccion a : atrNoTipo) {
 					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
 					hayCupo = a.hayCupoDisponible();
-					if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-						a.imprimir();
-						do {
-							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respUsuario = teclado.nextLine().toUpperCase();
-						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-						if (respUsuario.equals("S")) {
-							try {
-								a.reducirCupo();
-							} catch (AtraccionExcepcion e) {
-								System.out.println(e.getMessage());
+
+					if (hayCupo) {
+
+						if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
+							a.imprimir();
+							do {
+								System.out.println("Acepta sugerencia? Ingrese S o N:");
+								respUsuario = teclado.nextLine().toUpperCase();
+							} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
+							if (respUsuario.equals("S")) {
+								try {
+									a.reducirCupo();
+								} catch (AtraccionExcepcion e) {
+									System.out.println(e.getMessage());
+								}
+								u.agregarSugerencia(a);
+								atrTomadas.add(a.getNombre());
+								System.out.println("¡Aceptada!");
 							}
-							u.agregarSugerencia(a);
-							atrTomadas.add(a.getNombre());
-							System.out.println("¡Aceptada!");
 						}
+
+					} else {
+						++atraccSinCupo;
 					}
+
+				}
+
+				if (atracciones.size() == atraccSinCupo) {
+
+					System.out.println("\n*******************************************\n");
+					System.out.println("\n¡ No tenemos actividades que ofrecer, vuelva pronto !\n");
+					System.out.println("\n*******************************************\n");
+					this.mensajeFinal();
+					return;
 				}
 
 				System.out.println("\n¡ Han finalizado sus sugerencias del día !");
@@ -185,23 +205,6 @@ public class SistemaTurismo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private boolean validaDisponActivTotal() {
-
-		for (Paquete p : paquetes) {
-
-			if (p.hayCupoDisponible())
-				return true;
-		}
-
-		for (Atraccion a : atracciones) {
-
-			if (a.hayCupoDisponible())
-				return true;
-		}
-
-		return false;
 	}
 
 	private void mensajeBienvenida(Usuario usuario) {
