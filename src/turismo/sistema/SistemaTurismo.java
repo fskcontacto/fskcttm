@@ -30,131 +30,131 @@ public class SistemaTurismo {
 			paquetes.sort(Comparator.reverseOrder());
 			atracciones.sort(Comparator.reverseOrder());
 
-			int atraccSinCupo = 0;
+			int atraccionesSinCupo = 0;
 
-			for (Usuario u : usuarios) {
+			for (Usuario usuario : usuarios) {
 
-				atraccSinCupo = 0;
+				atraccionesSinCupo = 0;
 
-				this.mensajeBienvenida(u);
+				this.mensajeBienvenida(usuario);
 
-				Set<String> atrTomadas = new HashSet<>();
-				String respUsuario;
-				List<Paquete> paqNoTipo = new ArrayList<>();
-				List<Atraccion> atrNoTipo = new ArrayList<>();
+				Set<String> atraccionesTomadas = new HashSet<>();
+				String respuestaUsuario;
+				List<Paquete> paqueteNoPreferida = new ArrayList<>();
+				List<Atraccion> atraccionNoPreferida = new ArrayList<>();
 
 				boolean esPreferencia;
 				boolean puedeAdquirir;
 				boolean hayCupo;
 
-				for (Paquete p : paquetes) {
-					esPreferencia = p.getTipo().equals(u.getTipo());
-					puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
-					hayCupo = p.hayCupoDisponible();
+				for (Paquete paquete : paquetes) {
+					esPreferencia = paquete.getTipo().equals(usuario.getTipo());
+					puedeAdquirir = usuario.puedeAdquirirSugerencia(paquete.getCosto(), paquete.getDuracion());
+					hayCupo = paquete.hayCupoDisponible();
 					if (esPreferencia && hayCupo && puedeAdquirir) {
-						p.imprimir();
+						paquete.imprimir();
 						do {
 							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respUsuario = teclado.nextLine().toUpperCase();
-						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-						if (respUsuario.equals("S")) {
+							respuestaUsuario = teclado.nextLine().toUpperCase();
+						} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+						if (respuestaUsuario.equals("S")) {
 							try {
-								p.reducirCupo();
+								paquete.reducirCupo();
 							} catch (AtraccionExcepcion e) {
 								System.out.println(e.getMessage());
 							}
-							u.agregarSugerencia(p);
-							atrTomadas.addAll(p.getAtracciones());
+							usuario.agregarSugerencia(paquete);
+							atraccionesTomadas.addAll(paquete.getAtracciones());
 							System.out.println("¡Aceptada!");
 						}
 					} else if (!esPreferencia) {
-						paqNoTipo.add(p);
+						paqueteNoPreferida.add(paquete);
 					}
 				}
 
-				for (Atraccion a : atracciones) {
-					esPreferencia = a.getTipo().equals(u.getTipo());
-					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
-					hayCupo = a.hayCupoDisponible();
+				for (Atraccion atraccion : atracciones) {
+					esPreferencia = atraccion.getTipo().equals(usuario.getTipo());
+					puedeAdquirir = usuario.puedeAdquirirSugerencia(atraccion.getCosto(), atraccion.getDuracion());
+					hayCupo = atraccion.hayCupoDisponible();
 					if (hayCupo) {
-						if (esPreferencia && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-							a.imprimir();
+						if (esPreferencia && puedeAdquirir && !atraccionesTomadas.contains(atraccion.getNombre())) {
+							atraccion.imprimir();
 							do {
 								System.out.println("Acepta sugerencia? Ingrese S o N:");
-								respUsuario = teclado.nextLine().toUpperCase();
-							} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-							if (respUsuario.equals("S")) {
+								respuestaUsuario = teclado.nextLine().toUpperCase();
+							} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+							if (respuestaUsuario.equals("S")) {
 								try {
-									a.reducirCupo();
+									atraccion.reducirCupo();
 								} catch (AtraccionExcepcion e) {
 									System.out.println(e.getMessage());
 								}
-								u.agregarSugerencia(a);
-								atrTomadas.add(a.getNombre());
+								usuario.agregarSugerencia(atraccion);
+								atraccionesTomadas.add(atraccion.getNombre());
 								System.out.println("¡Aceptada!");
 							}
 						} else if (!esPreferencia) {
-							atrNoTipo.add(a);
+							atraccionNoPreferida.add(atraccion);
 						}
 					} else {
-						++atraccSinCupo;
+						++atraccionesSinCupo;
 					}
 
 				}
 
-				for (Paquete p : paqNoTipo) {
-					puedeAdquirir = u.puedeAdquirirSugerencia(p.getCosto(), p.getDuracion());
-					hayCupo = p.hayCupoDisponible();
+				for (Paquete paquete : paqueteNoPreferida) {
+					puedeAdquirir = usuario.puedeAdquirirSugerencia(paquete.getCosto(), paquete.getDuracion());
+					hayCupo = paquete.hayCupoDisponible();
 					if (hayCupo && puedeAdquirir) {
-						p.imprimir();
+						paquete.imprimir();
 						do {
 							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respUsuario = teclado.nextLine().toUpperCase();
-						} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-						if (respUsuario.equals("S")) {
+							respuestaUsuario = teclado.nextLine().toUpperCase();
+						} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+						if (respuestaUsuario.equals("S")) {
 							try {
-								p.reducirCupo();
+								paquete.reducirCupo();
 							} catch (AtraccionExcepcion e) {
 								System.out.println(e.getMessage());
 							}
-							u.agregarSugerencia(p);
-							atrTomadas.addAll(p.getAtracciones());
+							usuario.agregarSugerencia(paquete);
+							atraccionesTomadas.addAll(paquete.getAtracciones());
 							System.out.println("¡Aceptada!");
 						}
 					}
 				}
 
-				for (Atraccion a : atrNoTipo) {
-					puedeAdquirir = u.puedeAdquirirSugerencia(a.getCosto(), a.getDuracion());
-					hayCupo = a.hayCupoDisponible();
+				for (Atraccion atraccion : atraccionNoPreferida) {
+					puedeAdquirir = usuario.puedeAdquirirSugerencia(atraccion.getCosto(), atraccion.getDuracion());
+					hayCupo = atraccion.hayCupoDisponible();
 
 					if (hayCupo) {
 
-						if (hayCupo && puedeAdquirir && !atrTomadas.contains(a.getNombre())) {
-							a.imprimir();
+						if (hayCupo && puedeAdquirir && !atraccionesTomadas.contains(atraccion.getNombre())) {
+							atraccion.imprimir();
 							do {
 								System.out.println("Acepta sugerencia? Ingrese S o N:");
-								respUsuario = teclado.nextLine().toUpperCase();
-							} while (!respUsuario.equals("S") && !respUsuario.equals("N"));
-							if (respUsuario.equals("S")) {
+								respuestaUsuario = teclado.nextLine().toUpperCase();
+							} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+							if (respuestaUsuario.equals("S")) {
 								try {
-									a.reducirCupo();
+									atraccion.reducirCupo();
 								} catch (AtraccionExcepcion e) {
 									System.out.println(e.getMessage());
 								}
-								u.agregarSugerencia(a);
-								atrTomadas.add(a.getNombre());
+								usuario.agregarSugerencia(atraccion);
+								atraccionesTomadas.add(atraccion.getNombre());
 								System.out.println("¡Aceptada!");
 							}
 						}
 
 					} else {
-						++atraccSinCupo;
+						++atraccionesSinCupo;
 					}
 
 				}
 
-				if (atracciones.size() == atraccSinCupo) {
+				if (atracciones.size() == atraccionesSinCupo) {
 
 					System.out.println("\n*******************************************\n");
 					System.out.println("\n¡ No tenemos actividades que ofrecer, vuelva pronto !\n");
@@ -165,9 +165,9 @@ public class SistemaTurismo {
 
 				System.out.println("\n¡ Han finalizado sus sugerencias del día !");
 
-				if (!u.itinerarioVacio()) {
-					System.out.println("¡" + u.getNombre() + ", su itinerario es el siguiente: ");
-					u.mostrarItinerario();
+				if (!usuario.itinerarioVacio()) {
+					System.out.println("¡" + usuario.getNombre() + ", su itinerario es el siguiente: ");
+					usuario.mostrarItinerario();
 					System.out.println("\nFin de su itinerario. ¡ Hasta la proxima !\n");
 				}
 
@@ -181,24 +181,24 @@ public class SistemaTurismo {
 	public void generarArchivoSalida() {
 		PrintWriter printerWriter = null;
 
-		try (FileWriter file = new FileWriter(LocalDate.now() + ".out")) {
-			printerWriter = new PrintWriter(file);
-			int contVentas = 0;
+		try (FileWriter archivo = new FileWriter(LocalDate.now() + ".out")) {
+			printerWriter = new PrintWriter(archivo);
+			int contadorVentas = 0;
 
 			printerWriter.println("++++++++++++++++++++++");
 			printerWriter.println("+++ VENTAS DEL DIA +++");
 			printerWriter.println("++++++++++++++++++++++");
 
-			for (Usuario u : usuarios) {
+			for (Usuario usuario : usuarios) {
 
-				if (!u.itinerarioVacio()) {
-					printerWriter.println(u.imprimirItinerarioEnArchivo());
+				if (!usuario.itinerarioVacio()) {
+					printerWriter.println(usuario.imprimirItinerarioEnArchivo());
 					printerWriter.println("----------------------------------------");
-					++contVentas;
+					++contadorVentas;
 				}
 			}
 
-			if (contVentas == 0) {
+			if (contadorVentas == 0) {
 				printerWriter.println("NO SE REGISTRARON VENTAS EN EL DÍA");
 			}
 		} catch (Exception e) {

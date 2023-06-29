@@ -31,19 +31,19 @@ public class ArchivoPaquete {
 			List<Paquete> paquetes = new ArrayList<Paquete>();
 
 			int tipoPaquete;
-			String nombresAtrac;
+			String nombresAtracc;
 			String tipo;
 
 			while (lector.hasNextLine()) {
 				Map<String, Atraccion> atracPaquete = new HashMap<>();
 				tipoPaquete = lector.nextInt();
 				tipo = lector.next();
-				nombresAtrac = lector.next();
+				nombresAtracc = lector.next();
 
 				switch (tipoPaquete) {
 				case Paquete.ABSOLUTO: {
 					double costoAbsoluto = lector.nextDouble();
-					String[] nombres = nombresAtrac.split(";");
+					String[] nombres = nombresAtracc.split(";");
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
@@ -56,7 +56,7 @@ public class ArchivoPaquete {
 				}
 				case Paquete.PORCENTUAL: {
 					double porcentaje = lector.nextDouble();
-					String[] nombres = nombresAtrac.split(";");
+					String[] nombres = nombresAtracc.split(";");
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}
@@ -68,7 +68,7 @@ public class ArchivoPaquete {
 					break;
 				}
 				case Paquete.AXB: {
-					String[] nombres = nombresAtrac.split(";");
+					String[] nombres = nombresAtracc.split(";");
 					for (String nombre : nombres) {
 						atracPaquete.put(nombre, atracciones.get(nombre));
 					}

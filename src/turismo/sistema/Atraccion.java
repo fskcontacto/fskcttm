@@ -15,9 +15,9 @@ public class Atraccion extends Sugerencia {
 		cupoDisponible = cupoTotal;
 	}
 
-	private int verificarCupo(int cupo, String msgExcepcion) throws AtraccionExcepcion {
+	private int verificarCupo(int cupo, String mensajeExcepcion) throws AtraccionExcepcion {
 		if (cupo < 0)
-			throw new AtraccionExcepcion(msgExcepcion);
+			throw new AtraccionExcepcion(mensajeExcepcion);
 
 		return cupo;
 	}

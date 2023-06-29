@@ -7,12 +7,12 @@ import java.util.Locale;
 public class Itinerario {
 	private double costo;
 	private double duracion;
-	private List<Sugerencia> sugAceptadas;
+	private List<Sugerencia> sugerenciasAceptadas;
 
 	public Itinerario() {
 		this.costo = 0;
 		this.duracion = 0;
-		this.sugAceptadas = new ArrayList<Sugerencia>();
+		this.sugerenciasAceptadas = new ArrayList<Sugerencia>();
 	}
 
 	public double getCostoItinerario() {
@@ -24,11 +24,11 @@ public class Itinerario {
 	}
 
 	public List<Sugerencia> getItinerario() {
-		return this.sugAceptadas;
+		return this.sugerenciasAceptadas;
 	}
 
 	public void agregarSugerencia(Sugerencia sugerencia) {
-		this.sugAceptadas.add(sugerencia);
+		this.sugerenciasAceptadas.add(sugerencia);
 		this.costo += sugerencia.getCosto();
 		this.duracion += sugerencia.getDuracion();
 	}
@@ -36,7 +36,7 @@ public class Itinerario {
 	public void imprimir() {
 		System.out.println("Sugerencias aceptadas:");
 		System.out.println("");
-		for (Sugerencia sugerencia : sugAceptadas) {
+		for (Sugerencia sugerencia : sugerenciasAceptadas) {
 			System.out.println("\t" + sugerencia.getNombre());
 		}
 		System.out.println("");
@@ -46,7 +46,7 @@ public class Itinerario {
 
 	public String imprimirEnArchivo() {
 		String texto = "Sugerencias aceptadas: " + "\n[ ";
-		for (Sugerencia sugerencia : sugAceptadas) {
+		for (Sugerencia sugerencia : sugerenciasAceptadas) {
 			texto += sugerencia.getNombre() + ", ";
 		}
 		texto = texto.substring(0, texto.length() - 2);

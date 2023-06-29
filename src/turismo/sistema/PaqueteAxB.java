@@ -8,12 +8,12 @@ import turismo.excepciones.SugerenciaExcepcion;
 
 public class PaqueteAxB extends Paquete {
 
-	private Map<String, Atraccion> atracGratuitas;
+	private Map<String, Atraccion> atraccionesGratuitas;
 
 	public PaqueteAxB(String tipo, Map<String, Atraccion> atracciones, Map<String, Atraccion> atracGratuitas)
 			throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo, atracciones);
-		this.atracGratuitas = verificarAtraccionesGratuitas(atracGratuitas);
+		this.atraccionesGratuitas = verificarAtraccionesGratuitas(atracGratuitas);
 		this.costo = calcularCosto();
 	}
 
@@ -27,7 +27,7 @@ public class PaqueteAxB extends Paquete {
 
 	protected double calcularCosto() {
 		double costoGratuito = 0;
-		for (Atraccion atraccion : this.atracGratuitas.values()) {
+		for (Atraccion atraccion : this.atraccionesGratuitas.values()) {
 			costoGratuito += atraccion.getCosto();
 		}
 		return this.costoOriginal - costoGratuito;
@@ -35,7 +35,7 @@ public class PaqueteAxB extends Paquete {
 
 	public void mostrarAtraccionesGratuitas() {
 		System.out.println("Atracciones gratuitas:");
-		for (Atraccion atraccion : atracGratuitas.values()) {
+		for (Atraccion atraccion : atraccionesGratuitas.values()) {
 			System.out.println("-Nombre: " + atraccion.getNombre());
 			System.out.println("-Duración: " + atraccion.getDuracion());
 			System.out.println("-Costo: " + atraccion.getCosto());
@@ -43,7 +43,7 @@ public class PaqueteAxB extends Paquete {
 	}
 
 	public Set<String> getAtraccionesGratuitas() {
-		return atracGratuitas.keySet();
+		return atraccionesGratuitas.keySet();
 	}
 
 	protected void imprimir() {
