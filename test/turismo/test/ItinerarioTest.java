@@ -20,6 +20,9 @@ public class ItinerarioTest {
 
 	@Before
 	public void setUp() throws Exception {
+		
+		costo = 10;
+		duracion = 2;
 		atraccion = new Atraccion("Erebor", "Paisaje", costo, duracion, 6);
 		itinerario = new Itinerario();
 		itinerario.agregarSugerencia(atraccion);
@@ -27,18 +30,17 @@ public class ItinerarioTest {
 	}
 
 	@Test
-	public void QueObtengaCosto() {
+	public void queObtengaCosto() {
 		Assert.assertEquals(costo, itinerario.getCostoItinerario(), 0.1);
 	}
 
 	@Test
-	public void QueObtengaDuracion() {
+	public void queObtengaDuracion() {
 		Assert.assertEquals(duracion, itinerario.getDuracionItinerario(), 0.1);
 	}
 
 	@Test
-	public void QueObtengaSugerenciasAceptadas() {
+	public void queObtengaSugerenciasAceptadas() {
 		Assert.assertEquals(sugAceptadas, itinerario.getItinerario());
 	}
-
 }

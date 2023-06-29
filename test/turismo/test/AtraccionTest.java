@@ -29,7 +29,6 @@ public class AtraccionTest {
 
 	@Test(expected = AtraccionExcepcion.class)
 	public void queAtraccionNoTengaCupoInvalido() throws AtraccionExcepcion, SugerenciaExcepcion {
-
 		new Atraccion("Atraccion1", "Paisaje", 10.0, 3, -1);
 	}
 

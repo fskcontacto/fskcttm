@@ -96,19 +96,19 @@ public class PaqueteTest {
 	}
 
 	@Test
-	public void porcentajeDescontado() {
+	public void quePorcentajeSeDescuente() {
 		boolean totalValido = paquetePorc.getCosto() == totalConDescuento;
 		Assert.assertEquals(totalValido, true);
 	}
 
 	@Test
-	public void axbDescontada() {
+	public void quePaqueteAXBDescuenteCosto() {
 		boolean totalValido = paqueteAXB.getCosto() == costoTotal;
 		Assert.assertEquals(totalValido, true);
 	}
 
 	@Test
-	public void absolutoDescontado() {
+	public void quePaqueteAbsolutoDescuenteCosto() {
 		boolean totalValido = paqueteAbs.getCosto() == precioAbsoluto;
 		Assert.assertEquals(totalValido, true);
 	}
@@ -125,7 +125,7 @@ public class PaqueteTest {
 	}
 
 	@Test
-	public void menorCupo() {
+	public void queObtengaMenorCupo() {
 		Assert.assertEquals(cupoMin, paqueteAbs.getCupoDisponible());
 		Assert.assertEquals(cupoMin, paqueteAXB.getCupoDisponible());
 		Assert.assertEquals(cupoMin, paquetePorc.getCupoDisponible());
@@ -184,7 +184,7 @@ public class PaqueteTest {
 	}
 
 	@Test
-	public void seOrdenaPorPrecioYTiempo() {
+	public void queSeOrdenePorPrecioYTiempo() {
 		paquetes.sort(Comparator.reverseOrder());
 		List<Paquete> paquetesOrdenados = new ArrayList<Paquete>();
 		paquetesOrdenados.add(paqueteAXB);
