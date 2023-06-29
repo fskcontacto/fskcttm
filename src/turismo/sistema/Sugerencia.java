@@ -73,11 +73,11 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 
 	public abstract boolean hayCupoDisponible();
 
-	public int compareTo(Sugerencia o) {
-		if (this.costo != o.costo)
-			return Double.compare(this.costo, o.costo);
+	public int compareTo(Sugerencia otra) {
+		if (this.costo != otra.costo)
+			return Double.compare(this.costo, otra.costo);
 
-		return Double.compare(this.duracion, o.duracion);
+		return Double.compare(this.duracion, otra.duracion);
 	}
 
 	protected abstract void imprimir();

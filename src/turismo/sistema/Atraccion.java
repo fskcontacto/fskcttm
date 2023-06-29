@@ -41,7 +41,7 @@ public class Atraccion extends Sugerencia {
 	}
 
 	public boolean hayCupoDisponible() {
-		return this.cupoDisponible > 0;
+		return cupoDisponible > 0;
 	}
 
 }

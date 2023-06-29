@@ -14,7 +14,7 @@ public class Usuario {
 		this.tipo = verificarPreferencia(tipo);
 		this.presupuestoDisp = verificarPresupDisp(presupuestoTotal);
 		this.tiempoDisp = verificarTiempoDisp(tiempoTotal);
-		itinerario = new Itinerario();
+		this.itinerario = new Itinerario();
 	}
 
 	public String getNombre() {
@@ -78,12 +78,12 @@ public class Usuario {
 		return tipoAtracc.equals(this.tipo);
 	}
 
-	public void agregarSugerencia(Sugerencia sugerencia) {
+	public void agregarSugerencia(Sugerencia sugerencia) throws UsuarioExcepcion {
 		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
-			throw new RuntimeException("Presupuesto insuficiente del Usuario: " + this.nombre + "."); // PresupuestoInsuficienteException();
+			throw new UsuarioExcepcion("Presupuesto insuficiente del Usuario: " + this.nombre + ".");
 
 		if (!this.tieneTiempoDispo(sugerencia.getDuracion()))
-			throw new RuntimeException("Tiempo insuficiente del Usuario: " + this.nombre + "."); // TiempoInsuficienteException();
+			throw new UsuarioExcepcion("Tiempo insuficiente del Usuario: " + this.nombre + ".");
 
 		this.presupuestoDisp -= sugerencia.getCosto();
 		this.tiempoDisp -= sugerencia.getDuracion();

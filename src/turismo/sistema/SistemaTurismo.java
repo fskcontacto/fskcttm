@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.UsuarioExcepcion;
 
 public class SistemaTurismo {
 	private List<Usuario> usuarios;
@@ -60,10 +61,10 @@ public class SistemaTurismo {
 						if (respuestaUsuario.equals("S")) {
 							try {
 								paquete.reducirCupo();
-							} catch (AtraccionExcepcion e) {
+								usuario.agregarSugerencia(paquete);
+							} catch (AtraccionExcepcion | UsuarioExcepcion e) {
 								System.out.println(e.getMessage());
 							}
-							usuario.agregarSugerencia(paquete);
 							atraccionesTomadas.addAll(paquete.getAtracciones());
 							System.out.println("¡Aceptada!");
 						}
@@ -86,10 +87,11 @@ public class SistemaTurismo {
 							if (respuestaUsuario.equals("S")) {
 								try {
 									atraccion.reducirCupo();
-								} catch (AtraccionExcepcion e) {
+									usuario.agregarSugerencia(atraccion);
+								} catch (AtraccionExcepcion | UsuarioExcepcion e) {
 									System.out.println(e.getMessage());
 								}
-								usuario.agregarSugerencia(atraccion);
+								
 								atraccionesTomadas.add(atraccion.getNombre());
 								System.out.println("¡Aceptada!");
 							}
@@ -114,10 +116,10 @@ public class SistemaTurismo {
 						if (respuestaUsuario.equals("S")) {
 							try {
 								paquete.reducirCupo();
-							} catch (AtraccionExcepcion e) {
+								usuario.agregarSugerencia(paquete);
+							} catch (AtraccionExcepcion | UsuarioExcepcion e) {
 								System.out.println(e.getMessage());
 							}
-							usuario.agregarSugerencia(paquete);
 							atraccionesTomadas.addAll(paquete.getAtracciones());
 							System.out.println("¡Aceptada!");
 						}
@@ -139,10 +141,10 @@ public class SistemaTurismo {
 							if (respuestaUsuario.equals("S")) {
 								try {
 									atraccion.reducirCupo();
-								} catch (AtraccionExcepcion e) {
+									usuario.agregarSugerencia(atraccion);
+								} catch (AtraccionExcepcion | UsuarioExcepcion e) {
 									System.out.println(e.getMessage());
 								}
-								usuario.agregarSugerencia(atraccion);
 								atraccionesTomadas.add(atraccion.getNombre());
 								System.out.println("¡Aceptada!");
 							}
@@ -216,9 +218,9 @@ public class SistemaTurismo {
 	}
 
 	private void mensajeFinal() {
-		System.out.println("\n*******************************************");
-		System.out.println("** FIN DEL PROCESAMIENTO DE LOS USUARIOS **");
-		System.out.println("** GRACIAS POR ELEGIRNOS - SISTEMA TURISMO EN LA TIERRA MEDIA **");
-		System.out.println("*******************************************");
+		System.out.println("******************************************************************");
+		System.out.println("**              FIN DEL PROCESAMIENTO DE LOS USUARIOS           **");
+		System.out.println("**  GRACIAS POR ELEGIRNOS - SISTEMA TURISMO EN LA TIERRA MEDIA  **");
+		System.out.println("******************************************************************");
 	}
 }
