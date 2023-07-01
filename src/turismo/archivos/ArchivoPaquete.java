@@ -27,7 +27,7 @@ public class ArchivoPaquete {
 
 	public List<Paquete> leer(Map<String, Atraccion> atracciones) throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter(System.lineSeparator()).useLocale(Locale.US)) {
 			List<Paquete> paquetes = new ArrayList<Paquete>();
 
 			int tipoPaquete;

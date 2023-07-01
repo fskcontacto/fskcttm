@@ -22,7 +22,7 @@ public class ArchivoAtraccion {
 	public Map<String, Atraccion> leer() throws FileNotFoundException {
 
 		File archivo = new File(this.nombre + ".in");
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter(System.lineSeparator()).useLocale(Locale.US)) {
 			Map<String, Atraccion> atracciones = new HashMap<>();
 
 			String nombre;
