@@ -20,7 +20,7 @@ public class ItinerarioTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
+
 		costo = 10;
 		duracion = 2;
 		atraccion = new Atraccion("Erebor", "Paisaje", costo, duracion, 6);

@@ -91,7 +91,7 @@ public class SistemaTurismo {
 								} catch (AtraccionExcepcion | UsuarioExcepcion e) {
 									System.out.println(e.getMessage());
 								}
-								
+
 								atraccionesTomadas.add(atraccion.getNombre());
 								System.out.println("¡Aceptada!");
 							}
