@@ -22,8 +22,8 @@ public class UsuarioTest {
 
 	private Atraccion atraccionPaisaje, atraccionPaisaje2, atraccionAventura, atraccionAventura2, atraccionDegustacion,
 			atraccionDegustacion2, atraccionCostosa, atraccionLarga;
-	private HashMap<String, Atraccion> atraccionesPaisaje, atraccionesAventura,atraccionesDegustacion,
-	atraccionesCostosas,atraccionesLargas;
+	private HashMap<String, Atraccion> atraccionesPaisaje, atraccionesAventura, atraccionesDegustacion,
+			atraccionesCostosas, atraccionesLargas;
 	private final double costoAtr1 = 10;
 	private final double costoAtr2 = 6;
 	private final double costoAtr3 = 5;
@@ -37,15 +37,14 @@ public class UsuarioTest {
 	private final int cupoAtr2 = 5;
 	private final int cupoAtr3 = 6;
 
-	private Paquete paqueteAbsPaisaje, paqueteAbsDegustacion,paqueteCostosoDegust,paqueteLargoDegust;
+	private Paquete paqueteAbsPaisaje, paqueteAbsDegustacion, paqueteCostosoDegust, paqueteLargoDegust;
 	private final double costoPaquetePaisaje = costoAtr1 + costoAtr2;
 	private final double duracionPaquetePaisaje = duracionAtr1 + duracionAtr2;
 
 	private final double costoPaqueteDegustacion = costoAtr3 + costoAtr3;
 	private final double duracionPaqueteDegustacion = duracionAtr3 + duracionAtr3;
-	
-	private final double costoPaqueteCostosoDegust = costoAtrCostosa + costoAtr1;
 
+	private final double costoPaqueteCostosoDegust = costoAtrCostosa + costoAtr1;
 
 	@Before
 	public void setUp() {
@@ -54,7 +53,6 @@ public class UsuarioTest {
 		atraccionesDegustacion = new HashMap<String, Atraccion>();
 		atraccionesCostosas = new HashMap<String, Atraccion>();
 		atraccionesLargas = new HashMap<String, Atraccion>();
-
 
 		try {
 
@@ -77,18 +75,17 @@ public class UsuarioTest {
 			atraccionesDegustacion.put("2", atraccionDegustacion2);
 
 			atraccionCostosa = new Atraccion("Minas Tirith", "Aventura", costoAtrCostosa, duracionAtr1, cupoAtr1);
-			
-			atraccionesCostosas.put("1",atraccionCostosa);
+
+			atraccionesCostosas.put("1", atraccionCostosa);
 
 			atraccionLarga = new Atraccion("Minas Tirith2", "Aventura", costoAtr1, duracionAtrLarga, cupoAtr1);
-			atraccionesLargas.put("1",atraccionLarga);
+			atraccionesLargas.put("1", atraccionLarga);
 
 			paqueteAbsPaisaje = new PaqueteAbsoluto("Paisaje", costoPaquetePaisaje, atraccionesPaisaje);
 			paqueteAbsDegustacion = new PaqueteAbsoluto("Degustación", costoPaqueteDegustacion, atraccionesDegustacion);
 			paqueteCostosoDegust = new PaqueteAbsoluto("Degustación", costoPaqueteCostosoDegust, atraccionesCostosas);
 			paqueteLargoDegust = new PaqueteAbsoluto("Degustación", costoPaqueteDegustacion, atraccionesLargas);
 
-			
 		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion | UsuarioExcepcion e) {
 			e.printStackTrace();
 		}
@@ -348,7 +345,6 @@ public class UsuarioTest {
 
 	}
 
-	
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregueAtraccionSiNoPuedeCosto() throws UsuarioExcepcion {
 		try {
@@ -362,7 +358,7 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(atraccionCostosa);
 	}
-	
+
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgreguePaqueteSiNoPuedeCosto() throws UsuarioExcepcion {
 		try {
@@ -375,7 +371,7 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(paqueteCostosoDegust);
 	}
-		
+
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregueAtraccionSiNoPuedeTiempo() throws UsuarioExcepcion {
 		try {
@@ -389,7 +385,7 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(atraccionLarga);
 	}
-	
+
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgreguePaqueteSiNoPuedeTiempo() throws UsuarioExcepcion {
 		try {
@@ -402,10 +398,7 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(paqueteLargoDegust);
 	}
-	
-	
-	
-	
+
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregaSugerenciasSiNoPuede() throws UsuarioExcepcion {
 		try {
