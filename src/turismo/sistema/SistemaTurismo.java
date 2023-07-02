@@ -54,10 +54,7 @@ public class SistemaTurismo {
 					hayCupo = paquete.hayCupoDisponible();
 					if (esPreferencia && hayCupo && puedeAdquirir) {
 						paquete.imprimir();
-						do {
-							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respuestaUsuario = teclado.nextLine().toUpperCase();
-						} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+						respuestaUsuario = obtenerRespuestaUsuario(teclado);
 						if (respuestaUsuario.equals("S")) {
 							try {
 								paquete.reducirCupo();
@@ -80,10 +77,7 @@ public class SistemaTurismo {
 					if (hayCupo) {
 						if (esPreferencia && puedeAdquirir && !atraccionesTomadas.contains(atraccion.getNombre())) {
 							atraccion.imprimir();
-							do {
-								System.out.println("Acepta sugerencia? Ingrese S o N:");
-								respuestaUsuario = teclado.nextLine().toUpperCase();
-							} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+							respuestaUsuario = obtenerRespuestaUsuario(teclado);
 							if (respuestaUsuario.equals("S")) {
 								try {
 									atraccion.reducirCupo();
@@ -109,10 +103,7 @@ public class SistemaTurismo {
 					hayCupo = paquete.hayCupoDisponible();
 					if (hayCupo && puedeAdquirir) {
 						paquete.imprimir();
-						do {
-							System.out.println("Acepta sugerencia? Ingrese S o N:");
-							respuestaUsuario = teclado.nextLine().toUpperCase();
-						} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+						respuestaUsuario = obtenerRespuestaUsuario(teclado);
 						if (respuestaUsuario.equals("S")) {
 							try {
 								paquete.reducirCupo();
@@ -134,10 +125,7 @@ public class SistemaTurismo {
 
 						if (hayCupo && puedeAdquirir && !atraccionesTomadas.contains(atraccion.getNombre())) {
 							atraccion.imprimir();
-							do {
-								System.out.println("Acepta sugerencia? Ingrese S o N:");
-								respuestaUsuario = teclado.nextLine().toUpperCase();
-							} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+							respuestaUsuario = obtenerRespuestaUsuario(teclado);
 							if (respuestaUsuario.equals("S")) {
 								try {
 									atraccion.reducirCupo();
@@ -178,6 +166,15 @@ public class SistemaTurismo {
 		}
 
 		this.mensajeFinal();
+	}
+
+	private String obtenerRespuestaUsuario(Scanner teclado) {
+		String respuestaUsuario;
+		do {
+			System.out.println("Acepta sugerencia? Ingrese S o N:");
+			respuestaUsuario = teclado.nextLine().toUpperCase();
+		} while (!respuestaUsuario.equals("S") && !respuestaUsuario.equals("N"));
+		return respuestaUsuario;
 	}
 
 	public void generarArchivoSalida() {

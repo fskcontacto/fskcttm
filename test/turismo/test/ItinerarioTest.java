@@ -43,4 +43,10 @@ public class ItinerarioTest {
 	public void queObtengaSugerenciasAceptadas() {
 		Assert.assertEquals(sugAceptadas, itinerario.getItinerario());
 	}
+
+	@Test
+	public void queDevuelvaStringParaImprimirEnArchivo() {
+		String esperado = "Sugerencias aceptadas: \n[ Erebor ]\nDuracion total: 2.00\nCosto total: 10.00";
+		Assert.assertEquals(esperado, itinerario.imprimirEnArchivo());
+	}
 }
