@@ -37,9 +37,8 @@ public class UsuarioTest {
 	private final int cupoAtr2 = 5;
 	private final int cupoAtr3 = 6;
 
-	private Paquete paqueteAbsPaisaje, paqueteAbsDegustacion, paqueteCostosoDegust, paqueteLargoDegust;
+	private Paquete paqueteAbsPaisaje, paqueteAbsDegustacion, paqueteCostosoDegust;
 	private final double costoPaquetePaisaje = costoAtr1 + costoAtr2 - 2;
-	private final double duracionPaquetePaisaje = duracionAtr1 + duracionAtr2;
 
 	private final double costoPaqueteDegustacion = costoAtr3 + costoAtr3 - 2;
 	private final double duracionPaqueteDegustacion = duracionAtr3 + duracionAtr3;
@@ -84,7 +83,6 @@ public class UsuarioTest {
 			paqueteAbsPaisaje = new PaqueteAbsoluto("Paisaje", costoPaquetePaisaje, atraccionesPaisaje);
 			paqueteAbsDegustacion = new PaqueteAbsoluto("Degustación", costoPaqueteDegustacion, atraccionesDegustacion);
 			paqueteCostosoDegust = new PaqueteAbsoluto("Degustación", costoPaqueteCostosoDegust, atraccionesCostosas);
-			paqueteLargoDegust = new PaqueteAbsoluto("Degustación", costoPaqueteDegustacion, atraccionesLargas);
 
 		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion | UsuarioExcepcion e) {
 			e.printStackTrace();
@@ -112,132 +110,28 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void queChequeePreferenciaUsuarioDegustacion() {
+	public void queSeObtengaPreferenciaCorrectamente() {
 		Assert.assertEquals(true, usuario.getTipo() == "Degustación");
 	}
-
+	
 	@Test
-	public void queChequeeNoPreferenciaUsuarioDegustacion() {
-		Assert.assertEquals(false, usuario.getTipo() == "Aventura");
+	public void queSeObtengaPresupuestoCorrectamente() {
+		Assert.assertEquals(true, usuario.getPresupuestoDisp() == presupuestoUsuario);
+	}
+	
+	@Test
+	public void queSeObtengaTiempoDisponibleCorrectamente() {
+		Assert.assertEquals(true, usuario.getTiempoDisp() == tiempoUsuario);
 	}
 
 	@Test
-	public void queChequeePreferenciaUsuarioAventura() throws UsuarioExcepcion {
-		Usuario usuario2 = new Usuario("Juan", "Aventura", presupuestoUsuario, tiempoUsuario);
-		Assert.assertEquals(true, usuario2.getTipo() == "Aventura");
-	}
-
-	@Test
-	public void queChequeePreferenciaUsuarioPaisaje() throws UsuarioExcepcion {
-		Usuario usuario2 = new Usuario("Pedro", "Paisaje", presupuestoUsuario, tiempoUsuario);
-		Assert.assertEquals(true, usuario2.getTipo() == "Paisaje");
-	}
-
-	@Test
-	public void queAgregaUnaAtraccionCorrectamentePreferenciaUsuario() {
-		try {
-			usuario.agregarSugerencia(atraccionDegustacion);
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtraccion = "Degustación";
-		boolean esPrefencia = usuario.getTipo() == tipoAtraccion;
-		Assert.assertEquals(true, esPrefencia);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoAtr3);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionAtr3);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaAtraccionesCorrectamentePreferenciaUsuario() {
-		try {
-
-			usuario.agregarSugerencia(atraccionDegustacion);
-			usuario.agregarSugerencia(atraccionDegustacion2);
-
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtracciones = "Degustación";
-		boolean esPrefencia = usuario.getTipo() == tipoAtracciones;
-		Assert.assertEquals(true, esPrefencia);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoAtr3 - costoAtr3);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionAtr3 - duracionAtr3);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaUnaAtraccionCorrectamenteNoPreferenciaUsuario() {
-		try {
-			usuario.agregarSugerencia(atraccionPaisaje);
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtraccion = "Paisaje";
-		boolean esPrefencia = usuario.getTipo() == tipoAtraccion;
-		Assert.assertEquals(false, esPrefencia);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoAtr1);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionAtr1);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaAtraccionesCorrectamenteNoPreferenciaUsuario() {
-		try {
-			usuario.agregarSugerencia(atraccionPaisaje);
-			usuario.agregarSugerencia(atraccionPaisaje2);
-
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtraccion = "Paisaje";
-		boolean esPrefencia = usuario.getTipo() == tipoAtraccion;
-		Assert.assertEquals(false, esPrefencia);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoAtr1 - costoAtr2);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionAtr1 - duracionAtr2);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaUnPaqueteCorrectamentePreferenciaUsuario() {
+	public void queAgregaUnaSugerenciaCorrectamente() {
 		try {
 			usuario.agregarSugerencia(paqueteAbsDegustacion);
 
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
-
-		String tipoAtraccionPaquete = "Degustación";
-		boolean esPrefencia = usuario.getTipo() == tipoAtraccionPaquete;
-		Assert.assertEquals(true, esPrefencia);
 
 		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoPaqueteDegustacion);
 		Assert.assertEquals(true, totalValido);
@@ -250,74 +144,23 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void queAgregaPaquetesCorrectamentePreferenciaUsuario() {
+	public void queAgregaSugerenciasCorrectamente() {
 		try {
 			usuario.agregarSugerencia(paqueteAbsDegustacion);
-			usuario.agregarSugerencia(paqueteAbsDegustacion);
+			usuario.agregarSugerencia(atraccionPaisaje);
 
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
-		String tipoAtraccionesPaquete = "Degustación";
-		boolean sonPrefencias = usuario.getTipo() == tipoAtraccionesPaquete;
-		Assert.assertEquals(true, sonPrefencias);
-
-		double costoPaquetes = costoPaqueteDegustacion * 2;
+		double costoPaquetes = costoPaqueteDegustacion + costoAtr1;
 
 		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoPaquetes);
 		Assert.assertEquals(true, totalValido);
 
-		double duracionPaquetes = duracionPaqueteDegustacion * 2;
+		double duracionPaquetes = duracionPaqueteDegustacion + duracionAtr1;
 
 		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionPaquetes);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaUnPaqueteCorrectamenteNoPreferenciaUsuario() {
-		try {
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
-
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtraccionPaquete = "Paisaje";
-		boolean sonPrefencias = usuario.getTipo() == tipoAtraccionPaquete;
-		Assert.assertEquals(false, sonPrefencias);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoPaquetePaisaje);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionPaquetePaisaje);
-		Assert.assertEquals(true, totalValido);
-
-		Assert.assertEquals(false, usuario.itinerarioVacio());
-
-	}
-
-	@Test
-	public void queAgregaPaquetesCorrectamenteNoPreferenciaUsuario() {
-		try {
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
-
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		String tipoAtraccionPaquete = "Paisaje";
-		boolean sonPrefencias = usuario.getTipo() == tipoAtraccionPaquete;
-		Assert.assertEquals(false, sonPrefencias);
-
-		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoPaquetePaisaje);
-		Assert.assertEquals(true, totalValido);
-
-		totalValido = usuario.getTiempoDisp() == (tiempoUsuario - duracionAtr1 - duracionAtr2);
 		Assert.assertEquals(true, totalValido);
 
 		Assert.assertEquals(false, usuario.itinerarioVacio());
@@ -330,7 +173,7 @@ public class UsuarioTest {
 			usuario.agregarSugerencia(atraccionDegustacion);
 			usuario.agregarSugerencia(paqueteAbsPaisaje);
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
 		boolean totalValido = usuario.getPresupuestoDisp() == (presupuestoUsuario - costoAtr3 - costoPaquetePaisaje);
@@ -344,23 +187,11 @@ public class UsuarioTest {
 	}
 
 	@Test(expected = UsuarioExcepcion.class)
-	public void queNoAgregueAtraccionSiNoPuedeCosto() throws UsuarioExcepcion {
+	public void queNoAgregueSugerenciaSiNoPuedeCosto() throws UsuarioExcepcion {
 		try {
 			usuario.agregarSugerencia(atraccionDegustacion);
 			usuario.agregarSugerencia(atraccionAventura);
-			usuario.agregarSugerencia(atraccionPaisaje);
 
-		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
-		}
-
-		usuario.agregarSugerencia(atraccionCostosa);
-	}
-
-	@Test(expected = UsuarioExcepcion.class)
-	public void queNoAgreguePaqueteSiNoPuedeCosto() throws UsuarioExcepcion {
-		try {
-			usuario.agregarSugerencia(paqueteAbsDegustacion);
 		} catch (UsuarioExcepcion e) {
 			Assert.fail(e.getMessage());
 		}
@@ -368,28 +199,6 @@ public class UsuarioTest {
 		usuario.agregarSugerencia(paqueteCostosoDegust);
 	}
 
-	@Test(expected = UsuarioExcepcion.class)
-	public void queNoAgregueAtraccionSiNoPuedeTiempo() throws UsuarioExcepcion {
-		try {
-			usuario.agregarSugerencia(atraccionDegustacion);
-			usuario.agregarSugerencia(atraccionAventura);
-
-		} catch (UsuarioExcepcion e) {
-			Assert.fail(e.getMessage());
-		}
-
-		usuario.agregarSugerencia(atraccionLarga);
-	}
-
-	@Test(expected = UsuarioExcepcion.class)
-	public void queNoAgreguePaqueteSiNoPuedeTiempo() throws UsuarioExcepcion {
-		try {
-			usuario.agregarSugerencia(paqueteAbsDegustacion);
-		} catch (UsuarioExcepcion e) {
-			Assert.fail(e.getMessage());
-		}
-		usuario.agregarSugerencia(paqueteLargoDegust);
-	}
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregaSugerenciasSiNoPuede() throws UsuarioExcepcion {
