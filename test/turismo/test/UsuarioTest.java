@@ -38,13 +38,13 @@ public class UsuarioTest {
 	private final int cupoAtr3 = 6;
 
 	private Paquete paqueteAbsPaisaje, paqueteAbsDegustacion, paqueteCostosoDegust, paqueteLargoDegust;
-	private final double costoPaquetePaisaje = costoAtr1 + costoAtr2;
+	private final double costoPaquetePaisaje = costoAtr1 + costoAtr2 - 2;
 	private final double duracionPaquetePaisaje = duracionAtr1 + duracionAtr2;
 
-	private final double costoPaqueteDegustacion = costoAtr3 + costoAtr3;
+	private final double costoPaqueteDegustacion = costoAtr3 + costoAtr3 - 2;
 	private final double duracionPaqueteDegustacion = duracionAtr3 + duracionAtr3;
 
-	private final double costoPaqueteCostosoDegust = costoAtrCostosa + costoAtr1;
+	private final double costoPaqueteCostosoDegust = costoAtrCostosa - 6;
 
 	@Before
 	public void setUp() {
@@ -78,7 +78,7 @@ public class UsuarioTest {
 
 			atraccionesCostosas.put("1", atraccionCostosa);
 
-			atraccionLarga = new Atraccion("Minas Tirith2", "Aventura", costoAtr1, duracionAtrLarga, cupoAtr1);
+			atraccionLarga = new Atraccion("Minas Tirith2", "Degustación", costoAtr1, duracionAtrLarga, cupoAtr1);
 			atraccionesLargas.put("1", atraccionLarga);
 
 			paqueteAbsPaisaje = new PaqueteAbsoluto("Paisaje", costoPaquetePaisaje, atraccionesPaisaje);
@@ -125,14 +125,12 @@ public class UsuarioTest {
 	public void queChequeePreferenciaUsuarioAventura() throws UsuarioExcepcion {
 		Usuario usuario2 = new Usuario("Juan", "Aventura", presupuestoUsuario, tiempoUsuario);
 		Assert.assertEquals(true, usuario2.getTipo() == "Aventura");
-		usuario2 = null;
 	}
 
 	@Test
 	public void queChequeePreferenciaUsuarioPaisaje() throws UsuarioExcepcion {
 		Usuario usuario2 = new Usuario("Pedro", "Paisaje", presupuestoUsuario, tiempoUsuario);
 		Assert.assertEquals(true, usuario2.getTipo() == "Paisaje");
-		usuario2 = null;
 	}
 
 	@Test
@@ -363,10 +361,8 @@ public class UsuarioTest {
 	public void queNoAgreguePaqueteSiNoPuedeCosto() throws UsuarioExcepcion {
 		try {
 			usuario.agregarSugerencia(paqueteAbsDegustacion);
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
-
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
 		usuario.agregarSugerencia(paqueteCostosoDegust);
@@ -377,10 +373,9 @@ public class UsuarioTest {
 		try {
 			usuario.agregarSugerencia(atraccionDegustacion);
 			usuario.agregarSugerencia(atraccionAventura);
-			usuario.agregarSugerencia(atraccionPaisaje);
 
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
 		usuario.agregarSugerencia(atraccionLarga);
@@ -390,12 +385,9 @@ public class UsuarioTest {
 	public void queNoAgreguePaqueteSiNoPuedeTiempo() throws UsuarioExcepcion {
 		try {
 			usuario.agregarSugerencia(paqueteAbsDegustacion);
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
-
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
-
 		usuario.agregarSugerencia(paqueteLargoDegust);
 	}
 
@@ -403,9 +395,8 @@ public class UsuarioTest {
 	public void queNoAgregaSugerenciasSiNoPuede() throws UsuarioExcepcion {
 		try {
 			usuario.agregarSugerencia(atraccionDegustacion);
-			usuario.agregarSugerencia(paqueteAbsPaisaje);
 		} catch (UsuarioExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
 		usuario.agregarSugerencia(paqueteCostosoDegust);

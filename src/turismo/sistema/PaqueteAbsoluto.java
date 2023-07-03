@@ -20,8 +20,8 @@ public class PaqueteAbsoluto extends Paquete {
 		if (costoFinal < 0)
 			throw new PaqueteExcepcion("No puede generar sugerencias con costo menor que 0.");
 
-		//if (costoFinal >= this.getCosto())
-			//throw new PaqueteExcepcion("El costo de la promocion debe ser menor al costo original del paquete.");
+		if (costoFinal >= this.getCosto())
+			throw new PaqueteExcepcion("El costo de la promocion debe ser menor al costo original del paquete.");
 
 		return costoFinal;
 	}
