@@ -113,12 +113,12 @@ public class UsuarioTest {
 	public void queSeObtengaPreferenciaCorrectamente() {
 		Assert.assertEquals(true, usuario.getTipo() == "Degustación");
 	}
-	
+
 	@Test
 	public void queSeObtengaPresupuestoCorrectamente() {
 		Assert.assertEquals(true, usuario.getPresupuestoDisp() == presupuestoUsuario);
 	}
-	
+
 	@Test
 	public void queSeObtengaTiempoDisponibleCorrectamente() {
 		Assert.assertEquals(true, usuario.getTiempoDisp() == tiempoUsuario);
@@ -198,7 +198,6 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(paqueteCostosoDegust);
 	}
-
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregaSugerenciasSiNoPuede() throws UsuarioExcepcion {
