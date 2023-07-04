@@ -41,9 +41,9 @@ public abstract class Paquete extends Sugerencia {
 		int menorCupo = Integer.MAX_VALUE;
 
 		for (Atraccion atraccion : this.atracciones.values()) {
-			nombre += atraccion.nombre + ", ";
-			duracion += atraccion.duracion;
-			costoOriginal += atraccion.costo;
+			nombre += atraccion.getNombre() + ", ";
+			duracion += atraccion.getDuracion();
+			costoOriginal += atraccion.getCosto();
 			int cupoTotal = atraccion.getCupoTotal();
 			if (cupoTotal < menorCupo) {
 				menorCupo = cupoTotal;

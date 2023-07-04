@@ -1,8 +1,5 @@
 package turismo.sistema;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import turismo.excepciones.UsuarioExcepcion;
 
 public class Usuario {
@@ -11,15 +8,6 @@ public class Usuario {
 	private double presupuestoDisp;
 	private double tiempoDisp;
 	private Itinerario itinerario;
-	public final static Map<Integer, String> tiposSugerencias = new HashMap<Integer, String>() {
-		private static final long serialVersionUID = 725700593619607496L;
-
-		{
-			put(0, "Paisaje");
-			put(1, "Aventura");
-			put(2, "Degustación");
-		}
-	};
 
 	public Usuario(String nombre, int tipo, double presupuestoTotal, double tiempoTotal) throws UsuarioExcepcion {
 		this.nombre = verificarNombre(nombre);
@@ -70,7 +58,7 @@ public class Usuario {
 	}
 
 	private int verificarPreferencia(int pref) throws UsuarioExcepcion {
-		if (!tiposSugerencias.containsKey(pref)) {
+		if (!Sugerencia.tiposSugerencias.containsKey(pref)) {
 			throw new UsuarioExcepcion(pref + " no tiene un tipo de sugerencia asignada");
 		}
 
@@ -116,7 +104,7 @@ public class Usuario {
 	}
 
 	public String imprimirItinerarioEnArchivo() {
-		return "Nombre: " + this.nombre + "\nTipo preferencia: " + tiposSugerencias.get(this.tipo) + "\n"
+		return "Nombre: " + this.nombre + "\nTipo preferencia: " + Sugerencia.tiposSugerencias.get(this.tipo) + "\n"
 				+ this.itinerario.imprimirEnArchivo();
 	}
 }
