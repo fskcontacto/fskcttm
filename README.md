@@ -74,7 +74,7 @@ Aventura<br />
 
 - Link a grabación: https://drive.google.com/file/d/1D1bzJ78oiWx6ao8PSxuBvwOM_Fs7rSVW/view?usp=drive_link
 
-- Link a Diagrama UML: https://drive.google.com/file/d/13plHvuN5pOmYWPIzUyHHnMMzmjxp8PuS/view?usp=drive_link
+- Link a Diagrama UML: [https://drive.google.com/file/d/13plHvuN5pOmYWPIzUyHHnMMzmjxp8PuS/view?usp=drive_link](https://app.diagrams.net/#G13_O_Swqhdreu9eiEo4ZctsyJnewYErgp)
 
 - Link a presentación PPT: https://docs.google.com/presentation/d/1viy9rU5iSf6FHE3lOPbGHDJVo9vLV29h/edit?usp=sharing&ouid=112941802210794310975&rtpof=true&sd=true
 
