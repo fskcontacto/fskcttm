@@ -22,6 +22,12 @@ public class PaqueteAxB extends Paquete {
 		if (atraccionesGratuitas.isEmpty())
 			throw new PaqueteExcepcion("Debe haber al menos una atraccion gratuita en Paquetes AxB");
 
+		for(String atraccion : atraccionesGratuitas.keySet()) {
+			if(!atracciones.containsKey(atraccion)) {
+				throw new PaqueteExcepcion("Las atracciones gratuitas deben estar dentro del conjunto de atracciones inicial");
+			}
+		}
+		
 		return atraccionesGratuitas;
 	}
 

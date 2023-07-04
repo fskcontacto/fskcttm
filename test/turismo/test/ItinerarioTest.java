@@ -21,7 +21,7 @@ public class ItinerarioTest {
 	private Itinerario itinerario;
 	private final double costoAtr1 = 10;
 	private final double costoAtr2 = 6;
-	private final double costoPaquete = costoAtr1 + costoAtr2;
+	private final double costoPaquete = costoAtr1 + costoAtr2 - 2;
 	private final double duracionAtr1 = 2;
 	private final double duracionAtr2 = 1;
 	private final int cupoAtr1 = 4;

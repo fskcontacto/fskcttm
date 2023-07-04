@@ -1,12 +1,17 @@
 package turismo.sistema;
 
+//import java.util.Map;
+//import java.util.HashMap;
+
 import turismo.excepciones.AtraccionExcepcion;
 import turismo.excepciones.SugerenciaExcepcion;
 
 public class Atraccion extends Sugerencia {
 	private int cupoTotal;
 	private int cupoDisponible;
-
+	//public static Map<Integer, String> tiposAtracciones = new HashMap<Integer,String>();
+	
+	
 	public Atraccion(String nombre, String tipo, double costo, double duracion, int cupo)
 			throws AtraccionExcepcion, SugerenciaExcepcion {
 		super(nombre, tipo, costo, duracion);

@@ -21,8 +21,8 @@ import turismo.sistema.PaquetePorcentual;
 
 public class PaqueteTest {
 
-	private Atraccion atraccionPaisaje1, atraccionPaisaje2, atraccionDegustacion1, atraccionDegustacion2,
-			atraccionAventura;
+	private Atraccion atraccionPaisaje1, atraccionPaisaje2, atraccionPaisaje3, atraccionPaisaje4,
+			atraccionPaisaje5;
 	private Map<String, Atraccion> atracciones;
 	private Map<String, Atraccion> atraccionesGratuitas;
 	private Map<String, Atraccion> atraccionesAXB;
@@ -33,16 +33,16 @@ public class PaqueteTest {
 	private List<Paquete> paquetes;
 	private static final int cupoAtrPaisaje1 = 6;
 	private static final int cupoAtrPaisaje2 = 5;
-	private static final int cupoAtrDegustacion = 4;
+	private static final int cupoAtrPaisaje3 = 4;
 	private static final int cupoAtrGratis = 6;
 	private static final int cupoMin = Math.min(cupoAtrGratis,
-			Math.min(cupoAtrDegustacion, Math.min(cupoAtrPaisaje1, cupoAtrPaisaje2)));
+			Math.min(cupoAtrPaisaje3, Math.min(cupoAtrPaisaje1, cupoAtrPaisaje2)));
 	private static final double costoAtrPaisaje1 = 10;
 	private static final double costoAtrPaisaje2 = 20;
-	private static final double costoAtrDegustacion = 25;
+	private static final double costoAtrPaisaje3 = 25;
 	private static final double costoAtrGratuita1 = 60;
 	private static final double costoAtrGratuita2 = 60;
-	private static final double costoTotal = costoAtrPaisaje1 + costoAtrPaisaje2 + costoAtrDegustacion;
+	private static final double costoTotal = costoAtrPaisaje1 + costoAtrPaisaje2 + costoAtrPaisaje3;
 	private static final double costoOriginalAXB = costoTotal + costoAtrGratuita1 + costoAtrGratuita2;
 	private static final double porcentajeDescontado = 0.1;
 	private static final double precioAbsoluto = costoTotal - 10;
@@ -58,27 +58,27 @@ public class PaqueteTest {
 		try {
 			atraccionPaisaje1 = new Atraccion("Moria", "Paisaje", costoAtrPaisaje1, 2, cupoAtrPaisaje1);
 			atraccionPaisaje2 = new Atraccion("Fortuna", "Paisaje", costoAtrPaisaje2, 3, cupoAtrPaisaje2);
-			atraccionDegustacion1 = new Atraccion("Giratoria", "Degustación", costoAtrDegustacion, 4,
-					cupoAtrDegustacion);
-			atraccionDegustacion2 = new Atraccion("Mirador", "Degustación", costoAtrGratuita1, 5, cupoAtrGratis);
-			atraccionAventura = new Atraccion("Telesferico", "Paisaje", costoAtrGratuita2, 6, cupoAtrGratis);
+			atraccionPaisaje3 = new Atraccion("Giratoria", "Paisaje", costoAtrPaisaje3, 4,
+					cupoAtrPaisaje3);
+			atraccionPaisaje4 = new Atraccion("Mirador", "Paisaje", costoAtrGratuita1, 5, cupoAtrGratis);
+			atraccionPaisaje5 = new Atraccion("Telesferico", "Paisaje", costoAtrGratuita2, 6, cupoAtrGratis);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
 			e.printStackTrace();
 		}
 
 		atracciones.put("1", atraccionPaisaje1);
 		atracciones.put("2", atraccionPaisaje2);
-		atracciones.put("3", atraccionDegustacion1);
+		atracciones.put("3", atraccionPaisaje3);
 
-		atraccionesGratuitas.put("4", atraccionDegustacion2);
-		atraccionesGratuitas.put("5", atraccionAventura);
+		atraccionesGratuitas.put("4", atraccionPaisaje4);
+		atraccionesGratuitas.put("5", atraccionPaisaje5);
 
 		atraccionesAXB.putAll(atracciones);
 		atraccionesAXB.putAll(atraccionesGratuitas);
 		try {
 			paqueteAbs = new PaqueteAbsoluto("Paisaje", precioAbsoluto, atracciones);
-			paqueteAXB = new PaqueteAxB("Aventura", atraccionesAXB, atraccionesGratuitas);
-			paquetePorc = new PaquetePorcentual("Degustación", porcentajeDescontado, atracciones);
+			paqueteAXB = new PaqueteAxB("Paisaje", atraccionesAXB, atraccionesGratuitas);
+			paquetePorc = new PaquetePorcentual("Paisaje", porcentajeDescontado, atracciones);
 		} catch (PaqueteExcepcion | SugerenciaExcepcion e) {
 			e.printStackTrace();
 		}
@@ -132,17 +132,15 @@ public class PaqueteTest {
 
 	@Test
 	public void queReduzcaCuposDeAtracciones() {
-		for (Paquete paquete : paquetes) {
-			try {
-				paquete.reducirCupo();
-			} catch (AtraccionExcepcion e) {
-				Assert.fail(e.getMessage());
-			}
+		try {
+			paqueteAbs.reducirCupo();
+		} catch (AtraccionExcepcion e) {
+			Assert.fail(e.getMessage());
 		}
 
-		Assert.assertEquals(cupoAtrPaisaje1 - paquetes.size(), atraccionPaisaje1.getCupoDisponible());
-		Assert.assertEquals(cupoAtrPaisaje2 - paquetes.size(), atraccionPaisaje2.getCupoDisponible());
-		Assert.assertEquals(cupoAtrDegustacion - paquetes.size(), atraccionDegustacion1.getCupoDisponible());
+		Assert.assertEquals(cupoAtrPaisaje1 - 1, atraccionPaisaje1.getCupoDisponible());
+		Assert.assertEquals(cupoAtrPaisaje2 - 1, atraccionPaisaje2.getCupoDisponible());
+		Assert.assertEquals(cupoAtrPaisaje3 - 1, atraccionPaisaje3.getCupoDisponible());
 	}
 
 	@Test
@@ -197,4 +195,12 @@ public class PaqueteTest {
 		Assert.assertEquals(paquetes, paquetesOrdenados);
 
 	}
+	
+	@Test(expected = PaqueteExcepcion.class)
+	public void queAtraccionesTotalesContengaALasGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
+		new PaqueteAxB("Aventura", atracciones, atraccionesGratuitas);
+	}
+	
+
+	
 }

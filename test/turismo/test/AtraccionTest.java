@@ -21,7 +21,7 @@ public class AtraccionTest {
 		try {
 			atraccion = new Atraccion("Moria", "Paisaje", 10, 2, 6);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
-			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 
 	}

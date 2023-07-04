@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import turismo.excepciones.AtraccionExcepcion;
+import turismo.excepciones.PaqueteExcepcion;
 import turismo.excepciones.SugerenciaExcepcion;
 
 public abstract class Paquete extends Sugerencia {
@@ -14,11 +15,23 @@ public abstract class Paquete extends Sugerencia {
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
-	public Paquete(String tipo, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion {
+	public Paquete(String tipo, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo);
-		this.atracciones = atracciones;
+		this.atracciones = verificarTipoAtracciones(atracciones);
 		inicializarValores();
 		this.costo = costoOriginal;
+	}
+
+	private Map<String, Atraccion> verificarTipoAtracciones(Map<String, Atraccion> atracciones)
+			throws PaqueteExcepcion {
+		for (Atraccion atraccion : atracciones.values()) {
+			if (!atraccion.getTipo().equals(this.tipo)) {
+				throw new PaqueteExcepcion(
+						"Los tipos de las atracciones del paquete deben coincidir con el tipo del paquete");
+			}
+		}
+
+		return atracciones;
 	}
 
 	private void inicializarValores() {
