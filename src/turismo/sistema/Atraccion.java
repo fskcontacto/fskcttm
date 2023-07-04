@@ -6,7 +6,7 @@ import turismo.excepciones.SugerenciaExcepcion;
 public class Atraccion extends Sugerencia {
 	private int cupoTotal;
 	private int cupoDisponible;
-	
+
 	public Atraccion(String nombre, int tipo, double costo, double duracion, int cupo)
 			throws AtraccionExcepcion, SugerenciaExcepcion {
 		super(nombre, tipo, costo, duracion);
@@ -37,8 +37,9 @@ public class Atraccion extends Sugerencia {
 	}
 
 	protected void imprimir() {
-		System.out.println("*ATRACCION*" + "\n\tNombre: " + this.nombre + "\n\t Tipo: " + Sugerencia.tiposSugerencias.get(this.tipo) + "\n\t Costo: "
-				+ this.costo + "\n\t Duración: " + this.duracion + " horas");
+		System.out.println("*ATRACCION*" + "\n\tNombre: " + this.nombre + "\n\t Tipo: "
+				+ Sugerencia.tiposSugerencias.get(this.tipo) + "\n\t Costo: " + this.costo + "\n\t Duración: "
+				+ this.duracion + " horas");
 	}
 
 	public boolean hayCupoDisponible() {

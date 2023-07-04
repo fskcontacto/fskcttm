@@ -71,7 +71,7 @@ public class Usuario {
 
 	private int verificarPreferencia(int pref) throws UsuarioExcepcion {
 		if (!tiposSugerencias.containsKey(pref)) {
-			throw new UsuarioExcepcion( pref + " no tiene un tipo de sugerencia asignada");
+			throw new UsuarioExcepcion(pref + " no tiene un tipo de sugerencia asignada");
 		}
 
 		return pref;

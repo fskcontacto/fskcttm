@@ -32,12 +32,9 @@ public class ItinerarioTest {
 	private Atraccion atraccionAmoria;
 	private Paquete paqueteAbs;
 	private HashMap<String, Atraccion> atraccionesParaPaquete;
-	
-	
-	
 
 	@Before
-	public void setUp()  {
+	public void setUp() {
 
 		atraccionesParaPaquete = new HashMap<String, Atraccion>();
 		try {
@@ -47,28 +44,28 @@ public class ItinerarioTest {
 			atraccionesParaPaquete.put("1", atraccionMoria);
 			atraccionesParaPaquete.put("2", atraccionAmoria);
 			paqueteAbs = new PaqueteAbsoluto(0, costoPaquete, atraccionesParaPaquete);
-		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion  e) {
+		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion e) {
 			e.printStackTrace();
 		}
 		itinerario = new Itinerario();
-		
+
 	}
 
-	@Test 
-	public void agregarAtraccion()
-	{
+	@Test
+	public void agregarAtraccion() {
 		itinerario.agregarSugerencia(atraccionErebor);
 		sugAceptadas.add(atraccionErebor);
 		Assert.assertEquals(sugAceptadas, itinerario.getItinerario());
 	}
-	
+
 	@Test
-	public void agregarPaquete()
-	{
+	public void agregarPaquete() {
 		itinerario.agregarSugerencia(paqueteAbs);
-		sugAceptadas.add(paqueteAbs);;
+		sugAceptadas.add(paqueteAbs);
+		;
 		Assert.assertEquals(sugAceptadas, itinerario.getItinerario());
 	}
+
 	@Test
 	public void queObtengaCosto() {
 		itinerario.agregarSugerencia(atraccionErebor);

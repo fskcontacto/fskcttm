@@ -21,8 +21,7 @@ import turismo.sistema.PaquetePorcentual;
 
 public class PaqueteTest {
 
-	private Atraccion atraccionPaisaje1, atraccionPaisaje2, atraccionPaisaje3, atraccionPaisaje4,
-			atraccionPaisaje5;
+	private Atraccion atraccionPaisaje1, atraccionPaisaje2, atraccionPaisaje3, atraccionPaisaje4, atraccionPaisaje5;
 	private Map<String, Atraccion> atracciones;
 	private Map<String, Atraccion> atraccionesGratuitas;
 	private Map<String, Atraccion> atraccionesAXB;
@@ -58,8 +57,7 @@ public class PaqueteTest {
 		try {
 			atraccionPaisaje1 = new Atraccion("Moria", 0, costoAtrPaisaje1, 2, cupoAtrPaisaje1);
 			atraccionPaisaje2 = new Atraccion("Fortuna", 0, costoAtrPaisaje2, 3, cupoAtrPaisaje2);
-			atraccionPaisaje3 = new Atraccion("Giratoria", 0, costoAtrPaisaje3, 4,
-					cupoAtrPaisaje3);
+			atraccionPaisaje3 = new Atraccion("Giratoria", 0, costoAtrPaisaje3, 4, cupoAtrPaisaje3);
 			atraccionPaisaje4 = new Atraccion("Mirador", 0, costoAtrGratuita1, 5, cupoAtrGratis);
 			atraccionPaisaje5 = new Atraccion("Telesferico", 0, costoAtrGratuita2, 6, cupoAtrGratis);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
@@ -195,12 +193,10 @@ public class PaqueteTest {
 		Assert.assertEquals(paquetes, paquetesOrdenados);
 
 	}
-	
+
 	@Test(expected = PaqueteExcepcion.class)
 	public void queAtraccionesTotalesContengaALasGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
 		new PaqueteAxB(1, atracciones, atraccionesGratuitas);
 	}
-	
 
-	
 }

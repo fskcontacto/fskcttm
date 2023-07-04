@@ -23,12 +23,13 @@ public class PaqueteAxB extends Paquete {
 			throw new PaqueteExcepcion("Debe haber al menos una atraccion gratuita en Paquetes AxB");
 		}
 
-		for(String atraccion : atraccionesGratuitas.keySet()) {
-			if(!atracciones.containsKey(atraccion)) {
-				throw new PaqueteExcepcion("Las atracciones gratuitas deben estar dentro del conjunto de atracciones inicial");
+		for (String atraccion : atraccionesGratuitas.keySet()) {
+			if (!atracciones.containsKey(atraccion)) {
+				throw new PaqueteExcepcion(
+						"Las atracciones gratuitas deben estar dentro del conjunto de atracciones inicial");
 			}
 		}
-		
+
 		return atraccionesGratuitas;
 	}
 
@@ -55,9 +56,9 @@ public class PaqueteAxB extends Paquete {
 
 	protected void imprimir() {
 		System.out.println("*PAQUETE*" + "\n\tNombre atracciones totales: " + this.getAtracciones()
-				+ "\n\tNombre atracciones gratuitas: " + this.getAtraccionesGratuitas() + "\n\tTipo: " + Sugerencia.tiposSugerencias.get(this.tipo) 
-				+ "\n\tDuracion: " + this.getDuracion() + "\n\tCosto original: " + this.costoOriginal
-				+ "\n\tCosto final: " + this.getCosto());
+				+ "\n\tNombre atracciones gratuitas: " + this.getAtraccionesGratuitas() + "\n\tTipo: "
+				+ Sugerencia.tiposSugerencias.get(this.tipo) + "\n\tDuracion: " + this.getDuracion()
+				+ "\n\tCosto original: " + this.costoOriginal + "\n\tCosto final: " + this.getCosto());
 	}
 
 }

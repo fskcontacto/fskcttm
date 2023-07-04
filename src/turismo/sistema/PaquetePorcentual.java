@@ -35,8 +35,9 @@ public class PaquetePorcentual extends Paquete {
 
 	protected void imprimir() {
 		System.out.println("*PAQUETE*" + "\n\tNombre atracciones: " + this.getAtracciones() + "\n\tTipo: "
-				+ Sugerencia.tiposSugerencias.get(this.tipo) + "\n\tDuracion: " + this.getDuracion() + "\n\tCosto original: " + this.costoOriginal
-				+ "\n\tCosto con descuento: " + String.format(Locale.US, "%.2f", this.getCosto()));
+				+ Sugerencia.tiposSugerencias.get(this.tipo) + "\n\tDuracion: " + this.getDuracion()
+				+ "\n\tCosto original: " + this.costoOriginal + "\n\tCosto con descuento: "
+				+ String.format(Locale.US, "%.2f", this.getCosto()));
 	}
 
 }

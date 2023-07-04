@@ -123,7 +123,7 @@ public class UsuarioTest {
 	public void queSeObtengaTiempoDisponibleCorrectamente() {
 		Assert.assertEquals(true, usuario.getTiempoDisp() == tiempoUsuario);
 	}
-	
+
 	@Test
 	public void queSeObtengaNombreCorrectamente() {
 		Assert.assertEquals(true, usuario.getNombre() == "Franco");
@@ -203,7 +203,7 @@ public class UsuarioTest {
 
 		usuario.agregarSugerencia(paqueteCostosoDegust);
 	}
-	
+
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoAgregueSugerenciaSiNoPuedeTiempo() throws UsuarioExcepcion {
 		try {
