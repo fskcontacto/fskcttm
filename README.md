@@ -2,94 +2,117 @@
 
 ![image](https://github.com/fskcontacto/fskcttm/assets/133590555/786a661a-6f54-4bae-934a-f4b71c7b57b9)
 
-## ¿ Cómo ejecutar el programa ?
+## ¿Cómo ejecutar el programa?
 
-Para ejecutar lo desarollado, debe ingresar a src/turismo/sistema/App.java y correr dicho archivo.
+Para ejecutar lo desarollado, debe realizar los siguientes pasos:
+
+1- Dirigirse a __src/turismo/sistema__ <br />
+2- Ejecutar el archivo __App.java__
 
 ## Formato de archivos de entrada
 
-### Archivo de Atracciones:<br />
-Nombre de atraccion<br />
-Costo<br />
-Duracion<br />
-Cupo<br />
-Tipo de Atraccion<br />
+### Archivo de Atracciones
 
-#### Ejemplo:<br />
-Moria<br />
-1<br />
-2<br />
-1<br />
-Aventura<br />
-Minas Tirith<br />
-5<br />
-2.5<br />
-25<br />
-Paisaje<br />
+- Nombre de atracción
+- Costo
+- Duración
+- Cupo
+- Tipo de atracción
+    - 0 --> Paisaje
+    - 1 --> Aventura
+    - 2 --> Degustación
 
-### Archivo de Paquetes:<br />
+#### Ejemplo
 
-Clase de Paquete (0 -> ABSOLUTO | 1 -> PORCENTUAL | 2 -> AXB)<br />
-Tipo de Atracciones del Paquete<br />
-Nombre de Atracciones separados por ";"<br />
-<br />
-#### Luego, si es un paquete "ABSOLUTO":<br />
-Precio Final<br />
-<br />
-#### Si es un paquete "PORCENTUAL":<br />
-Porcentaje de Descuento<br />
-<br />
-#### Si es un paquete "AXB":<br />
-Atracciones Gratis separadas por ";"<br />
-<br />
-#### Ejemplo:<br />
-2<br />
-Aventura<br />
-Minas Tirith;Moria<br />
-Erebor<br />
-1<br />
-Aventura<br />
-Bosque Negro;Mordor<br />
-0.2<br />
-0<br />
-Degustación<br />
-Lothlórien;La Comarca<br />
-36<br />
+```
+Minas Tirith
+5
+2.5
+25
+0
+```
 
-### Archivo de Usuarios:<br />
+### Archivo de Paquetes
 
-Nombre de Usuario<br />
-Tipo de Atraccion Preferida<br />
-Presupuesto<br />
-Tiempo<br />
+- Tipo de paquete
+    - 0 --> ABSOLUTO
+    - 1 --> PORCENTUAL
+    - 2 --> AXB
+- Tipo de atracciones del paquete
+    - 0 --> Paisaje
+    - 1 --> Aventura
+    - 2 --> Degustación
+- Nombre de atracciones separados por ";"
+- _Campo extra dependiendo tipo de paquete_
 
-#### Ejemplo:<br />
-Frodo<br />
-Aventura<br />
-10<br />
-8<br />
+#### En caso de paquete "ABSOLUTO"
 
+- Campo extra --> Precio final
+
+#### En caso de paquete "PORCENTUAL"
+
+- Campo extra --> Porcentaje de descuento
+
+#### En caso de paquete "AXB"
+
+- Campo extra --> Atracciones gratuitas separadas por ";"
+
+#### Ejemplo
+
+```
+2
+0
+Minas Tirith;Abismo de Helm
+Erebor
+```
+
+### Archivo de Usuarios
+
+- Nombre de usuario
+- Tipo de atracción preferida
+    - 0 --> Paisaje
+    - 1 --> Aventura
+    - 2 --> Degustación
+- Presupuesto
+- Tiempo
+
+#### Ejemplo
+
+```
+Frodo
+1
+10
+8
+```
+
+## Formato de archivos de salida
+
+El formato del archivo de salida (.out) varía dependiendo de los siguientes casos:
+
+### Usuarios aceptaron atracciones
+
+-  Para este caso, se muestra en el archivo de salida el itinerario de cada usuario, concretando las ventas del día.
+
+![image](https://github.com/fskcontacto/fskcttm/assets/105324633/ed09a9af-e54d-48b5-a8ec-398097c3eb8c)
+
+### Usuarios rechazaron todas las atracciones
+
+- Para este caso, el archivo de salida cuenta con una leyenda indicando que no se realizaron ventas en el día debido a que ningún usuario aceptó ninguna sugerencia.
+
+![image](https://github.com/fskcontacto/fskcttm/assets/105324633/b389e7e3-930f-4410-9ce9-3de0ee4fad01)
 
 ## Links
 
-- Link a grabación: https://drive.google.com/file/d/1D1bzJ78oiWx6ao8PSxuBvwOM_Fs7rSVW/view?usp=drive_link
-
-- Link a Diagrama UML: [https://drive.google.com/file/d/13plHvuN5pOmYWPIzUyHHnMMzmjxp8PuS/view?usp=drive_link](https://app.diagrams.net/#G13_O_Swqhdreu9eiEo4ZctsyJnewYErgp)
-
-- Link a presentación PPT: https://docs.google.com/presentation/d/1viy9rU5iSf6FHE3lOPbGHDJVo9vLV29h/edit?usp=sharing&ouid=112941802210794310975&rtpof=true&sd=true
+- Link a [grabación](https://drive.google.com/file/d/1D1bzJ78oiWx6ao8PSxuBvwOM_Fs7rSVW/view?usp=drive_link)
+- Link a [Diagrama UML](https://drive.google.com/file/d/13_O_Swqhdreu9eiEo4ZctsyJnewYErgp/view)
+- Link a presentación [PPT](https://docs.google.com/presentation/d/1viy9rU5iSf6FHE3lOPbGHDJVo9vLV29h/edit?usp=sharing&ouid=112941802210794310975&rtpof=true&sd=true)
 
 ## Integrantes del equipo
 
-Gianluca Espíndola – DNI: 38.585.140
-
-Tomas Felice – DNI: 44.789.809
-
-Ignacio Collazo – DNI: 41.537.099
-
-Juan Botto – DNI: 42.393.917
-
-Ignacio Nogueira – DNI: 41.714.018
-
-Juan Loiotile - DNI: 42.101.782
-
-Alan Alesina – DNI: 40.913.809
+- Alesina, Alan – DNI: 40.913.809
+- Botto, Juan – DNI: 42.393.917
+- Collazo, Ignacio – DNI: 41.537.099
+- Espíndola, Gianluca – DNI: 38.585.140
+- Felice, Tomás – DNI: 44.789.809
+- Loiotile, Juan - DNI: 42.101.782
+- Nogueira, Ignacio – DNI: 41.714.018
