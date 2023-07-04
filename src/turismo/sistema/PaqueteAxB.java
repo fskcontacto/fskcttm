@@ -19,8 +19,9 @@ public class PaqueteAxB extends Paquete {
 
 	private Map<String, Atraccion> verificarAtraccionesGratuitas(Map<String, Atraccion> atraccionesGratuitas)
 			throws PaqueteExcepcion {
-		if (atraccionesGratuitas.isEmpty())
+		if (atraccionesGratuitas.isEmpty()) {
 			throw new PaqueteExcepcion("Debe haber al menos una atraccion gratuita en Paquetes AxB");
+		}
 
 		for(String atraccion : atraccionesGratuitas.keySet()) {
 			if(!atracciones.containsKey(atraccion)) {

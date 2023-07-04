@@ -34,30 +34,34 @@ public class Usuario {
 	}
 
 	private String verificarNombre(String nombreUsuario) throws UsuarioExcepcion {
-		if (nombreUsuario.equals(""))
+		if (nombreUsuario.equals("")) {
 			throw new UsuarioExcepcion("Usuario no identificado, error");
+		}
 
 		return nombreUsuario;
 	}
 
 	private double verificarPresupDisp(double presupDisp) throws UsuarioExcepcion {
-		if (presupDisp < 0)
+		if (presupDisp < 0) {
 			throw new UsuarioExcepcion("El presupuesto disponible del usuario no puede ser menor a 0");
+		}
 
 		return presupDisp;
 	}
 
 	private double verificarTiempoDisp(double tiempoDispon) throws UsuarioExcepcion {
-		if (tiempoDispon < 0)
+		if (tiempoDispon < 0) {
 			throw new UsuarioExcepcion("El tiempo disponible del usuario no puede ser menor a 0");
+		}
 
 		return tiempoDispon;
 	}
 
 	private String verificarPreferencia(String pref) throws UsuarioExcepcion {
 		if (!pref.equalsIgnoreCase("Paisaje") && !pref.equalsIgnoreCase("Degustación")
-				&& !pref.equalsIgnoreCase("Aventura"))
+				&& !pref.equalsIgnoreCase("Aventura")) {
 			throw new UsuarioExcepcion(pref + " no es una preferencia válida para el usuario");
+		}
 
 		return pref;
 	}
@@ -79,11 +83,13 @@ public class Usuario {
 	}
 
 	public void agregarSugerencia(Sugerencia sugerencia) throws UsuarioExcepcion {
-		if (!this.puedeCostearSugerencia(sugerencia.getCosto()))
+		if (!this.puedeCostearSugerencia(sugerencia.getCosto())) {
 			throw new UsuarioExcepcion("Presupuesto insuficiente del Usuario: " + this.nombre + ".");
+		}
 
-		if (!this.tieneTiempoDispo(sugerencia.getDuracion()))
+		if (!this.tieneTiempoDispo(sugerencia.getDuracion())) {
 			throw new UsuarioExcepcion("Tiempo insuficiente del Usuario: " + this.nombre + ".");
+		}
 
 		this.presupuestoDisp -= sugerencia.getCosto();
 		this.tiempoDisp -= sugerencia.getDuracion();

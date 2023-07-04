@@ -45,8 +45,9 @@ public abstract class Paquete extends Sugerencia {
 			duracion += atraccion.duracion;
 			costoOriginal += atraccion.costo;
 			int cupoTotal = atraccion.getCupoTotal();
-			if (cupoTotal < menorCupo)
+			if (cupoTotal < menorCupo) {
 				menorCupo = cupoTotal;
+			}
 		}
 
 		this.nombre = nombre.substring(0, nombre.length() - 2);
@@ -59,16 +60,18 @@ public abstract class Paquete extends Sugerencia {
 	}
 
 	public void reducirCupo() throws AtraccionExcepcion {
-		for (Atraccion atraccion : this.atracciones.values())
+		for (Atraccion atraccion : this.atracciones.values()) {
 			atraccion.reducirCupo();
+		}
 	}
 
 	public int getCupoDisponible() {
 		int cupoDisponible = Integer.MAX_VALUE;
 
 		for (Atraccion atraccion : this.atracciones.values()) {
-			if (atraccion.getCupoDisponible() < cupoDisponible)
+			if (atraccion.getCupoDisponible() < cupoDisponible) {
 				cupoDisponible = atraccion.getCupoDisponible();
+			}
 		}
 
 		return cupoDisponible;
@@ -78,8 +81,9 @@ public abstract class Paquete extends Sugerencia {
 		int cupoTotal = Integer.MAX_VALUE;
 
 		for (Atraccion atraccion : this.atracciones.values()) {
-			if (atraccion.getCupoTotal() < cupoTotal)
+			if (atraccion.getCupoTotal() < cupoTotal) {
 				cupoTotal = atraccion.getCupoTotal();
+			}
 		}
 
 		return cupoTotal;

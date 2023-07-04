@@ -21,30 +21,34 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	}
 
 	private double verificarCosto(double costo) throws SugerenciaExcepcion {
-		if (costo < 0)
+		if (costo < 0) {
 			throw new SugerenciaExcepcion("No puede generar sugerencias con costo menor que 0.");
+		}
 
 		return costo;
 	}
 
 	private double verificarDuracion(double duracion) throws SugerenciaExcepcion {
-		if (duracion <= 0)
+		if (duracion <= 0) {
 			throw new SugerenciaExcepcion("No puede generar sugerencias con duracion menor o igual a 0");
+		}
 
 		return duracion;
 	}
 
 	private String verificarTipo(String tipo) throws SugerenciaExcepcion {
 		if (!tipo.equalsIgnoreCase("Paisaje") && !tipo.equalsIgnoreCase("Degustación")
-				&& !tipo.equalsIgnoreCase("Aventura"))
+				&& !tipo.equalsIgnoreCase("Aventura")) {
 			throw new SugerenciaExcepcion("Tipo de sugerencia invalida.");
+		}
 
 		return tipo;
 	}
 
 	private String verificarNombre(String nombre) throws SugerenciaExcepcion {
-		if (nombre.equals(""))
+		if (nombre.equals("")) {
 			throw new SugerenciaExcepcion("No se ingreso nombre.");
+		}
 
 		return nombre;
 	}
@@ -74,8 +78,9 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 	public abstract boolean hayCupoDisponible();
 
 	public int compareTo(Sugerencia otra) {
-		if (this.costo != otra.costo)
+		if (this.costo != otra.costo) {
 			return Double.compare(this.costo, otra.costo);
+		}
 
 		return Double.compare(this.duracion, otra.duracion);
 	}

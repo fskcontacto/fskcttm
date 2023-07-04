@@ -18,8 +18,9 @@ public class PaquetePorcentual extends Paquete {
 	}
 
 	private double verificarPorcentaje(double porcentaje) throws PaqueteExcepcion {
-		if (Double.compare(porcentaje, 0) < 0 || Double.compare(porcentaje, 1) > 0)
+		if (Double.compare(porcentaje, 0) < 0 || Double.compare(porcentaje, 1) > 0) {
 			throw new PaqueteExcepcion("El porcentaje a descontar debe estar entre 0(0%) y 1(100%)");
+		}
 
 		return porcentaje;
 	}

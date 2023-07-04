@@ -17,11 +17,13 @@ public class PaqueteAbsoluto extends Paquete {
 	}
 
 	private double verificarCostoFinal(double costoFinal) throws PaqueteExcepcion {
-		if (costoFinal < 0)
+		if (costoFinal < 0) {
 			throw new PaqueteExcepcion("No puede generar sugerencias con costo menor que 0.");
+		}
 
-		if (costoFinal >= this.getCosto())
+		if (costoFinal >= this.getCosto()) {
 			throw new PaqueteExcepcion("El costo de la promocion debe ser menor al costo original del paquete.");
+		}
 
 		return costoFinal;
 	}
