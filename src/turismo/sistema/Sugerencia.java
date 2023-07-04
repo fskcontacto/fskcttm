@@ -1,22 +1,34 @@
 package turismo.sistema;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import turismo.excepciones.AtraccionExcepcion;
 import turismo.excepciones.SugerenciaExcepcion;
 
 public abstract class Sugerencia implements Comparable<Sugerencia> {
 	protected String nombre;
-	protected String tipo;
+	protected int tipo;
 	protected double costo;
 	protected double duracion;
+	public final static Map<Integer, String> tiposSugerencias = new HashMap<Integer, String>() {
+		private static final long serialVersionUID = -2860186704571723436L;
 
-	public Sugerencia(String nombre, String tipo, double costo, double duracion) throws SugerenciaExcepcion {
+		{
+			put(0, "Paisaje");
+			put(1, "Aventura");
+			put(2, "Degustación");
+		}
+	};
+
+	public Sugerencia(String nombre, int tipo, double costo, double duracion) throws SugerenciaExcepcion {
 		this.nombre = verificarNombre(nombre);
 		this.tipo = verificarTipo(tipo);
 		this.costo = verificarCosto(costo);
 		this.duracion = verificarDuracion(duracion);
 	}
 
-	protected Sugerencia(String tipo) throws SugerenciaExcepcion {
+	protected Sugerencia(int tipo) throws SugerenciaExcepcion {
 		this.tipo = verificarTipo(tipo);
 	}
 
@@ -36,9 +48,8 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 		return duracion;
 	}
 
-	private String verificarTipo(String tipo) throws SugerenciaExcepcion {
-		if (!tipo.equalsIgnoreCase("Paisaje") && !tipo.equalsIgnoreCase("Degustación")
-				&& !tipo.equalsIgnoreCase("Aventura")) {
+	private int verificarTipo(int tipo) throws SugerenciaExcepcion {
+		if (!tiposSugerencias.containsKey(tipo)) {
 			throw new SugerenciaExcepcion("Tipo de sugerencia invalida.");
 		}
 
@@ -57,7 +68,7 @@ public abstract class Sugerencia implements Comparable<Sugerencia> {
 		return this.nombre;
 	}
 
-	public String getTipo() {
+	public int getTipo() {
 		return this.tipo;
 	}
 

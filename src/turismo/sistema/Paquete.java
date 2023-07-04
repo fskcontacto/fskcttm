@@ -15,7 +15,7 @@ public abstract class Paquete extends Sugerencia {
 	public static final int PORCENTUAL = 1;
 	public static final int AXB = 2;
 
-	public Paquete(String tipo, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion, PaqueteExcepcion {
+	public Paquete(int tipo, Map<String, Atraccion> atracciones) throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo);
 		this.atracciones = verificarTipoAtracciones(atracciones);
 		inicializarValores();
@@ -25,7 +25,7 @@ public abstract class Paquete extends Sugerencia {
 	private Map<String, Atraccion> verificarTipoAtracciones(Map<String, Atraccion> atracciones)
 			throws PaqueteExcepcion {
 		for (Atraccion atraccion : atracciones.values()) {
-			if (!atraccion.getTipo().equals(this.tipo)) {
+			if (atraccion.getTipo() != this.tipo) {
 				throw new PaqueteExcepcion(
 						"Los tipos de las atracciones del paquete deben coincidir con el tipo del paquete");
 			}

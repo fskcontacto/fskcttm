@@ -22,11 +22,11 @@ public class ArchivoAtraccion {
 	public Map<String, Atraccion> leer() throws FileNotFoundException {
 
 		File archivo = new File(this.nombre + ".in");
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter(System.lineSeparator()).useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			Map<String, Atraccion> atracciones = new HashMap<>();
 
 			String nombre;
-			String tipo;
+			int tipo;
 			double costo;
 			double duracion;
 			int cupo;
@@ -36,11 +36,11 @@ public class ArchivoAtraccion {
 				costo = lector.nextDouble();
 				duracion = lector.nextDouble();
 				cupo = lector.nextInt();
-				tipo = lector.next();
+				tipo = lector.nextInt();
 				try {
 					atracciones.put(nombre, new Atraccion(nombre, tipo, costo, duracion, cupo));
 				} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
-					System.out.println(e.getMessage());
+					e.printStackTrace();
 				}
 			}
 

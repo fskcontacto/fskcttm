@@ -19,7 +19,7 @@ public class AtraccionTest {
 	@Before
 	public void setUp() {
 		try {
-			atraccion = new Atraccion("Moria", "Paisaje", 10, 2, 6);
+			atraccion = new Atraccion("Moria", 0, 10, 2, 6);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
 			Assert.fail(e.getMessage());
 		}
@@ -28,7 +28,7 @@ public class AtraccionTest {
 
 	@Test(expected = AtraccionExcepcion.class)
 	public void queAtraccionNoTengaCupoInvalido() throws AtraccionExcepcion, SugerenciaExcepcion {
-		new Atraccion("Atraccion1", "Paisaje", 10.0, 3, -1);
+		new Atraccion("Atraccion1", 0, 10.0, 3, -1);
 	}
 
 	@Test
@@ -95,11 +95,11 @@ public class AtraccionTest {
 		Atraccion atraccion5;
 
 		try {
-			atraccion1 = new Atraccion("Moria", "Paisaje", 10, 5, 1);
-			atraccion2 = new Atraccion("Fortuna", "Paisaje", 20, 3, 1);
-			atraccion3 = new Atraccion("Giratoria", "Paisaje", 5, 3, 1);
-			atraccion4 = new Atraccion("Mirador", "Paisaje", 5, 5, 1);
-			atraccion5 = new Atraccion("Telesferico", "Paisaje", 30, 6, 1);
+			atraccion1 = new Atraccion("Moria", 0, 10, 5, 1);
+			atraccion2 = new Atraccion("Fortuna", 0, 20, 3, 1);
+			atraccion3 = new Atraccion("Giratoria", 0, 5, 3, 1);
+			atraccion4 = new Atraccion("Mirador", 0, 5, 5, 1);
+			atraccion5 = new Atraccion("Telesferico", 0, 30, 6, 1);
 
 			atraccionGeneral.add(atraccion1);
 			atraccionGeneral.add(atraccion2);

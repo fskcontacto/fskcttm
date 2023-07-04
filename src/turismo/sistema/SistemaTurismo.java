@@ -49,7 +49,7 @@ public class SistemaTurismo {
 				boolean hayCupo;
 
 				for (Paquete paquete : paquetes) {
-					esPreferencia = paquete.getTipo().equals(usuario.getTipo());
+					esPreferencia = paquete.getTipo() == usuario.getTipo();
 					puedeAdquirir = usuario.puedeAdquirirSugerencia(paquete.getCosto(), paquete.getDuracion());
 					hayCupo = paquete.hayCupoDisponible();
 					if (esPreferencia && hayCupo && puedeAdquirir) {
@@ -71,7 +71,7 @@ public class SistemaTurismo {
 				}
 
 				for (Atraccion atraccion : atracciones) {
-					esPreferencia = atraccion.getTipo().equals(usuario.getTipo());
+					esPreferencia = atraccion.getTipo() == usuario.getTipo();
 					puedeAdquirir = usuario.puedeAdquirirSugerencia(atraccion.getCosto(), atraccion.getDuracion());
 					hayCupo = atraccion.hayCupoDisponible();
 					if (hayCupo) {

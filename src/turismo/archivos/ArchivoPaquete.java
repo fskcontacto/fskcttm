@@ -27,17 +27,17 @@ public class ArchivoPaquete {
 
 	public List<Paquete> leer(Map<String, Atraccion> atracciones) throws FileNotFoundException {
 		File archivo = new File(this.nombre + ".in");
-		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter(System.lineSeparator()).useLocale(Locale.US)) {
+		try (Scanner lector = new Scanner(archivo, "utf-8").useDelimiter("\n").useLocale(Locale.US)) {
 			List<Paquete> paquetes = new ArrayList<Paquete>();
 
 			int tipoPaquete;
 			String nombresAtracc;
-			String tipo;
+			int tipo;
 
 			while (lector.hasNextLine()) {
 				Map<String, Atraccion> atracPaquete = new HashMap<>();
 				tipoPaquete = lector.nextInt();
-				tipo = lector.next();
+				tipo = lector.nextInt();
 				nombresAtracc = lector.next();
 
 				switch (tipoPaquete) {
@@ -50,7 +50,7 @@ public class ArchivoPaquete {
 					try {
 						paquetes.add(new PaqueteAbsoluto(tipo, costoAbsoluto, atracPaquete));
 					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
-						System.out.println(e.getMessage());
+						e.printStackTrace();
 					}
 					break;
 				}
@@ -63,7 +63,7 @@ public class ArchivoPaquete {
 					try {
 						paquetes.add(new PaquetePorcentual(tipo, porcentaje, atracPaquete));
 					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
-						System.out.println(e.getMessage());
+						e.printStackTrace();
 					}
 					break;
 				}
@@ -83,7 +83,7 @@ public class ArchivoPaquete {
 					try {
 						paquetes.add(new PaqueteAxB(tipo, atracPaquete, atracGratuitas));
 					} catch (SugerenciaExcepcion | PaqueteExcepcion e) {
-						System.out.println(e.getMessage());
+						e.printStackTrace();
 					}
 					break;
 				}

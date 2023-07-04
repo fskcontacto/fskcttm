@@ -10,7 +10,7 @@ public class PaqueteAxB extends Paquete {
 
 	private Map<String, Atraccion> atraccionesGratuitas;
 
-	public PaqueteAxB(String tipo, Map<String, Atraccion> atracciones, Map<String, Atraccion> atracGratuitas)
+	public PaqueteAxB(int tipo, Map<String, Atraccion> atracciones, Map<String, Atraccion> atracGratuitas)
 			throws SugerenciaExcepcion, PaqueteExcepcion {
 		super(tipo, atracciones);
 		this.atraccionesGratuitas = verificarAtraccionesGratuitas(atracGratuitas);
@@ -55,7 +55,7 @@ public class PaqueteAxB extends Paquete {
 
 	protected void imprimir() {
 		System.out.println("*PAQUETE*" + "\n\tNombre atracciones totales: " + this.getAtracciones()
-				+ "\n\tNombre atracciones gratuitas: " + this.getAtraccionesGratuitas() + "\n\tTipo: " + this.getTipo()
+				+ "\n\tNombre atracciones gratuitas: " + this.getAtraccionesGratuitas() + "\n\tTipo: " + Sugerencia.tiposSugerencias.get(this.tipo) 
 				+ "\n\tDuracion: " + this.getDuracion() + "\n\tCosto original: " + this.costoOriginal
 				+ "\n\tCosto final: " + this.getCosto());
 	}

@@ -56,12 +56,12 @@ public class PaqueteTest {
 		sinAtracciones = new HashMap<String, Atraccion>();
 		paquetes = new ArrayList<Paquete>();
 		try {
-			atraccionPaisaje1 = new Atraccion("Moria", "Paisaje", costoAtrPaisaje1, 2, cupoAtrPaisaje1);
-			atraccionPaisaje2 = new Atraccion("Fortuna", "Paisaje", costoAtrPaisaje2, 3, cupoAtrPaisaje2);
-			atraccionPaisaje3 = new Atraccion("Giratoria", "Paisaje", costoAtrPaisaje3, 4,
+			atraccionPaisaje1 = new Atraccion("Moria", 0, costoAtrPaisaje1, 2, cupoAtrPaisaje1);
+			atraccionPaisaje2 = new Atraccion("Fortuna", 0, costoAtrPaisaje2, 3, cupoAtrPaisaje2);
+			atraccionPaisaje3 = new Atraccion("Giratoria", 0, costoAtrPaisaje3, 4,
 					cupoAtrPaisaje3);
-			atraccionPaisaje4 = new Atraccion("Mirador", "Paisaje", costoAtrGratuita1, 5, cupoAtrGratis);
-			atraccionPaisaje5 = new Atraccion("Telesferico", "Paisaje", costoAtrGratuita2, 6, cupoAtrGratis);
+			atraccionPaisaje4 = new Atraccion("Mirador", 0, costoAtrGratuita1, 5, cupoAtrGratis);
+			atraccionPaisaje5 = new Atraccion("Telesferico", 0, costoAtrGratuita2, 6, cupoAtrGratis);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion e) {
 			e.printStackTrace();
 		}
@@ -76,9 +76,9 @@ public class PaqueteTest {
 		atraccionesAXB.putAll(atracciones);
 		atraccionesAXB.putAll(atraccionesGratuitas);
 		try {
-			paqueteAbs = new PaqueteAbsoluto("Paisaje", precioAbsoluto, atracciones);
-			paqueteAXB = new PaqueteAxB("Paisaje", atraccionesAXB, atraccionesGratuitas);
-			paquetePorc = new PaquetePorcentual("Paisaje", porcentajeDescontado, atracciones);
+			paqueteAbs = new PaqueteAbsoluto(0, precioAbsoluto, atracciones);
+			paqueteAXB = new PaqueteAxB(0, atraccionesAXB, atraccionesGratuitas);
+			paquetePorc = new PaquetePorcentual(0, porcentajeDescontado, atracciones);
 		} catch (PaqueteExcepcion | SugerenciaExcepcion e) {
 			e.printStackTrace();
 		}
@@ -171,17 +171,17 @@ public class PaqueteTest {
 
 	@Test(expected = PaqueteExcepcion.class)
 	public void queNoCreePaqueteAXBSinAtraccionesGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
-		new PaqueteAxB("Degustación", atracciones, sinAtracciones);
+		new PaqueteAxB(2, atracciones, sinAtracciones);
 	}
 
 	@Test(expected = PaqueteExcepcion.class)
 	public void quePaqueteAbsolutoNoTengaCostoFinalMayorAlOriginal() throws SugerenciaExcepcion, PaqueteExcepcion {
-		new PaqueteAbsoluto("Degustación", costoTotal + 10, atracciones);
+		new PaqueteAbsoluto(2, costoTotal + 10, atracciones);
 	}
 
 	@Test(expected = PaqueteExcepcion.class)
 	public void quePaqueteAbsolutoNoAcepteCostoNoPositivo() throws SugerenciaExcepcion, PaqueteExcepcion {
-		new PaqueteAbsoluto("Degustación", -10, atracciones);
+		new PaqueteAbsoluto(2, -10, atracciones);
 	}
 
 	@Test
@@ -198,7 +198,7 @@ public class PaqueteTest {
 	
 	@Test(expected = PaqueteExcepcion.class)
 	public void queAtraccionesTotalesContengaALasGratuitas() throws SugerenciaExcepcion, PaqueteExcepcion {
-		new PaqueteAxB("Aventura", atracciones, atraccionesGratuitas);
+		new PaqueteAxB(1, atracciones, atraccionesGratuitas);
 	}
 	
 

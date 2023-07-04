@@ -55,34 +55,34 @@ public class UsuarioTest {
 
 		try {
 
-			usuario = new Usuario("Franco", "Degustación", presupuestoUsuario, tiempoUsuario);
+			usuario = new Usuario("Franco", 2, presupuestoUsuario, tiempoUsuario);
 
-			atraccionPaisaje = new Atraccion("Moria", "Paisaje", costoAtr1, duracionAtr1, cupoAtr1);
-			atraccionPaisaje2 = new Atraccion("Amoria", "Paisaje", costoAtr2, duracionAtr2, cupoAtr2);
+			atraccionPaisaje = new Atraccion("Moria", 0, costoAtr1, duracionAtr1, cupoAtr1);
+			atraccionPaisaje2 = new Atraccion("Amoria", 0, costoAtr2, duracionAtr2, cupoAtr2);
 			atraccionesPaisaje.put("1", atraccionPaisaje);
 			atraccionesPaisaje.put("2", atraccionPaisaje2);
 
-			atraccionAventura = new Atraccion("Fortuna", "Aventura", costoAtr1, duracionAtr1, cupoAtr1);
-			atraccionAventura2 = new Atraccion("Hazzard", "Aventura", costoAtr2, duracionAtr2, cupoAtr2);
+			atraccionAventura = new Atraccion("Fortuna", 1, costoAtr1, duracionAtr1, cupoAtr1);
+			atraccionAventura2 = new Atraccion("Hazzard", 1, costoAtr2, duracionAtr2, cupoAtr2);
 			atraccionesAventura.put("1", atraccionAventura);
 			atraccionesAventura.put("2", atraccionAventura2);
 
-			atraccionDegustacion = new Atraccion("Infortuna", "Degustación", costoAtr3, duracionAtr3, cupoAtr3);
-			atraccionDegustacion2 = new Atraccion("Restaurant inf", "Degustación", costoAtr3, duracionAtr3, cupoAtr3);
+			atraccionDegustacion = new Atraccion("Infortuna", 2, costoAtr3, duracionAtr3, cupoAtr3);
+			atraccionDegustacion2 = new Atraccion("Restaurant inf", 2, costoAtr3, duracionAtr3, cupoAtr3);
 
 			atraccionesDegustacion.put("1", atraccionDegustacion);
 			atraccionesDegustacion.put("2", atraccionDegustacion2);
 
-			atraccionCostosa = new Atraccion("Minas Tirith", "Aventura", costoAtrCostosa, duracionAtr1, cupoAtr1);
+			atraccionCostosa = new Atraccion("Minas Tirith", 2, costoAtrCostosa, duracionAtr1, cupoAtr1);
 
 			atraccionesCostosas.put("1", atraccionCostosa);
 
-			atraccionLarga = new Atraccion("Minas Tirith2", "Degustación", costoAtr1, duracionAtrLarga, cupoAtr1);
+			atraccionLarga = new Atraccion("Minas Tirith2", 2, costoAtr1, duracionAtrLarga, cupoAtr1);
 			atraccionesLargas.put("1", atraccionLarga);
 
-			paqueteAbsPaisaje = new PaqueteAbsoluto("Paisaje", costoPaquetePaisaje, atraccionesPaisaje);
-			paqueteAbsDegustacion = new PaqueteAbsoluto("Degustación", costoPaqueteDegustacion, atraccionesDegustacion);
-			paqueteCostosoDegust = new PaqueteAbsoluto("Degustación", costoPaqueteCostosoDegust, atraccionesCostosas);
+			paqueteAbsPaisaje = new PaqueteAbsoluto(0, costoPaquetePaisaje, atraccionesPaisaje);
+			paqueteAbsDegustacion = new PaqueteAbsoluto(2, costoPaqueteDegustacion, atraccionesDegustacion);
+			paqueteCostosoDegust = new PaqueteAbsoluto(2, costoPaqueteCostosoDegust, atraccionesCostosas);
 
 		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion | UsuarioExcepcion e) {
 			e.printStackTrace();
@@ -91,27 +91,27 @@ public class UsuarioTest {
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoPermitaPreferenciasInvalidas() throws UsuarioExcepcion {
-		new Usuario("Federico", "Comida", 20, 4);
+		new Usuario("Federico", 3, 20, 4);
 	}
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoPermitaNombreVacio() throws UsuarioExcepcion {
-		new Usuario("", "Degustación", 20, 1);
+		new Usuario("", 2, 20, 1);
 	}
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoPermitaPresupuestoNegativo() throws UsuarioExcepcion {
-		new Usuario("Lucas", "Paisaje", -10, 11);
+		new Usuario("Lucas", 0, -10, 11);
 	}
 
 	@Test(expected = UsuarioExcepcion.class)
 	public void queNoPermitaTiempoNegativo() throws UsuarioExcepcion {
-		new Usuario("Hernan", "Paisaje", 50, -1);
+		new Usuario("Hernan", 0, 50, -1);
 	}
 
 	@Test
 	public void queSeObtengaPreferenciaCorrectamente() {
-		Assert.assertEquals(true, usuario.getTipo() == "Degustación");
+		Assert.assertEquals(true, usuario.getTipo() == 2);
 	}
 
 	@Test

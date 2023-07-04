@@ -41,12 +41,12 @@ public class ItinerarioTest {
 
 		atraccionesParaPaquete = new HashMap<String, Atraccion>();
 		try {
-			atraccionErebor = new Atraccion("Erebor", "Paisaje", costoAtr1, duracionAtr1, cupoAtr1);
-			atraccionMoria = new Atraccion("Moria", "Paisaje", costoAtr1, duracionAtr1, cupoAtr1);
-			atraccionAmoria = new Atraccion("Amoria", "Paisaje", costoAtr2, duracionAtr2, cupoAtr2);
+			atraccionErebor = new Atraccion("Erebor", 0, costoAtr1, duracionAtr1, cupoAtr1);
+			atraccionMoria = new Atraccion("Moria", 0, costoAtr1, duracionAtr1, cupoAtr1);
+			atraccionAmoria = new Atraccion("Amoria", 0, costoAtr2, duracionAtr2, cupoAtr2);
 			atraccionesParaPaquete.put("1", atraccionMoria);
 			atraccionesParaPaquete.put("2", atraccionAmoria);
-			paqueteAbs = new PaqueteAbsoluto("Paisaje", costoPaquete, atraccionesParaPaquete);
+			paqueteAbs = new PaqueteAbsoluto(0, costoPaquete, atraccionesParaPaquete);
 		} catch (AtraccionExcepcion | SugerenciaExcepcion | PaqueteExcepcion  e) {
 			e.printStackTrace();
 		}
